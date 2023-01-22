@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,500&display=swap");
+@tailwind base;
+@tailwind components;
+
+@layer base {
+    body {
+        margin: 0;
+        padding: 0;
+        color: #212121;
+    }
+    h1 {
+        @apply text-5xl font-bold;
+    }
+
+    h2 {
+        @apply text-4xl font-bold;
+    }
+
+    h3 {
+        @apply text-3xl font-bold;
+    }
+
+    h4 {
+        @apply text-2xl font-bold;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply border-none px-4 py-2 rounded  text-sm font-semibold cursor-pointer;
+    }
+    .btn2 {
+        @apply mx-2 bg-[#e7e8ea] py-2 rounded-md font-bold text-[#3f4b53] text-sm flex w-1/2 hover:opacity-75;
+    }
+    .bground {
+        @apply bg-[#ee2624];
+    }
+    .topic-item {
+        @apply px-20 py-3 hover:bg-[#f1514f] cursor-pointer transition;
+    }
+    .input {
+        @apply border outline-none py-3 rounded-md my-2 px-4;
+    }
+}
