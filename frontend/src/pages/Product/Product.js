@@ -1,6 +1,8 @@
 import ImageProduct from "./InforProduct/ImageProduct";
 import InforProduct from "./InforProduct/InforProduct";
 import InforSelller from "./InforSeller/InforSeller";
+import DescriptionProduct from "./DescriptionProduct";
+import Suggest from "pages/Home/Suggest";
 function Product() {
     return (
         <div className="py-10">
@@ -13,8 +15,14 @@ function Product() {
                     <div className="col-span-2">
                         <InforSelller />
                     </div>
-                    <div className="col-span-3"></div>
+                    <div className="col-span-3">
+                        <DescriptionProduct />
+                    </div>
                 </div>
+                <div className="font-bold my-3">
+                    Ở đây có sản phẩm bạn thích
+                </div>
+                <Suggest />
             </div>
         </div>
     );

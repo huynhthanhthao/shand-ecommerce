@@ -1,7 +1,6 @@
-import ProductSeller from "./ProductSeller";
 function Contact() {
     return (
-        <div className="infor-seller bg-white p-5 rounded-md ">
+        <>
             <div className=" font-bold ">Thông tin nguời bán</div>
             <div className="avatar-shop my-3 flex items-center">
                 <img
@@ -49,8 +48,7 @@ function Contact() {
                 </button>
             </div>
             <div className="border border-gray-200 my-3"></div>
-            <ProductSeller />
-        </div>
+        </>
     );
 }
 

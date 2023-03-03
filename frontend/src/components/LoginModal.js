@@ -18,10 +18,19 @@ function LoginModal() {
                 </button>
                 <h4 className="mt-4 mb-2 ">Xin chào,</h4>
                 <div className="my-3">Đăng nhập hoặc đăng ký tài khoản</div>
-                <input className="input" placeholder="Tên đăng nhập" />
-                <input className="input" placeholder="Mật khẩu" />
+                <input
+                    className="input px-2 py-3 my-2"
+                    placeholder="Tên đăng nhập"
+                />
+                <input
+                    className="input px-2 py-3 my-2"
+                    placeholder="Mật khẩu"
+                />
                 {showRegister && (
-                    <input className="input" placeholder="Nhập lại mật khẩu" />
+                    <input
+                        className="input px-2 py-3 my-2"
+                        placeholder="Nhập lại mật khẩu"
+                    />
                 )}
 
                 {showRegister ? (

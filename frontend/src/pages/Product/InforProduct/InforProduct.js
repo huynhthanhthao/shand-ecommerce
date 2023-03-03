@@ -3,8 +3,7 @@ function InforProduct() {
         <div className="infor-product col-span-2">
             <h4>THÌA LÀM MỌC VÀ THỊT VIÊN THẦN THÁNH - tlmvtv</h4>
             <div className="my-2">Thương hiệu: OEM</div>
-            <h4 className="my-2 text-[#ee2624]">35.000đ</h4>
-            <h5 className="my-2 text-[#6f787e]">Giá cũ: 8.000đ</h5>
+            <h4 className="my-2 text-orange-600">35.000đ</h4>
             <div className="my-6 border"> </div>
             <div className="amount my-5">
                 <span className="text-[#464747]">Chọn số lượng: </span>
@@ -45,9 +44,7 @@ function InforProduct() {
                     </button>
                 </div>
                 <div className="w-1/2 mx-1">
-                    <button className="bg-[#ee2624] px-5 py-3 font-bold rounded-md hover:opacity-80  w-full text-white">
-                        Mua ngay
-                    </button>
+                    <button className="px-5 py-3 btn3  w-full">Mua ngay</button>
                 </div>
             </div>
         </div>

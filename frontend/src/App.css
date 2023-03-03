@@ -23,6 +23,10 @@
     h4 {
         @apply text-2xl font-bold;
     }
+    .shadow-input {
+        box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%),
+            0 0 8px rgb(102 175 233 / 60%);
+    }
 }
 
 @layer components {
@@ -30,15 +34,18 @@
         @apply border-none px-4 py-2 rounded  text-sm font-semibold cursor-pointer;
     }
     .btn2 {
-        @apply mx-2 bg-[#e7e8ea] py-2 rounded-md font-bold text-[#3f4b53] text-sm flex w-1/2 hover:opacity-75;
+        @apply mx-2 bg-[#e7e8ea] py-2 rounded font-bold text-[#3f4b53] text-sm flex w-1/2 hover:opacity-75;
+    }
+    .btn3 {
+        @apply bg-orange-600  font-bold rounded hover:opacity-80  text-white;
     }
     .bground {
-        @apply bg-[#ee2624];
+        @apply bg-orange-600;
     }
     .topic-item {
-        @apply px-20 py-3 hover:bg-[#f1514f] cursor-pointer transition;
+        @apply px-20 py-3 hover:bg-orange-500 cursor-pointer transition;
     }
     .input {
-        @apply border outline-none py-3 rounded-md my-2 px-4;
+        @apply border-[1px] outline-none rounded focus:border-[#66afe9];
     }
 }
