@@ -2,7 +2,7 @@ function HeaderAdmin() {
     return (
         <div className="header-admin flex justify-between items-center px-10 bg-[#1f2937]  py-2">
             <div className="flex">
-                <div class="flex items-center mr-36">
+                <div className="flex items-center mr-36">
                     <img
                         src={require("assets/images/admin.jpg")}
                         className="w-10 mr-2 rounded"
@@ -28,7 +28,7 @@ function HeaderAdmin() {
                     />
                 </div>
             </div>
-            <div class="flex items-center font-bold">
+            <div className="flex items-center font-bold">
                 <svg
                     className="w-5 mr-2"
                     xmlns="http://www.w3.org/2000/svg"

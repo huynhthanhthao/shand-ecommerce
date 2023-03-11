@@ -17,7 +17,7 @@ function LoginModal() {
                     Thoát
                 </button>
                 <h4 className="mt-4 mb-2 ">Xin chào,</h4>
-                <div className="my-3">Đăng nhập hoặc đăng ký tài khoản</div>
+                <div className="my-3">Đăng nhập vào Shand</div>
                 <input
                     className="input px-2 py-3 my-2"
                     placeholder="Tên đăng nhập"
@@ -33,37 +33,19 @@ function LoginModal() {
                     />
                 )}
 
-                {showRegister ? (
-                    <button className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80">
-                        Đăng ký
-                    </button>
-                ) : (
-                    <button className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80">
-                        Đăng nhập
-                    </button>
-                )}
+                <button className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80">
+                    Đăng nhập
+                </button>
+
                 <div className="text-center mt-auto">
-                    {showRegister ? (
-                        <>
-                            Bạn đã có tài khoản SHand?
-                            <button
-                                onClick={() => setShowRegister(false)}
-                                className="text-cyan-800"
-                            >
-                                &nbsp;Đăng nhập.
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            Bạn mới biết đến SHand?
-                            <button
-                                className="text-cyan-800"
-                                onClick={() => setShowRegister(true)}
-                            >
-                                &nbsp;Đăng ký.
-                            </button>
-                        </>
-                    )}
+                    <>
+                        <button
+                            onClick={() => setShowRegister(false)}
+                            className="text-cyan-800"
+                        >
+                            &nbsp;Quên mật khẩu?
+                        </button>
+                    </>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import Header from "./Header/Header";
 import Footer from "./Footer";
-import LoginModal from "components/LoginModal";
+import LoginModal from "components/Modals/LoginModal";
 import { useSelector } from "react-redux";
 import { loginModalSelector } from "store/reducers/LoginModalSlice";
 

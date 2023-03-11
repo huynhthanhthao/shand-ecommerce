@@ -1,5 +1,6 @@
 import Categogy from "./Categogy/Category";
 import { Outlet } from "react-router-dom";
+import Confirm from "components/Modals/Confirm";
 function Profile() {
     return (
         <div className="profile bg-white px-20 grid grid-cols-5 gap-10 py-5 ">
@@ -7,6 +8,11 @@ function Profile() {
                 <Categogy />
             </div>
             <div className="profile-detail col-span-4">
+                <Confirm
+                    id="delete_product"
+                    title="Xóa sản phẩm"
+                    description="bạn có chắc muốn xóa sản phẩm này?"
+                />
                 <Outlet />
             </div>
         </div>

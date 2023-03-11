@@ -5,6 +5,7 @@ import ImageProduct from "./ImageProduct";
 import StatusProduct from "./StatusProduct";
 import OtherInforProduct from "./OtherInforProduct";
 import ShipInfor from "./ShipInfor";
+import ImageProve from "./ImageProve";
 function AddProductForm() {
     return (
         <div className="add-product">
@@ -23,6 +24,9 @@ function AddProductForm() {
                         </tr>
                         <tr>
                             <ImageProduct />
+                        </tr>
+                        <tr>
+                            <ImageProve />
                         </tr>
                         <tr>
                             <td className="w-[15%] text-right"></td>

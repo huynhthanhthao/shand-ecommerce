@@ -4,10 +4,10 @@ function Category() {
     return (
         <div className="bg-[#111827] min-h-screen  py-5 ">
             <div className="mb-6">
-                <p class="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
+                <p className="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
                     Quản lý tài khoản
                 </p>
-                <ul class="my-2">
+                <ul className="my-2">
                     <li>
                         <Link
                             className="flex text-white px-5 mb-1 cursor-pointer hover:bg-gray-600 py-3 transition"
@@ -51,10 +51,10 @@ function Category() {
                 </ul>
             </div>
             <div className="mb-6">
-                <p class="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
+                <p className="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
                     Danh mục sản phẩm
                 </p>
-                <ul class="my-2">
+                <ul className="my-2">
                     <li>
                         <Link
                             className="flex text-white px-5 mb-1 cursor-pointer hover:bg-gray-600 py-3 transition"
@@ -78,10 +78,10 @@ function Category() {
                 </ul>
             </div>
             <div className="mb-6">
-                <p class="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
+                <p className="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
                     Sự kiện
                 </p>
-                <ul class="my-2">
+                <ul className="my-2">
                     <li>
                         <Link
                             className="flex text-white px-5 mb-1 cursor-pointer hover:bg-gray-600 py-3 transition"
@@ -106,10 +106,10 @@ function Category() {
             </div>
 
             <div className="mb-6">
-                <p class="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
+                <p className="text-sm font-light tracking-wide text-gray-400 uppercase mx-5">
                     Hỗ trợ người dùng
                 </p>
-                <ul class="my-2">
+                <ul className="my-2">
                     <li>
                         <Link
                             className="flex text-white px-5 mb-1 cursor-pointer hover:bg-gray-600 py-3 transition"
