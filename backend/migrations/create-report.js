@@ -11,18 +11,38 @@ module.exports = {
             },
             idReportedStudent: {
                 type: Sequelize.STRING,
+                allowNull: false,
+                references: {
+                    model: {
+                        tableName: "Users",
+                    },
+                    key: "userName",
+                },
+            },
+            idStudent: {
+                type: Sequelize.STRING,
+                allowNull: false,
+                references: {
+                    model: {
+                        tableName: "Users",
+                    },
+                    key: "userName",
+                },
             },
             title: {
                 type: Sequelize.STRING,
-            },
-            idStudent: {
-                type: Sequelize.DATE,
             },
             content: {
                 type: Sequelize.STRING,
             },
             idProduct: {
-                type: Sequelize.BOOLEAN,
+                type: Sequelize.STRING,
+                references: {
+                    model: {
+                        tableName: "Products",
+                    },
+                    key: "idProduct",
+                },
             },
             createdAt: {
                 allowNull: false,

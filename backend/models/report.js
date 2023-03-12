@@ -13,12 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     }
     Report.init(
         {
+            id: { type: DataTypes.INTEGER, primaryKey: true },
             idStudent: DataTypes.STRING,
             idReportedStudent: DataTypes.STRING,
             title: DataTypes.STRING,
             content: DataTypes.STRING,
             idProduct: DataTypes.STRING,
-            id: DataTypes.STRING,
         },
         {
             sequelize,

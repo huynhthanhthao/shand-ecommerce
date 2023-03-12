@@ -4,16 +4,27 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable("Products", {
             idProduct: {
+                type: Sequelize.STRING,
                 allowNull: false,
-                autoIncrement: true,
                 primaryKey: true,
-                type: Sequelize.INTEGER,
             },
             idOwn: {
                 type: Sequelize.STRING,
+                references: {
+                    model: {
+                        tableName: "Users",
+                    },
+                    key: "userName",
+                },
             },
             idCategory: {
                 type: Sequelize.INTEGER,
+                references: {
+                    model: {
+                        tableName: "Categories",
+                    },
+                    key: "id",
+                },
             },
             name: {
                 type: Sequelize.STRING,
@@ -22,17 +33,22 @@ module.exports = {
                 type: Sequelize.STRING,
             },
             images: {
-                type: Sequelize.ARRAY(Sequelize.STRING),
+                type: Sequelize.JSON(Sequelize.STRING),
+                defaultValue: [],
             },
             imagesSource: {
-                type: Sequelize.ARRAY(Sequelize.STRING),
+                type: Sequelize.JSON(Sequelize.STRING),
+                defaultValue: [],
             },
             price: {
                 type: Sequelize.INTEGER,
             },
-
+            amount: {
+                type: Sequelize.INTEGER,
+            },
             transport: {
-                type: Sequelize.STRING,
+                type: Sequelize.ENUM,
+                values: ["buyer", "seller"],
             },
             createdAt: {
                 allowNull: false,

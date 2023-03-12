@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             images: DataTypes.ARRAY(DataTypes.STRING),
             imagesSource: DataTypes.ARRAY(DataTypes.STRING),
             price: DataTypes.INTEGER,
-            transport: DataTypes.STRING,
+            amount: DataTypes.INTEGER,
+            transport: DataTypes.ENUM("buyer", "seller"),
         },
         {
             sequelize,

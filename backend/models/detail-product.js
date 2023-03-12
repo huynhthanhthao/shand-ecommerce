@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             idProduct: DataTypes.STRING,
             quantityAvailable: DataTypes.INTEGER,
-            status: DataTypes.INTEGER,
+            status: DataTypes.ENUM("1", "2", "3", "4", "5"),
             trademark: DataTypes.STRING,
             size: DataTypes.STRING,
         },
