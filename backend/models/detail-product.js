@@ -9,11 +9,18 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            DetailProduct.belongsTo(models.Product, {
+                foreignKey: "id",
+                as: "product",
+            });
         }
     }
     DetailProduct.init(
         {
-            idProduct: DataTypes.STRING,
+            id: {
+                type: DataTypes.STRING,
+                primaryKey: true,
+            },
             quantityAvailable: DataTypes.INTEGER,
             status: DataTypes.ENUM("1", "2", "3", "4", "5"),
             trademark: DataTypes.STRING,

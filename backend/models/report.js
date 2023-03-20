@@ -9,16 +9,30 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Report.belongsTo(models.Product, {
+                foreignKey: "productId",
+                as: "product",
+            });
+
+            Report.belongsTo(models.User, {
+                foreignKey: "reportedStudentId",
+                as: "seller",
+            });
+
+            Report.belongsTo(models.User, {
+                foreignKey: "studentId",
+                as: "buyer",
+            });
         }
     }
     Report.init(
         {
             id: { type: DataTypes.INTEGER, primaryKey: true },
-            idStudent: DataTypes.STRING,
-            idReportedStudent: DataTypes.STRING,
+            studentId: DataTypes.STRING,
+            reportedStudentId: DataTypes.STRING,
             title: DataTypes.STRING,
             content: DataTypes.STRING,
-            idProduct: DataTypes.STRING,
+            productId: DataTypes.STRING,
         },
         {
             sequelize,

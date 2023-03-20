@@ -3,16 +3,16 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable("DetailProducts", {
-            idProduct: {
+            id: {
                 allowNull: false,
                 primaryKey: true,
                 type: Sequelize.STRING,
                 references: {
-                    model: {
-                        tableName: "Products",
-                    },
-                    key: "idProduct",
+                    model: "Products", // name of Target model
+                    key: "id", // key in Target model that we're referencing
                 },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
             quantityAvailable: {
                 type: Sequelize.INTEGER,

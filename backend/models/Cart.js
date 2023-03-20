@@ -9,14 +9,18 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Cart.belongsTo(models.Product, {
+                foreignKey: "productId",
+                as: "product",
+            });
         }
     }
     Cart.init(
         {
             id: { type: DataTypes.INTEGER, primaryKey: true },
             studentId: DataTypes.STRING,
-            products: DataTypes.ARRAY(DataTypes.STRING),
-            total: DataTypes.FLOAT,
+            productId: DataTypes.STRING,
+            amount: DataTypes.INTEGER,
         },
         {
             sequelize,

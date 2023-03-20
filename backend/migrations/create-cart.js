@@ -18,11 +18,17 @@ module.exports = {
                     key: "userName",
                 },
             },
-            products: {
-                type: Sequelize.JSON(Sequelize.STRING),
+            productId: {
+                type: Sequelize.STRING,
+                references: {
+                    model: "Products", // name of Target model
+                    key: "id", // key in Target model that we're referencing
+                },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
-            total: {
-                type: Sequelize.FLOAT,
+            amount: {
+                type: Sequelize.INTEGER,
             },
             createdAt: {
                 allowNull: false,

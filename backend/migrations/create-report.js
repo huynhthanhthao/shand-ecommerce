@@ -9,7 +9,7 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            idReportedStudent: {
+            reportedStudentId: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 references: {
@@ -19,7 +19,7 @@ module.exports = {
                     key: "userName",
                 },
             },
-            idStudent: {
+            studentId: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 references: {
@@ -35,14 +35,8 @@ module.exports = {
             content: {
                 type: Sequelize.STRING,
             },
-            idProduct: {
+            productId: {
                 type: Sequelize.STRING,
-                references: {
-                    model: {
-                        tableName: "Products",
-                    },
-                    key: "idProduct",
-                },
             },
             createdAt: {
                 allowNull: false,

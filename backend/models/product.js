@@ -13,15 +13,15 @@ module.exports = (sequelize, DataTypes) => {
     }
     Product.init(
         {
-            idProduct: DataTypes.STRING,
-            idOwn: DataTypes.STRING,
-            idCategory: DataTypes.INTEGER,
+            id: { type: DataTypes.STRING, primaryKey: true },
+            productId: { type: DataTypes.STRING },
+            ownId: DataTypes.STRING,
+            categoryId: DataTypes.INTEGER,
             name: DataTypes.STRING,
             description: DataTypes.STRING,
-            images: DataTypes.ARRAY(DataTypes.STRING),
-            imagesSource: DataTypes.ARRAY(DataTypes.STRING),
+            images: DataTypes.JSON,
+            imagesSource: DataTypes.JSON,
             price: DataTypes.INTEGER,
-            amount: DataTypes.INTEGER,
             transport: DataTypes.ENUM("buyer", "seller"),
         },
         {

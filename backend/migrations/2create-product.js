@@ -3,12 +3,16 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable("Products", {
-            idProduct: {
+            id: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 primaryKey: true,
             },
-            idOwn: {
+            productId: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+            ownId: {
                 type: Sequelize.STRING,
                 references: {
                     model: {
@@ -17,7 +21,7 @@ module.exports = {
                     key: "userName",
                 },
             },
-            idCategory: {
+            categoryId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model: {
@@ -43,9 +47,7 @@ module.exports = {
             price: {
                 type: Sequelize.INTEGER,
             },
-            amount: {
-                type: Sequelize.INTEGER,
-            },
+
             transport: {
                 type: Sequelize.ENUM,
                 values: ["buyer", "seller"],
