@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
 
             Report.belongsTo(models.User, {
                 foreignKey: "reportedStudentId",
-                as: "seller",
+                as: "reportedStudent",
             });
 
             Report.belongsTo(models.User, {
                 foreignKey: "studentId",
-                as: "buyer",
+                as: "student",
             });
         }
     }

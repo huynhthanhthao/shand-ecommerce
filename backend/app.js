@@ -6,11 +6,14 @@ const app = express();
 const port = 3001;
 
 // Import router
-const adminRouter = require("./routes/admin-router.js");
+const eventRouter = require("./routes/event-router.js");
 const authRouter = require("./routes/auth-router.js");
 const cartRouter = require("./routes/cart-router.js");
 const productRouter = require("./routes/product-router.js");
 const orderRouter = require("./routes/order-router");
+const reportRouter = require("./routes/report-router");
+const accountRouter = require("./routes/account-router");
+const categoryRouter = require("./routes/category-router");
 
 // Connect database
 connectionDatabase();
@@ -22,12 +25,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use("/admin", adminRouter);
 app.use("/auth", authRouter);
 
 app.use("/cart", cartRouter);
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
+app.use("/report", reportRouter);
+app.use("/account", accountRouter);
+app.use("/category", categoryRouter);
+app.use("/event", eventRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
