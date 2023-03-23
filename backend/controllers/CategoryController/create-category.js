@@ -18,7 +18,7 @@ const createCategory = async (req, res, next) => {
         });
 
         res.status(200).json({
-            success: true,
+            status: true,
             message: "Thêm danh mục thành công!",
         });
     } catch (error) {

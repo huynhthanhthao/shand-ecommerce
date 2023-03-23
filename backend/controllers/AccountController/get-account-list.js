@@ -4,7 +4,7 @@ const getAccountList = async (req, res, next) => {
         const userList = await db.User.findAll();
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy danh sách tài khoản thành công!",
             userList,
         });

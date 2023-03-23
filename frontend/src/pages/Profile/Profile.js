@@ -1,7 +1,10 @@
 import Categogy from "./Categogy/Category";
 import { Outlet } from "react-router-dom";
 import Confirm from "components/Modals/Confirm";
+import { useSelector } from "react-redux";
+
 function Profile() {
+    const { product } = useSelector(({ productReducer }) => productReducer);
     return (
         <div className="profile bg-white px-20 grid grid-cols-5 gap-10 py-5 ">
             <div className="profile-category col-span-1 text-[#000000a6] border-r">
@@ -11,7 +14,8 @@ function Profile() {
                 <Confirm
                     id="delete_product"
                     title="Xóa sản phẩm"
-                    description="bạn có chắc muốn xóa sản phẩm này?"
+                    description="Bạn có chắc muốn xóa sản phẩm này?"
+                    product={product}
                 />
                 <Outlet />
             </div>

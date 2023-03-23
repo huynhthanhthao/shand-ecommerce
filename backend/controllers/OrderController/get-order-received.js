@@ -1,11 +1,10 @@
 const db = require("../../models");
 const getOrderList = async (req, res, next) => {
     try {
-        const { status } = req.query;
-        const { buyerId } = req.body;
+        const { status, sellerId } = req.query;
 
         const orders = await db.Order.findAll({
-            where: { buyerId, status },
+            where: { sellerId, status },
             include: [
                 {
                     model: db.User,
@@ -54,7 +53,7 @@ const getOrderList = async (req, res, next) => {
         const newOrders = await Promise.all(promises);
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy thông tin đơn hàng thành công!",
             orderList: newOrders,
         });

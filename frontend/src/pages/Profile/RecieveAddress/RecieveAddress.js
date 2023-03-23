@@ -1,19 +1,45 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getAddressList } from "api/addressReceiveApi";
 import { useState } from "react";
-import AddressForm from "./AddressForm";
+import AddressFormAdd from "./AddressFormAdd";
+import AddressFormUpdate from "./AddressFormUpdate";
 import AddressItem from "./AddressItem";
 
 function RecieveAddress() {
-    const [showForm, setShowForm] = useState(false);
+    const dispatch = useDispatch();
+    const { account } = useSelector(({ accountReducer }) => accountReducer);
+    const [showFormAdd, setShowFormAdd] = useState(false);
+    const [showFormUpdate, setShowFormUpdate] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAddressList({ username: account.username }, dispatch);
+        };
+        fetchData();
+    }, [dispatch, account]);
+
+    const { addressList } = useSelector(
+        ({ addressReceiveReducer }) => addressReceiveReducer
+    );
+
     return (
         <div className="recieve-address flex flex-col">
             <label className="font-bold">Địa chỉ nhận hàng</label>
 
             <div className="border-t my-3 py-5">
-                <AddressItem />
-
-                {showForm || (
+                <div className="grid grid-cols-2 gap-2 ">
+                    {addressList.map((address) => (
+                        <AddressItem
+                            key={address.id}
+                            address={address}
+                            setShowFormUpdate={setShowFormUpdate}
+                        />
+                    ))}
+                </div>
+                {showFormAdd || (
                     <button
-                        onClick={() => setShowForm(true)}
+                        onClick={() => setShowFormAdd(true)}
                         className="btn3 py-2 px-3 w-56 flex items-center justify-center my-4 "
                     >
                         <svg
@@ -29,7 +55,12 @@ function RecieveAddress() {
                         Thêm địa chỉ
                     </button>
                 )}
-                {showForm && <AddressForm setShowForm={setShowForm} />}
+                {showFormAdd && (
+                    <AddressFormAdd setShowFormAdd={setShowFormAdd} />
+                )}
+                {showFormUpdate && (
+                    <AddressFormUpdate setShowFormUpdate={setShowFormUpdate} />
+                )}
             </div>
         </div>
     );

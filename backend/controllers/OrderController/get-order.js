@@ -37,7 +37,7 @@ const getOrder = async (req, res, next) => {
         }
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy thông tin đơn hàng thành công!",
             order: { ...order.dataValues, productList },
         });

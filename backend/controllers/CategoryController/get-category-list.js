@@ -4,7 +4,7 @@ const getCategoryList = async (req, res, next) => {
         const categoryList = await db.Category.findAll();
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy tất cả danh mục thành công!",
             categoryList,
         });

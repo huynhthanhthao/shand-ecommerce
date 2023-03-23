@@ -13,7 +13,7 @@ const createOrder = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Tạo hóa đơn thành công!",
             order,
         });

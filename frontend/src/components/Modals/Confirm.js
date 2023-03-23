@@ -1,4 +1,9 @@
+import { useDispatch } from "react-redux";
+import { deleteProductById } from "api/productApi";
+
 function Confirm(props) {
+    const dispatch = useDispatch();
+
     return (
         <div
             data-te-modal-init
@@ -71,7 +76,14 @@ function Confirm(props) {
                         <button
                             className="bg-red-700 ml-1 inline-block rounded  px-6 pt-2.5 pb-2 text-xs font-medium uppercase  text-white "
                             data-te-ripple-init
+                            data-te-modal-dismiss
                             data-te-ripple-color="light"
+                            onClick={() => {
+                                deleteProductById(
+                                    { id: props.product.id },
+                                    dispatch
+                                );
+                            }}
                         >
                             Xác nhận
                         </button>

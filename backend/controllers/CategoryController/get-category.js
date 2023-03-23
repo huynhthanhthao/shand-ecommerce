@@ -5,7 +5,7 @@ const getCategory = async (req, res, next) => {
         const category = await db.Category.findOne({ where: { id } });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy danh mục thành công!",
             category,
         });

@@ -10,7 +10,7 @@ const createAccount = async (req, res, next) => {
         });
 
         res.status(200).json({
-            success: true,
+            status: true,
             message: "Xóa tài khoản thành công!",
         });
     } catch (error) {

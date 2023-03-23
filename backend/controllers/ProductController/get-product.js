@@ -17,7 +17,7 @@ const getProduct = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy sản phẩm thành công!",
             product: response,
         });

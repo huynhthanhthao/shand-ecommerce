@@ -34,7 +34,7 @@ const getDetailReport = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy chi tiết đơn báo cáo thành công!",
             reportList,
         });

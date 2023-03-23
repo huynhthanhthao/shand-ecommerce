@@ -14,7 +14,7 @@ const getReportList = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy danh sách đơn báo cáo thành công!",
             reportList,
         });

@@ -42,7 +42,7 @@ const createProduct = async (req, res, next) => {
 
         if (product)
             return res.status(200).json({
-                success: true,
+                status: true,
                 message: "Mã sản phẩm bị trùng!",
             });
         // All good
@@ -68,7 +68,7 @@ const createProduct = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Thêm sản phẩm thành công!",
         });
     } catch (error) {

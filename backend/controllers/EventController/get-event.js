@@ -6,7 +6,7 @@ const getEvent = async (req, res, next) => {
         const event = await db.Event.findOne({ where: { id } });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy sự kiện thành công!",
             event,
         });

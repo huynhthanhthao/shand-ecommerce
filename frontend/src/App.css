@@ -48,4 +48,7 @@
     .input {
         @apply border-[1px] outline-none rounded focus:border-[#66afe9];
     }
+    .active {
+        @apply text-orange-600 fill-orange-600 font-bold;
+    }
 }

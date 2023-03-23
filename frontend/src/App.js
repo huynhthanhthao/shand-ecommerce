@@ -3,6 +3,8 @@ import { Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 import { publicRoutes } from "./routes";
 import { DefaultLayout } from "./components/Layout/";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Profile children
 import InforAccount from "pages/Profile/InforAccount";
@@ -19,12 +21,13 @@ import SupportUser from "pages/Admin/Content/SupportUser/SupportUser";
 import Report from "pages/Admin/Content/Report/Report";
 import Cart from "pages/Cart/Cart";
 import OrderSent from "pages/Profile/OrderSent/OrderSent";
-import DetailOrderSent from "pages/Profile/DetailOrderSent/DetailOrderSent";
+import DetailOrder from "pages/Profile/DetailOrder/DetailOrder";
 import OrderReceive from "pages/Profile/OrderRecieve/OrderRecieve";
 
 function App() {
     return (
         <div className="App">
+            <ToastContainer />
             <Routes>
                 {publicRoutes.map((route, index) => {
                     const Layout =
@@ -75,15 +78,15 @@ function App() {
                                         element={<EditProductForm />}
                                     ></Route>
                                     <Route
-                                        path="order-sent/"
+                                        path="order-sent/:status"
                                         element={<OrderSent />}
                                     ></Route>
                                     <Route
-                                        path="detail-order-sent"
-                                        element={<DetailOrderSent />}
+                                        path="detail-order/:id"
+                                        element={<DetailOrder />}
                                     ></Route>
                                     <Route
-                                        path="order-receive"
+                                        path="order-receive/:status"
                                         element={<OrderReceive />}
                                     ></Route>
                                 </>

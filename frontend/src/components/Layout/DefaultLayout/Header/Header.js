@@ -1,7 +1,34 @@
 import { useDispatch } from "react-redux";
-import { showLogin } from "store/reducers/LoginModalSlice";
+import { showLogin, logout } from "store/reducers/authSlice";
+import { setAccount } from "store/reducers/accountSlice";
+import { useSelector } from "react-redux";
+import { useRef, useEffect, useState } from "react";
+
 function Header() {
     const dispatch = useDispatch();
+    const [option, setOption] = useState(false);
+
+    const useOutsideBox = function (ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setOption(false);
+                }
+            }
+
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    };
+
+    const wrapperRef = useRef(null);
+
+    useOutsideBox(wrapperRef);
+
+    const account = useSelector((state) => state.accountReducer.account);
     return (
         <header className="flex justify-between items-center py-4 px-24 bground ">
             <div className="flex">
@@ -51,14 +78,61 @@ function Header() {
                         ></path>
                     </svg>
                 </div>
-                <button
-                    className="flex bg-[white] btn"
-                    onClick={() => {
-                        dispatch(showLogin());
-                    }}
-                >
-                    Đăng nhập
-                </button>
+                {account ? (
+                    <>
+                        <div
+                            ref={wrapperRef}
+                            className="relative flex bg-[white]   p-1 rounded-3xl"
+                        >
+                            <div
+                                onClick={() => setOption(true)}
+                                className="flex items-center cursor-pointer hover:opacity-80"
+                            >
+                                <img
+                                    src={account.urlAvatar}
+                                    alt="avatar"
+                                    className="w-7 h-7 rounded-full "
+                                />
+                                <p className="font-bold text-sm px-1">
+                                    {account.fullName}
+                                </p>
+                            </div>
+                            {option && (
+                                <div className="bg-white shadow-lg shadow-slate-400/20 w-[182px] py-2  px-2 rounded-md absolute top-10 right-0">
+                                    <ul>
+                                        <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
+                                            Thông tin tài khoản
+                                        </li>
+                                        <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
+                                            Sản phẩm yêu thích
+                                        </li>
+                                        <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
+                                            Theo dõi đơn hàng
+                                        </li>
+                                        <li
+                                            onClick={() => {
+                                                dispatch(logout());
+                                                dispatch(setAccount(null));
+                                            }}
+                                            className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1"
+                                        >
+                                            Thoát tài khoản
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <button
+                        className="flex bg-[white] btn"
+                        onClick={() => {
+                            dispatch(showLogin());
+                        }}
+                    >
+                        Đăng nhập
+                    </button>
+                )}
             </div>
         </header>
     );

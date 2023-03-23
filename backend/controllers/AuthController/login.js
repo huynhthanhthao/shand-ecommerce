@@ -5,13 +5,16 @@ const db = require("../../models");
 dotenv.config();
 const loginController = async (req, res, next) => {
     try {
-        const { userName, password } = req.body;
-        const user = await db.User.findOne({ where: { userName } });
+        const { username, password } = req.body;
+
+        const user = await db.User.findOne({
+            where: { username },
+        });
 
         if (!user)
             return res.json({
                 status: false,
-                message: "Tài khoản hoặc mật khẩu không đúng!",
+                message: "Tên đăng nhập hoặc mật khẩu không chính xác!",
             });
         else {
             const passwordValid = await argon2.verify(
@@ -21,19 +24,19 @@ const loginController = async (req, res, next) => {
             if (!passwordValid)
                 return res.json({
                     status: false,
-                    message: "Tài khoản hoặc mật khẩu không đúng!",
+                    message: "Tên đăng nhập hoặc mật khẩu không chính xác!",
                 });
 
             // All good
             // Create token
             const accessToken = jwt.sign(
-                user.dataValues.userName,
+                user.dataValues.username,
                 process.env.ACCESS_TOKEN_SECRET
             );
 
             return res.json({
                 status: true,
-                message: "Đăng nhập thàn công!",
+                message: "Đăng nhập thành công!",
                 accessToken,
                 user,
             });

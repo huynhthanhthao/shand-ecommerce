@@ -20,7 +20,7 @@ const createEvent = async (req, res, next) => {
         });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Thêm sự kiện thành công!",
         });
     } catch (error) {

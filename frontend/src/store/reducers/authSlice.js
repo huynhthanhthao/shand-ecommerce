@@ -1,23 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const LoginModalSlice = createSlice({
-    name: "LoginModal",
+const AuthSlice = createSlice({
+    name: "authSlice",
     initialState: { isShowLogin: false },
     reducers: {
-        showLogin(state, action) {
-            console.log(123);
+        showLogin: (state, action) => {
             state.isShowLogin = true;
         },
-        closeLogin(state, action) {
+        closeLogin: (state, action) => {
             state.isShowLogin = false;
+        },
+        logout: (state, action) => {
+            localStorage.clear();
         },
     },
 });
 
 // reducer
-const loginModalReducer = LoginModalSlice.reducer;
+const loginModalReducer = AuthSlice.reducer;
 
-export const { showLogin, closeLogin } = LoginModalSlice.actions;
+// export action
+export const { showLogin, closeLogin, logout } = AuthSlice.actions;
 
 // Selector
 export const loginModalSelector = (state) => {

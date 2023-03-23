@@ -14,6 +14,7 @@ const orderRouter = require("./routes/order-router");
 const reportRouter = require("./routes/report-router");
 const accountRouter = require("./routes/account-router");
 const categoryRouter = require("./routes/category-router");
+const addressRouter = require("./routes/address-receive-router");
 
 // Connect database
 connectionDatabase();
@@ -34,6 +35,7 @@ app.use("/report", reportRouter);
 app.use("/account", accountRouter);
 app.use("/category", categoryRouter);
 app.use("/event", eventRouter);
+app.use("/address-receive", addressRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

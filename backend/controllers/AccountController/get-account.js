@@ -6,7 +6,7 @@ const getAccount = async (req, res, next) => {
         const user = await db.User.findOne({ where: { userName } });
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy thông tin tài khoản thành công!",
             user,
         });

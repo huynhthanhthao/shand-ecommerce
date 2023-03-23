@@ -4,7 +4,7 @@ const getEventList = async (req, res, next) => {
         const eventList = await db.Event.findAll();
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Lấy tất cả sự kiện thành công!",
             eventList,
         });

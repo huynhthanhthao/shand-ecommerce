@@ -23,7 +23,7 @@ const updateAccount = async (req, res, next) => {
         );
 
         return res.status(200).json({
-            success: true,
+            status: true,
             message: "Cập nhật thông tin thành công!",
         });
     } catch (error) {
