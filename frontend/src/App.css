@@ -51,4 +51,9 @@
     .active {
         @apply text-orange-600 fill-orange-600 font-bold;
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 }

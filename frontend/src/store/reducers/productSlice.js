@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const productSlice = createSlice({
     name: "products",
-    initialState: { productList: null, product: null },
+    initialState: { productList: null, product: null, detailProduct: null },
     reducers: {
         setMyProductList(state, action) {
             state.productList = action.payload;
@@ -15,6 +15,9 @@ const productSlice = createSlice({
                 (product) => product.id !== action.payload.id
             );
         },
+        setDetailProduct(state, action) {
+            state.detailProduct = action.payload;
+        },
     },
 });
 
@@ -22,7 +25,7 @@ const productSlice = createSlice({
 const productReducer = productSlice.reducer;
 
 // export action
-export const { setMyProductList, setProduct, deleteProduct } =
+export const { setMyProductList, setProduct, deleteProduct, setDetailProduct } =
     productSlice.actions;
 
 // export selector

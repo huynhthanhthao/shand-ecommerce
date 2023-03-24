@@ -1,14 +1,21 @@
-function InforProduct() {
+import { useState } from "react";
+
+function InforProduct({ product }) {
+    const [amount, setAmount] = useState(1);
     return (
         <div className="infor-product col-span-2">
-            <h4>THÌA LÀM MỌC VÀ THỊT VIÊN THẦN THÁNH - tlmvtv</h4>
-            <div className="my-2">Thương hiệu: OEM</div>
-            <h4 className="my-2 text-orange-600">35.000đ</h4>
-            <div className="my-6 border"> </div>
+            <h4>{product.detail.name}</h4>
+            <div className="my-2">Thương hiệu: {product.trademark}</div>
+            <h4 className="my-2 text-orange-600">{product.detail.price}đ</h4>
             <div className="amount my-5">
                 <span className="text-[#464747]">Chọn số lượng: </span>
                 <div className="select-amount flex my-5">
-                    <button className="bg-[#e7e8ea] p-2 rounded text-3xl hover:opacity-60">
+                    <button
+                        onClick={() =>
+                            setAmount((prev) => (prev <= 1 ? prev : prev - 1))
+                        }
+                        className="bg-[#e7e8ea] p-2 rounded text-3xl hover:opacity-60"
+                    >
                         <img
                             className="w-5"
                             src={require("assets/images/subtraction.png")}
@@ -16,10 +23,28 @@ function InforProduct() {
                         />
                     </button>
                     <input
-                        type="text"
+                        type="number"
                         className="w-12 px-2 mx-3 border rounded outline-cyan-600 py-1 text-center font-bold"
+                        value={amount}
+                        onChange={(e) =>
+                            setAmount(() =>
+                                e.target.value >= product.quantityAvailable
+                                    ? product.quantityAvailable
+                                    : e.target.value
+                            )
+                        }
                     />
-                    <button className="bg-[#e7e8ea] p-2 rounded  text-3xl hover:opacity-60">
+
+                    <button
+                        onClick={(e) =>
+                            setAmount((prev) =>
+                                prev >= product.quantityAvailable
+                                    ? prev
+                                    : prev + 1
+                            )
+                        }
+                        className="bg-[#e7e8ea] p-2 rounded  text-3xl hover:opacity-60"
+                    >
                         <img
                             className="w-5"
                             src={require("assets/images/add.png")}
@@ -35,7 +60,10 @@ function InforProduct() {
                     className="w-8 mr-3"
                 />
                 Bạn chỉ có thể mua tối đa
-                <span className="font-bold">&nbsp;100&nbsp;</span> sản phẩm.
+                <span className="font-bold">
+                    &nbsp;{product.quantityAvailable}&nbsp;
+                </span>{" "}
+                sản phẩm.
             </div>
             <div className="w-full flex">
                 <div className="w-1/2 mx-1">

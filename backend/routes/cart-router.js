@@ -6,9 +6,9 @@ const deleteCart = require("../controllers/CartController/delete-cart");
 const editCart = require("../controllers/CartController/edit-cart");
 const getCart = require("../controllers/CartController/get-cart");
 
-router.get("/get-cart", getCart);
-router.post("/add-cart", addCart);
-router.patch("/edit-cart", editCart);
-router.delete("/delete-cart", deleteCart);
+router.get("/", getCart);
+router.post("/", addCart);
+router.patch("/", editCart);
+router.delete("/", deleteCart);
 
 module.exports = router;

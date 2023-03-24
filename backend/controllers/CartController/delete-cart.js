@@ -1,12 +1,11 @@
 const db = require("../../models");
 const deleteCart = async (req, res, next) => {
     try {
-        const { productId, studentId } = req.body;
+        const { id } = req.body;
 
         await db.Cart.destroy({
             where: {
-                productId,
-                studentId,
+                id,
             },
         });
 

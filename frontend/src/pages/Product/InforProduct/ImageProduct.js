@@ -1,26 +1,20 @@
-function ImageProduct() {
+function ImageProduct({ images }) {
     return (
         <div className="img-product flex  flex-col items-center">
-            <img
-                src={require("assets/images/sp.jpg")}
-                className="w-80"
-                alt="Product"
-            />
+            <img src={images[1]} className="w-80 h-80" alt="Product" />
             <ul className="flex mt-3">
-                <li className="border-gray-50 border-2 mx-1 hover:border-red-600 rounded cursor-pointer">
-                    <img
-                        src={require("assets/images/sp.jpg")}
-                        className="w-20  rounded-sm"
-                        alt="Product"
-                    />
-                </li>
-                <li className="border-gray-50 border-2 mx-1 hover:border-red-600 rounded cursor-pointer">
-                    <img
-                        src={require("assets/images/sp.jpg")}
-                        className="w-20  rounded"
-                        alt="Product"
-                    />
-                </li>
+                {images.map((image, index) => (
+                    <li
+                        key={index}
+                        className="border-gray-50 border-2 mx-1 hover:border-red-600 rounded cursor-pointer"
+                    >
+                        <img
+                            src={image}
+                            className="w-20 h-20  rounded-sm"
+                            alt="Product"
+                        />
+                    </li>
+                ))}
             </ul>
         </div>
     );

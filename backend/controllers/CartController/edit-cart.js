@@ -1,7 +1,7 @@
 const db = require("../../models");
 const editCart = async (req, res, next) => {
     try {
-        const { productId, studentId, amount } = req.body;
+        const { id, amount } = req.body;
         // Missing data
         if (!amount) {
             return res.json({
@@ -14,7 +14,7 @@ const editCart = async (req, res, next) => {
             {
                 amount,
             },
-            { where: { studentId } }
+            { where: { id } }
         );
         return res.json({
             status: true,

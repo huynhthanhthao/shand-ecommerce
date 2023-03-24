@@ -21,11 +21,11 @@ module.exports = {
             productId: {
                 type: Sequelize.STRING,
                 references: {
-                    model: "Products", // name of Target model
-                    key: "id", // key in Target model that we're referencing
+                    model: {
+                        tableName: "DetailProducts",
+                    },
+                    key: "id",
                 },
-                onUpdate: "CASCADE",
-                onDelete: "CASCADE",
             },
             amount: {
                 type: Sequelize.INTEGER,

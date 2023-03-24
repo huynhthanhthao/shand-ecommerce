@@ -14,9 +14,25 @@ const getCart = async (req, res, next) => {
             where: { studentId },
             include: [
                 {
-                    model: db.Product,
+                    model: db.DetailProduct,
                     as: "product",
                     attributes: { exclude: ["createdAt", "updatedAt"] },
+                    include: [
+                        {
+                            model: db.Product,
+                            as: "detail",
+                            attributes: { exclude: ["createdAt", "updatedAt"] },
+                            include: [
+                                {
+                                    model: db.User,
+                                    as: "owner",
+                                    attributes: {
+                                        exclude: ["createdAt", "updatedAt"],
+                                    },
+                                },
+                            ],
+                        },
+                    ],
                 },
             ],
         });

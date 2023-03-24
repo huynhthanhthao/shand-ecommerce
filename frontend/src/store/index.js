@@ -4,6 +4,7 @@ import accountReducer from "./reducers/accountSlice";
 import orderReducer from "./reducers/orderSlice";
 import productReducer from "./reducers/productSlice";
 import addressReceiveReducer from "./reducers/addressReceiveSlice";
+import cartReducer from "./reducers/cartSlice";
 
 import {
     persistStore,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
     orderReducer,
     productReducer,
     addressReceiveReducer,
+    cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

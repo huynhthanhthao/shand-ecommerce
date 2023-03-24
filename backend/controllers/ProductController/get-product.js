@@ -10,8 +10,29 @@ const getProduct = async (req, res, next) => {
             include: [
                 {
                     model: db.Product,
-                    as: "product",
+                    as: "detail",
                     attributes: { exclude: ["createdAt", "updatedAt"] },
+                    include: [
+                        {
+                            model: db.User,
+                            as: "owner",
+                            attributes: {
+                                exclude: [
+                                    "createdAt",
+                                    "updatedAt",
+                                    "password",
+                                    "role",
+                                ],
+                            },
+                        },
+                        {
+                            model: db.Category,
+                            as: "category",
+                            attributes: {
+                                exclude: ["createdAt", "updatedAt"],
+                            },
+                        },
+                    ],
                 },
             ],
         });

@@ -3,27 +3,48 @@ import InforProduct from "./InforProduct/InforProduct";
 import InforSelller from "./InforSeller/InforSeller";
 import DescriptionProduct from "./DescriptionProduct";
 import Suggest from "pages/Home/Suggest";
+import { getDetailProduct } from "api/productApi";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 function Product() {
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const fetchData = async () => {
+            await getDetailProduct({ id }, dispatch);
+        };
+        fetchData();
+    }, [dispatch, id]);
+
+    const { detailProduct: product } = useSelector(
+        ({ productReducer }) => productReducer
+    );
+
     return (
         <div className="py-10">
-            <div className="product mx-24 ">
-                <div className="grid grid-cols-3 gap-4 bg-white rounded-lg  p-6">
-                    <ImageProduct />
-                    <InforProduct />
-                </div>
-                <div className="grid grid-cols-5 gap-4 my-5 ">
-                    <div className="col-span-2">
-                        <InforSelller />
+            {product && (
+                <div className="product mx-24 ">
+                    <div className="grid grid-cols-3 gap-4 bg-white rounded-lg  p-6">
+                        <ImageProduct
+                            images={JSON.parse(product.detail.images)}
+                        />
+                        <InforProduct product={product} />
                     </div>
-                    <div className="col-span-3">
-                        <DescriptionProduct />
+                    <div className="grid grid-cols-5 gap-4 my-5 ">
+                        <div className="col-span-2">
+                            <InforSelller product={product} />
+                        </div>
+                        <div className="col-span-3">
+                            <DescriptionProduct product={product} />
+                        </div>
                     </div>
+                    <div className="font-bold my-3">
+                        Ở đây có sản phẩm bạn thích
+                    </div>
+                    <Suggest />
                 </div>
-                <div className="font-bold my-3">
-                    Ở đây có sản phẩm bạn thích
-                </div>
-                <Suggest />
-            </div>
+            )}
         </div>
     );
 }

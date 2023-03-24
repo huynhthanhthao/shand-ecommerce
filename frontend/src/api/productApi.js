@@ -6,6 +6,7 @@ import {
     setProduct,
     setMyProductList,
     deleteProduct,
+    setDetailProduct,
 } from "store/reducers/productSlice";
 export const getMyProductList = async (payload, dispatch) => {
     try {
@@ -31,6 +32,21 @@ export const getProduct = async (payload, dispatch) => {
         });
         if (response.data.status) {
             dispatch(setProduct(response.data.product));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getDetailProduct = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/`, {
+            params: {
+                id: payload.id,
+            },
+        });
+        if (response.data.status) {
+            dispatch(setDetailProduct(response.data.product));
         }
     } catch (error) {
         console.log(error);
