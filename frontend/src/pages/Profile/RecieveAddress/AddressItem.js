@@ -6,7 +6,7 @@ function AddressItem({ address, setShowFormUpdate }) {
     const dispatch = useDispatch();
 
     return (
-        <div className="address-item  bg-[#dceafa]  p-3 rounded text-sm flex justify-between ">
+        <div className="address-item  bg-[#dceafa]  p-3 rounded text-sm flex justify-between items-center">
             <div>
                 <strong>{address.fullName}</strong>
                 <div>
@@ -17,6 +17,15 @@ function AddressItem({ address, setShowFormUpdate }) {
                     <strong>Điên thoại: </strong>
                     <span>{address.phoneNumber}</span>
                 </div>
+            </div>
+            <div>
+                {address.isDefault && (
+                    <div>
+                        <div className="bg-green-500 p-1 rounded text-white font-bold">
+                            Mặc định
+                        </div>
+                    </div>
+                )}
             </div>
             <div className="flex">
                 <button

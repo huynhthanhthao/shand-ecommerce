@@ -2,7 +2,7 @@ import ImageProduct from "./InforProduct/ImageProduct";
 import InforProduct from "./InforProduct/InforProduct";
 import InforSelller from "./InforSeller/InforSeller";
 import DescriptionProduct from "./DescriptionProduct";
-import Suggest from "pages/Home/Suggest";
+import ProductList from "pages/Home/ProductList";
 import { getDetailProduct } from "api/productApi";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,7 +42,7 @@ function Product() {
                     <div className="font-bold my-3">
                         Ở đây có sản phẩm bạn thích
                     </div>
-                    <Suggest />
+                    <ProductList />
                 </div>
             )}
         </div>

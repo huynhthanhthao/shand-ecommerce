@@ -1,4 +1,21 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createAccountApi } from "../../api/accountApi";
+
 function AddAccountForm(props) {
+    const dispatch = useDispatch();
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [fullName, setFullName] = useState("");
+
+    const handleCreateAccount = async () => {
+        await createAccountApi(
+            { username, password, fullName, role: props.role },
+            dispatch
+        );
+    };
+
     return (
         <>
             <div
@@ -52,6 +69,10 @@ function AddAccountForm(props) {
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập họ tên..."
+                                        value={fullName}
+                                        onChange={(e) =>
+                                            setFullName(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="flex flex-col mb-2">
@@ -61,6 +82,10 @@ function AddAccountForm(props) {
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên đăng nhập..."
+                                        value={username}
+                                        onChange={(e) => {
+                                            setUsername(e.target.value);
+                                        }}
                                     />
                                 </div>
                                 <div className="flex flex-col mb-2">
@@ -69,6 +94,10 @@ function AddAccountForm(props) {
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập mật khẩu..."
                                         type="password"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                     />
                                 </div>
                             </form>
@@ -86,7 +115,11 @@ function AddAccountForm(props) {
                             <button
                                 className="bg-green-700 ml-1 inline-block rounded  px-6 pt-2.5 pb-2 text-xs font-medium uppercase  text-white "
                                 data-te-ripple-init
+                                data-te-modal-dismiss
                                 data-te-ripple-color="light"
+                                onClick={() => {
+                                    handleCreateAccount();
+                                }}
                             >
                                 Xác nhận
                             </button>

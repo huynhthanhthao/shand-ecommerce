@@ -5,6 +5,10 @@ import orderReducer from "./reducers/orderSlice";
 import productReducer from "./reducers/productSlice";
 import addressReceiveReducer from "./reducers/addressReceiveSlice";
 import cartReducer from "./reducers/cartSlice";
+import transactionReducer from "./reducers/transactionSlice";
+import categoryReducer from "./reducers/categorySlice";
+import eventReducer from "./reducers/eventSlice";
+import reportReducer from "./reducers/reportSlice";
 
 import {
     persistStore,
@@ -31,6 +35,10 @@ const reducer = combineReducers({
     productReducer,
     addressReceiveReducer,
     cartReducer,
+    transactionReducer,
+    categoryReducer,
+    eventReducer,
+    reportReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

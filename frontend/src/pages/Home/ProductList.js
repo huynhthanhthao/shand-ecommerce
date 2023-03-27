@@ -1,8 +1,11 @@
 import Card from "components/Card";
-function Suggest() {
+function ProductList() {
     return (
-        <div className="suggest">
-            <ul className="grid grid-cols-6 gap-2">
+        <div className="suggest text-[#3c3c3c] ">
+            <div className="py-4 text-center bg-white font-bold border-b-4 border-b-[#3c3c3c]">
+                GỢI Ý HÔM NAY
+            </div>
+            <ul className="grid grid-cols-6 gap-2 my-3">
                 <li>
                     <Card />
                 </li>
@@ -22,13 +25,13 @@ function Suggest() {
                     <Card />
                 </li>
             </ul>
-            <div className="w-full text-center mt-5">
+            {/* <div className="w-full text-center mt-5">
                 <button className=" bg-white px-16 py-[12px] rounded border  text-sm font-semibold hover:bg-[#f0f0f0]">
                     Xem thêm
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }
 
-export default Suggest;
+export default ProductList;

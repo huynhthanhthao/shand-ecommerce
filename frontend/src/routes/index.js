@@ -11,7 +11,7 @@ export const publicRoutes = [
     { path: "/profile/", component: Profile },
     { path: "/admin/", component: Admin, layout: null },
     { path: "/cart/", component: Cart },
-    { path: "/confirm-order/:id", component: ConfirmOrder },
+    { path: "/confirm-order/", component: ConfirmOrder },
 ];
 
 export const privateRoutes = [];

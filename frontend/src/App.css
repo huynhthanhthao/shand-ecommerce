@@ -43,7 +43,7 @@
         @apply bg-[#3c3c3c];
     }
     .topic-item {
-        @apply px-20 py-3 hover:bg-[#3c3c3c] cursor-pointer transition;
+        @apply hover:bg-[#575757] cursor-pointer transition;
     }
     .input {
         @apply border-[1px] outline-none rounded focus:border-[#66afe9];

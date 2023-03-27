@@ -19,11 +19,13 @@ function Admin() {
             <div className="admin bg-[#364050] relative">
                 <AddAccountForm
                     label="Thêm tài khoản sinh viên"
+                    role="student"
                     idModal="add_student"
                 />
                 <AddAccountForm
                     label="Thêm tài khoản cửa hàng"
                     idModal="add_shop"
+                    role="shop"
                 />
                 <EditAccountForm
                     label="Chỉnh sửa tài khoản sinh viên"

@@ -23,6 +23,7 @@ import Cart from "pages/Cart/Cart";
 import OrderSent from "pages/Profile/OrderSent/OrderSent";
 import DetailOrder from "pages/Profile/DetailOrder/DetailOrder";
 import OrderReceive from "pages/Profile/OrderRecieve/OrderRecieve";
+import Transaction from "pages/Profile/Transaction/Transaction";
 
 function App() {
     return (
@@ -50,6 +51,10 @@ function App() {
                                     <Route
                                         path="address"
                                         element={<RecieveAddress />}
+                                    ></Route>
+                                    <Route
+                                        path="transaction"
+                                        element={<Transaction />}
                                     ></Route>
                                     <Route
                                         path="account"

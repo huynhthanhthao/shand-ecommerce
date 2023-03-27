@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { getOrderReceived } from "api/orderApi";
+import { getOrderReceived, updateOrderApi } from "api/orderApi";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -23,6 +23,10 @@ function OrderReceive() {
         };
         fetchData();
     }, [dispatch, account.username, status]);
+
+    const updateStatusOrder = async (id, status) => {
+        await updateOrderApi({ id, status }, dispatch);
+    };
     return (
         <div className="add-product">
             <label className="font-bold">Đơn hàng đã nhận</label>
@@ -59,14 +63,6 @@ function OrderReceive() {
                         activeclassname="active"
                     >
                         Đã nhận hàng
-                    </NavLink>
-                    <NavLink
-                        exact="true"
-                        className="mr-8 hover:text-orange-500 cursor-pointer"
-                        to="/profile/order-receive/refuse"
-                        activeclassname="active"
-                    >
-                        Từ chối
                     </NavLink>
                 </ul>
             </div>
@@ -123,7 +119,7 @@ function OrderReceive() {
                                                             src={
                                                                 JSON.parse(
                                                                     product.images
-                                                                )[1]
+                                                                )[0]
                                                             }
                                                             alt="product"
                                                             className="w-16 border mr-2"
@@ -154,7 +150,7 @@ function OrderReceive() {
                                             )}
                                         </ul>
 
-                                        {status === "refuse" ? (
+                                        {status !== "refuse" ? (
                                             <div
                                                 className={
                                                     status === "pending"
@@ -177,7 +173,7 @@ function OrderReceive() {
                                             </div>
                                         ) : (
                                             <div className="w-36 border border-dashed  text-center border-red-500 p-1 text-red-500">
-                                                Đã hủy
+                                                Đã bị từ chối
                                             </div>
                                         )}
                                     </div>
@@ -411,13 +407,32 @@ function OrderReceive() {
                                             {order.buyer.phoneNumber}
                                         </p>
                                     </div>
-                                    <NavLink
-                                        exact="true"
-                                        className="btn3 p-2"
-                                        to={"/profile/detail-order/" + order.id}
-                                    >
-                                        Theo dõi đơn hàng
-                                    </NavLink>
+                                    <div>
+                                        {order.status === "pending" && (
+                                            <button
+                                                onClick={() => {
+                                                    updateStatusOrder(
+                                                        order.id,
+                                                        "refuse"
+                                                    );
+                                                }}
+                                                className="bg-red-500 font-bold rounded hover:opacity-80 text-white p-2 mr-3"
+                                            >
+                                                Từ chối đơn hàng
+                                            </button>
+                                        )}
+
+                                        <NavLink
+                                            exact="true"
+                                            className="btn3 p-2"
+                                            to={
+                                                "/profile/detail-order/" +
+                                                order.id
+                                            }
+                                        >
+                                            Chi tiết đơn hàng
+                                        </NavLink>
+                                    </div>
                                 </div>
                             </li>
                         ))}

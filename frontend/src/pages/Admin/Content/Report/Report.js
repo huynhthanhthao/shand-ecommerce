@@ -1,4 +1,19 @@
+import { getReportListApi } from "api/reportApi";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setReport } from "store/reducers/reportSlice";
 function Report() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            await getReportListApi(dispatch);
+        };
+        fetchApi();
+    }, [dispatch]);
+
+    const { reportList } = useSelector(({ reportReducer }) => reportReducer);
+
     return (
         <>
             <div className="bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
@@ -10,61 +25,81 @@ function Report() {
                         <table className="w-full">
                             <thead>
                                 <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                    <th className="px-4 py-3">Mã đơn</th>
+                                    <th className="px-4 py-3">STT</th>
                                     <th className="px-4 py-3">Tiêu đề</th>
                                     <th className="px-4 py-3">Người báo cáo</th>
                                     <th className="px-4 py-3">Nội dung</th>
                                     <th className="px-4 py-3">Tùy chọn</th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                    <td className="px-4 py-3 text-sm">
-                                        MX1111
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        Sản phẩm lừa đảo
-                                    </td>
-                                    <td className="px-4 py-3">
-                                        <div className="flex items-center text-sm">
-                                            <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                <img
-                                                    className="object-cover w-full h-full rounded-full"
-                                                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                                    alt=""
-                                                    loading="lazy"
-                                                />
-                                                <div
-                                                    className="absolute inset-0 rounded-full shadow-inner"
-                                                    aria-hidden="true"
-                                                ></div>
-                                            </div>
-                                            <div>
-                                                <p className="font-semibold">
-                                                    Hans Burger
-                                                </p>
-                                                <p className="text-xs text-gray-600 dark:text-gray-400">
-                                                    10x Developer
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td className="px-4 py-3 text-xs">
-                                        Sản phẩm lừa đảo Sản phẩm lừa đảo Sản
-                                        phẩm lừa đảo Sản phẩm lừa
-                                    </td>
-                                    <td className="px-4 py-3 text-sm text-black">
-                                        <button
-                                            className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
-                                            data-te-toggle="modal"
-                                            data-te-target="#detail_report"
+                            {reportList && (
+                                <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                    {reportList.map((report, index) => (
+                                        <tr
+                                            key={index + 1}
+                                            className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                                         >
-                                            Xem chi tiết
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                            <td className="px-4 py-3 text-sm">
+                                                {index + 1}
+                                            </td>
+                                            <td className="px-4 py-3 text-sm">
+                                                {report.title}
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                <div className="flex items-center text-sm">
+                                                    <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                                                        <img
+                                                            className="object-cover w-full h-full rounded-full"
+                                                            src={
+                                                                report.student
+                                                                    .urlAvatar
+                                                            }
+                                                            alt=""
+                                                            loading="lazy"
+                                                        />
+                                                        <div
+                                                            className="absolute inset-0 rounded-full shadow-inner"
+                                                            aria-hidden="true"
+                                                        ></div>
+                                                    </div>
+                                                    <div>
+                                                        <p className="font-semibold">
+                                                            {
+                                                                report.student
+                                                                    .fullName
+                                                            }
+                                                        </p>
+                                                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                                                            {
+                                                                report.student
+                                                                    .username
+                                                            }
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td className="px-4 py-3 text-xs">
+                                                {report.content}
+                                            </td>
+                                            <td className="px-4 py-3 text-sm text-black">
+                                                <button
+                                                    className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
+                                                    data-te-toggle="modal"
+                                                    data-te-target="#detail_report"
+                                                    onClick={() => {
+                                                        dispatch(
+                                                            setReport(report)
+                                                        );
+                                                    }}
+                                                >
+                                                    Xem chi tiết
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            )}
                         </table>
                     </div>
                     <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">

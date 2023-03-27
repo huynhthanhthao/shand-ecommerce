@@ -66,3 +66,14 @@ export const deleteProductById = async (payload, dispatch) => {
         console.log(error);
     }
 };
+
+// export const updateProductQuantity = async (payload, dispatch) => {
+//     try {
+//         await axios.patch(`${domain}/product/edit-quantity`, {
+//             id: payload.id,
+//             quantity: payload.quantity,
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };

@@ -23,7 +23,9 @@ export const login = async (payload, dispatch) => {
 
             // show toast
             toast.success(response.data.message);
+            return true;
         } else toast.error(response.data.message);
+        return false;
     } catch (error) {
         console.log(error);
     }

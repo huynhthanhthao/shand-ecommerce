@@ -1,10 +1,15 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Moment from "react-moment";
+
 import { useEffect } from "react";
-import { getOrderById } from "api/orderApi";
+import { getOrderById, updateOrderApi } from "api/orderApi";
+// import { updateProductQuantity } from "api/productApi";
 
 function DetailOrderSent() {
     const dispatch = useDispatch();
+    let navigate = useNavigate();
+
     const { id } = useParams();
 
     useEffect(() => {
@@ -15,6 +20,7 @@ function DetailOrderSent() {
     }, [id, dispatch]);
 
     const { order } = useSelector(({ orderReducer }) => orderReducer);
+    const { account } = useSelector(({ accountReducer }) => accountReducer);
     const isTransport = () => {
         const buyerTransport = order.productList.some(
             (product) => product.transport === "buyer"
@@ -23,16 +29,15 @@ function DetailOrderSent() {
         return buyerTransport;
     };
 
+    const updateStatusOrder = async (id, status) => {
+        await updateOrderApi({ id, status }, dispatch);
+    };
+
     return (
         <div className="add-product">
             {order && (
                 <>
-                    <label className="font-bold flex">
-                        <p className="text-[#666]">
-                            Đơn hàng đã đặt&nbsp;/&nbsp;
-                        </p>
-                        Chi tiết đơn hàng
-                    </label>
+                    <label className="font-bold flex">Chi tiết đơn hàng</label>
                     <div className=" py-5 border-t my-3 bg-white text-sm flex flex-col">
                         <div className="flex">
                             <div>
@@ -42,7 +47,12 @@ function DetailOrderSent() {
                                         &nbsp;#{order.id}
                                     </p>
                                 </div>
-                                <p>Đặt ngày: {order.createdAt}</p>
+                                <p>
+                                    Đặt ngày:{" "}
+                                    <Moment format="DD/MM/YYYY">
+                                        {order.createdAt}
+                                    </Moment>
+                                </p>
                             </div>
                             <div className="flex justify-between items-center ml-64 ">
                                 <div className="flex flex-col items-center justify-center text-slate-400  fill-slate-400">
@@ -269,14 +279,14 @@ function DetailOrderSent() {
                                                 ? "Đã giao hàng"
                                                 : ""}
                                             {order.status === "refuse"
-                                                ? "Đã hủy"
+                                                ? "Đã bị từ chối"
                                                 : ""}
                                         </p>
                                     </div>
                                 </div>
                                 {order.status === "refuse" ? (
                                     <div className="w-36 h-8 border border-dashed  text-center border-red-500 p-1 text-red-500">
-                                        Đã hủy
+                                        Đã bị từ chối
                                     </div>
                                 ) : (
                                     <div
@@ -327,7 +337,11 @@ function DetailOrderSent() {
                                 </div>
                                 <div className="flex px-2 mb-2">
                                     <p>Hình thức thanh toán:&nbsp;</p>
-                                    <p className="font-bold">{}</p>
+                                    <p className="font-bold">
+                                        {order.paid
+                                            ? "Thanh toán trực tuyến"
+                                            : "Trả tiền mặt"}
+                                    </p>
                                 </div>
                             </div>
                             <table className="table-fixed w-full border-separate border-spacing-2 border border-white">
@@ -415,17 +429,71 @@ function DetailOrderSent() {
                                                 {order.total}
                                             </p>
                                         </div>
+                                        {order.paid && (
+                                            <div className="w-full border  text-center bg-green-500 p-3 text-white font-bold">
+                                                Đã thanh toán
+                                            </div>
+                                        )}
+
+                                        {account.username !==
+                                        order.seller.username ? (
+                                            <>
+                                                {order.status === "expired" && (
+                                                    <button
+                                                        onClick={() => {
+                                                            updateStatusOrder(
+                                                                order.id,
+                                                                "received"
+                                                            );
+                                                        }}
+                                                        className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
+                                                    >
+                                                        Đã nhận hàng
+                                                    </button>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <>
+                                                {order.status === "pending" && (
+                                                    <button
+                                                        onClick={() => {
+                                                            updateStatusOrder(
+                                                                order.id,
+                                                                "confirmed"
+                                                            );
+                                                        }}
+                                                        className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
+                                                    >
+                                                        Xác nhận đơn hàng
+                                                    </button>
+                                                )}
+                                                {order.status ===
+                                                    "confirmed" && (
+                                                    <button
+                                                        onClick={() => {
+                                                            updateStatusOrder(
+                                                                order.id,
+                                                                "expired"
+                                                            );
+                                                        }}
+                                                        className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
+                                                    >
+                                                        Xác nhận vận chuyển
+                                                    </button>
+                                                )}
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <Link
-                            to="/profile/order-sent/pending"
+                        <button
+                            onClick={() => navigate(-1)}
                             className="btn3 p-2 mt-3  w-64 mx-auto text-center"
                         >
                             QUAY LẠI DANH SÁCH ĐƠN HÀNG
-                        </Link>
+                        </button>
                     </div>
                 </>
             )}

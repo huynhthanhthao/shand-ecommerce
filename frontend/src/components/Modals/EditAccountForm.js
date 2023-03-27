@@ -1,4 +1,27 @@
+import { useDispatch, useSelector } from "react-redux";
+
+import { updateAccountApi } from "api/accountApi";
+import { useState } from "react";
+
 function EditAccountForm(props) {
+    const dispatch = useDispatch();
+
+    const { accountTarget } = useSelector(
+        ({ accountReducer }) => accountReducer
+    );
+
+    const handleUpdateAccount = async () => {
+        if (password === "") password = accountTarget.password;
+        await updateAccountApi(
+            { ...accountTarget, password, fullName, status },
+            dispatch
+        );
+    };
+
+    const [username, setUsername] = useState(accountTarget.username);
+    const [fullName, setFullName] = useState("");
+    let [password, setPassword] = useState("");
+    const [status, setStatus] = useState(accountTarget.status);
     return (
         <>
             <div
@@ -48,28 +71,54 @@ function EditAccountForm(props) {
                         <div className="relative p-4">
                             <form>
                                 <div className="flex flex-col mb-2">
-                                    <label className="pb-2">Tên đầy đủ</label>
-                                    <input
-                                        className="p-2 border outline-neutral-400"
-                                        placeholder="Nhập họ tên..."
-                                    />
-                                </div>
-                                <div className="flex flex-col mb-2">
                                     <label className="pb-2">
                                         Tên đăng nhập
                                     </label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên đăng nhập..."
+                                        value={accountTarget.username}
+                                        onChange={(e) => setUsername(username)}
+                                        disabled
                                     />
                                 </div>
+                                <div className="flex flex-col mb-2">
+                                    <label className="pb-2">Tên đầy đủ</label>
+                                    <input
+                                        className="p-2 border outline-neutral-400"
+                                        placeholder="Nhập họ tên..."
+                                        value={fullName}
+                                        onChange={(e) =>
+                                            setFullName(e.target.value)
+                                        }
+                                    />
+                                </div>
+
                                 <div className="flex flex-col mb-2">
                                     <label className="pb-2">Mật khẩu</label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập mật khẩu..."
                                         type="password"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
                                     />
+                                </div>
+                                <div className="flex flex-col justify-between  mb-2">
+                                    <label className="pb-2">Tùy chọn</label>
+                                    <div className="flex items-center">
+                                        <input
+                                            className="mr-2 w-5 h-5 outline-neutral-400"
+                                            type="checkbox"
+                                            checked={status}
+                                            onChange={(e) =>
+                                                setStatus(e.target.checked)
+                                            }
+                                        />
+                                        Hoạt động
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -86,7 +135,9 @@ function EditAccountForm(props) {
                             <button
                                 className="bg-green-700 ml-1 inline-block rounded  px-6 pt-2.5 pb-2 text-xs font-medium uppercase  text-white "
                                 data-te-ripple-init
+                                data-te-modal-dismiss
                                 data-te-ripple-color="light"
+                                onClick={() => handleUpdateAccount()}
                             >
                                 Xác nhận
                             </button>

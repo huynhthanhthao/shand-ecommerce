@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeLogin } from "store/reducers/authSlice";
 import { login } from "../../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 function LoginModal() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -43,7 +45,10 @@ function LoginModal() {
 
                 <button
                     onClick={() => {
-                        login({ username, password }, dispatch);
+                        const success = login({ username, password }, dispatch);
+                        if (success) {
+                            // navigate("/admin/student-list");
+                        }
                     }}
                     className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80"
                 >

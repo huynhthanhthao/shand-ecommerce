@@ -1,4 +1,27 @@
+import { useDispatch, useSelector } from "react-redux";
+import { updateCategoryApi } from "api/categoryApi";
+import { setCategory } from "store/reducers/categorySlice";
+
 function EditCategoryForm() {
+    const { category } = useSelector(({ categoryReducer }) => categoryReducer);
+    const dispatch = useDispatch();
+    const handleUpdateCategory = async () => {
+        try {
+            console.log(category);
+
+            await updateCategoryApi(category, dispatch);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const { categoryList } = useSelector(
+        ({ categoryReducer }) => categoryReducer
+    );
+
+    const rootCategory = categoryList.filter(
+        (category) => category.parent === null
+    );
+
     return (
         <>
             <div
@@ -48,17 +71,20 @@ function EditCategoryForm() {
                         <div className="relative p-4">
                             <form>
                                 <div className="flex flex-col mb-2">
-                                    <label className="pb-2">Mã danh mục</label>
-                                    <input
-                                        className="p-2 border outline-neutral-400"
-                                        placeholder="Nhập mã danh mục..."
-                                    />
-                                </div>
-                                <div className="flex flex-col mb-2">
                                     <label className="pb-2">Tên danh mục</label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên danh mục..."
+                                        value={category.nameCategory}
+                                        onChange={(e) => {
+                                            dispatch(
+                                                setCategory({
+                                                    ...category,
+                                                    nameCategory:
+                                                        e.target.value,
+                                                })
+                                            );
+                                        }}
                                     />
                                 </div>
                                 <div className="flex flex-col mb-2">
@@ -67,16 +93,28 @@ function EditCategoryForm() {
                                         <select
                                             className="p-2 border outline-neutral-400 w-full"
                                             data-te-select-init
+                                            onChange={(e) => {
+                                                dispatch(
+                                                    setCategory({
+                                                        ...category,
+                                                        parent: e.target.value,
+                                                    })
+                                                );
+                                            }}
                                         >
-                                            <option className="p-2" value="1">
-                                                One
+                                            <option value="0" className="p-2">
+                                                root
                                             </option>
-                                            <option className="p-2" value="2">
-                                                Two
-                                            </option>
-                                            <option className="p-2" value="3">
-                                                Three
-                                            </option>
+                                            {rootCategory.map((root) => (
+                                                <option
+                                                    className="p-2"
+                                                    value={root.id}
+                                                    key={root.id}
+                                                >
+                                                    [{root.id}] -{" "}
+                                                    {root.nameCategory}
+                                                </option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -95,7 +133,11 @@ function EditCategoryForm() {
                             <button
                                 className="bg-green-700 ml-1 inline-block rounded  px-6 pt-2.5 pb-2 text-xs font-medium uppercase  text-white "
                                 data-te-ripple-init
+                                data-te-modal-dismiss
                                 data-te-ripple-color="light"
+                                onClick={() => {
+                                    handleUpdateCategory();
+                                }}
                             >
                                 Xác nhận
                             </button>

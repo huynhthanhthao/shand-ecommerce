@@ -6,6 +6,7 @@ import {
     deleteAddressReceive,
     addAddressReceive,
     updateAddressReceive,
+    setAddressDefault,
 } from "store/reducers/addressReceiveSlice";
 
 export const getAddressList = async (payload, dispatch) => {
@@ -24,6 +25,21 @@ export const getAddressList = async (payload, dispatch) => {
     }
 };
 
+export const getAddressDefault = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/address-receive/default`, {
+            params: { username: payload.username },
+        });
+
+        if (response.data.status) {
+            // set state and close modal
+            dispatch(setAddressDefault(response.data.address));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const addAddressListApi = async (payload, dispatch) => {
     try {
         const response = await axios.post(`${domain}/address-receive/`, {
@@ -31,6 +47,7 @@ export const addAddressListApi = async (payload, dispatch) => {
             phoneNumber: payload.phoneNumber,
             address: payload.address,
             fullName: payload.fullName,
+            isDefault: payload.isDefault,
         });
         if (response.data.status) {
             // set state and close modal
@@ -63,10 +80,12 @@ export const deleteAddressReceiveApi = async (payload, dispatch) => {
 export const updateAddressReceiveApi = async (payload, dispatch) => {
     try {
         const response = await axios.patch(`${domain}/address-receive/`, {
+            username: payload.username,
             id: payload.id,
             fullName: payload.fullName,
             phoneNumber: payload.phoneNumber,
             address: payload.address,
+            isDefault: payload.isDefault,
         });
         if (response.data.status) {
             // set state and close modal

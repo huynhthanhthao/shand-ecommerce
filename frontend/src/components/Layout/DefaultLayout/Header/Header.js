@@ -3,6 +3,7 @@ import { showLogin, logout } from "store/reducers/authSlice";
 import { setAccount } from "store/reducers/accountSlice";
 import { useSelector } from "react-redux";
 import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
     const dispatch = useDispatch();
@@ -63,20 +64,22 @@ function Header() {
             </div>
             <div className="flex items-center">
                 <div className="mx-8 flex">
-                    <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        version="1.1"
-                        className="d7ed-SwZDZ2 "
-                    >
-                        <path
-                            d="m20.946 2 .994 17.89a2 2 0 0 1-1.886 2.107l-.111.003H4.057a2 2 0 0 1-2-2c0-.055 0-.055.003-.11L3.054 2h17.892Zm-1.892 2H4.946l-.889 16h15.886l-.889-16ZM9 6v2.5c0 1.248 1.385 2.5 3 2.5s3-1.252 3-2.5V6h2v2.5c0 2.4-2.323 4.5-5 4.5s-5-2.1-5-4.5V6h2Z"
-                            fill="#fff"
-                            fillRule="nonzero"
-                        ></path>
-                    </svg>
+                    <Link to="/cart">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            version="1.1"
+                            className="d7ed-SwZDZ2 "
+                        >
+                            <path
+                                d="m20.946 2 .994 17.89a2 2 0 0 1-1.886 2.107l-.111.003H4.057a2 2 0 0 1-2-2c0-.055 0-.055.003-.11L3.054 2h17.892Zm-1.892 2H4.946l-.889 16h15.886l-.889-16ZM9 6v2.5c0 1.248 1.385 2.5 3 2.5s3-1.252 3-2.5V6h2v2.5c0 2.4-2.323 4.5-5 4.5s-5-2.1-5-4.5V6h2Z"
+                                fill="#fff"
+                                fillRule="nonzero"
+                            ></path>
+                        </svg>
+                    </Link>
                 </div>
                 {account ? (
                     <>

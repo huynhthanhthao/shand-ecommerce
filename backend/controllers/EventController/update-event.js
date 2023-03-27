@@ -4,13 +4,24 @@ const updateEvent = async (req, res, next) => {
         const { id, title, address, date, purpose, status } = req.body;
 
         // Missing data
-        if (!title || !address || !date || !purpose || !status || !id) {
+        if (!title || !address || !date || !purpose || !id) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",
             });
         }
         // All good
+        // All good
+        if (status) {
+            await db.Event.update(
+                { status: false },
+                {
+                    where: {
+                        status: true,
+                    },
+                }
+            );
+        }
         await db.Event.update(
             { id, title, address, date, purpose, status },
             {

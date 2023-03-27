@@ -1,8 +1,26 @@
-import { useDispatch } from "react-redux";
-import { deleteProductById } from "api/productApi";
+import { useDispatch, useSelector } from "react-redux";
+// import { deleteProductById } from "api/productApi";
+import { deleteAccountApi } from "api/accountApi";
+import { deleteCategoryApi } from "api/categoryApi";
+import { deleteEventApi } from "api/eventApi";
 
 function Confirm(props) {
     const dispatch = useDispatch();
+    const { accountTarget } = useSelector(
+        ({ accountReducer }) => accountReducer
+    );
+    const { category } = useSelector(({ categoryReducer }) => categoryReducer);
+    const { event } = useSelector(({ eventReducer }) => eventReducer);
+    const handleDeleteAccount = async () => {
+        await deleteAccountApi(accountTarget, dispatch);
+    };
+    const handleDeleteCategory = async () => {
+        await deleteCategoryApi(category, dispatch);
+    };
+
+    const handleDeleteEvent = async () => {
+        await deleteEventApi(event, dispatch);
+    };
 
     return (
         <div
@@ -79,10 +97,17 @@ function Confirm(props) {
                             data-te-modal-dismiss
                             data-te-ripple-color="light"
                             onClick={() => {
-                                deleteProductById(
-                                    { id: props.product.id },
-                                    dispatch
-                                );
+                                if (props.id === "delete_student")
+                                    handleDeleteAccount();
+                                else if (props.id === "delete_category")
+                                    handleDeleteCategory();
+                                else if (props.id === "delete_event")
+                                    handleDeleteEvent();
+
+                                // deleteProductById(
+                                //     { id: props.product.id },
+                                //     dispatch
+                                // );
                             }}
                         >
                             Xác nhận

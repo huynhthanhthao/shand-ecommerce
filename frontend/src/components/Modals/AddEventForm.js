@@ -1,4 +1,33 @@
+import { createEventApi } from "api/eventApi";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 function AddEventForm() {
+    const dispatch = useDispatch();
+    const [title, setTitle] = useState("");
+    const [address, setAddress] = useState("");
+    const [date, setDate] = useState("");
+    const [purpose, setPurpose] = useState("");
+    const [status, setStatus] = useState(true);
+    const [time, setTime] = useState("");
+
+    const handleCreateEvent = async () => {
+        try {
+            await createEventApi(
+                {
+                    title,
+                    address,
+                    date,
+                    purpose,
+                    status,
+                    time,
+                },
+                dispatch
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <>
             <div
@@ -48,17 +77,14 @@ function AddEventForm() {
                         <div className="relative p-4">
                             <form>
                                 <div className="flex flex-col mb-2">
-                                    <label className="pb-2">Mã danh mục</label>
-                                    <input
-                                        className="p-2 border outline-neutral-400"
-                                        placeholder="Nhập mã sự kiện..."
-                                    />
-                                </div>
-                                <div className="flex flex-col mb-2">
                                     <label className="pb-2">Tên danh mục</label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên sự kiện..."
+                                        value={title}
+                                        onChange={(e) =>
+                                            setTitle(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="flex flex-col mb-2">
@@ -68,6 +94,10 @@ function AddEventForm() {
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập địa điểm..."
+                                        value={address}
+                                        onChange={(e) =>
+                                            setAddress(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div className="flex  mb-2">
@@ -79,6 +109,10 @@ function AddEventForm() {
                                         <input
                                             className="p-2 outline-neutral-400 border"
                                             type="time"
+                                            onChange={(e) =>
+                                                setTime(e.target.value)
+                                            }
+                                            value={time}
                                         />
                                     </div>
                                     <div className="flex flex-col w-full justify-center">
@@ -86,6 +120,10 @@ function AddEventForm() {
                                         <input
                                             className="p-2 outline-neutral-400 border"
                                             type="date"
+                                            onChange={(e) =>
+                                                setDate(e.target.value)
+                                            }
+                                            value={date}
                                         />
                                     </div>
                                 </div>
@@ -96,7 +134,26 @@ function AddEventForm() {
                                     <textarea
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập mục đích sự kiện..."
+                                        value={purpose}
+                                        onChange={(e) =>
+                                            setPurpose(e.target.value)
+                                        }
                                     ></textarea>
+                                </div>
+                                <div className="flex flex-col mb-2">
+                                    <label className="pb-2">Trạng thái</label>
+
+                                    <div className="flex items-center">
+                                        <input
+                                            className="mr-2 w-4 h-4 p-2 border outline-neutral-400"
+                                            value={status}
+                                            type="checkbox"
+                                            onChange={(e) =>
+                                                setStatus(e.target.checked)
+                                            }
+                                        />
+                                        Bật thông báo{" "}
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -113,7 +170,9 @@ function AddEventForm() {
                             <button
                                 className="bg-green-700 ml-1 inline-block rounded  px-6 pt-2.5 pb-2 text-xs font-medium uppercase  text-white "
                                 data-te-ripple-init
+                                data-te-modal-dismiss
                                 data-te-ripple-color="light"
+                                onClick={(e) => handleCreateEvent()}
                             >
                                 Xác nhận
                             </button>

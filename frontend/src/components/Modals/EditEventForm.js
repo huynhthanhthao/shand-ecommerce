@@ -1,4 +1,21 @@
+// import { useState } from "react";
+import { updateEventApi } from "api/eventApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setEvent } from "store/reducers/eventSlice";
+
 function EditEventForm() {
+    const dispatch = useDispatch();
+
+    const { event } = useSelector(({ eventReducer }) => eventReducer);
+
+    const handleUpdateEvent = async () => {
+        try {
+            await updateEventApi(event, dispatch);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <div
@@ -48,17 +65,18 @@ function EditEventForm() {
                         <div className="relative p-4">
                             <form>
                                 <div className="flex flex-col mb-2">
-                                    <label className="pb-2">Mã danh mục</label>
-                                    <input
-                                        className="p-2 border outline-neutral-400"
-                                        placeholder="Nhập mã sự kiện..."
-                                    />
-                                </div>
-                                <div className="flex flex-col mb-2">
                                     <label className="pb-2">Tên danh mục</label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên sự kiện..."
+                                        value={event.title}
+                                        onChange={(e) =>
+                                            dispatch(
+                                                setEvent({
+                                                    title: e.target.value,
+                                                })
+                                            )
+                                        }
                                     />
                                 </div>
                                 <div className="flex flex-col mb-2">
@@ -68,6 +86,14 @@ function EditEventForm() {
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập địa điểm..."
+                                        value={event.address}
+                                        onChange={(e) =>
+                                            dispatch(
+                                                setEvent({
+                                                    address: e.target.value,
+                                                })
+                                            )
+                                        }
                                     />
                                 </div>
                                 <div className="flex  mb-2">
@@ -79,13 +105,30 @@ function EditEventForm() {
                                         <input
                                             className="p-2 outline-neutral-400 border"
                                             type="time"
+                                            value={event.time}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setEvent({
+                                                        time: e.target.value,
+                                                    })
+                                                )
+                                            }
                                         />
                                     </div>
                                     <div className="flex flex-col w-full justify-center">
                                         <label className="pb-2">Ngày</label>
+
                                         <input
                                             className="p-2 outline-neutral-400 border"
                                             type="date"
+                                            value={event.date}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setEvent({
+                                                        date: e.target.value,
+                                                    })
+                                                )
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -96,7 +139,35 @@ function EditEventForm() {
                                     <textarea
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập mục đích sự kiện..."
+                                        onChange={(e) =>
+                                            dispatch(
+                                                setEvent({
+                                                    purpose: e.target.value,
+                                                })
+                                            )
+                                        }
+                                        value={event.purpose}
                                     ></textarea>
+                                </div>
+                                <div className="flex flex-col mb-2">
+                                    <label className="pb-2">Trạng thái</label>
+
+                                    <div className="flex items-center">
+                                        <input
+                                            className="mr-2 w-4 h-4 p-2 border outline-neutral-400"
+                                            checked={event.status}
+                                            type="checkbox"
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setEvent({
+                                                        status: e.target
+                                                            .checked,
+                                                    })
+                                                )
+                                            }
+                                        />
+                                        Bật thông báo{" "}
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -114,6 +185,10 @@ function EditEventForm() {
                                 className="bg-green-700 ml-1 inline-block rounded  px-6 pt-2.5 pb-2 text-xs font-medium uppercase  text-white "
                                 data-te-ripple-init
                                 data-te-ripple-color="light"
+                                data-te-modal-dismiss
+                                onClick={() => {
+                                    handleUpdateEvent();
+                                }}
                             >
                                 Xác nhận
                             </button>

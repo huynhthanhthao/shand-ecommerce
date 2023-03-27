@@ -1,7 +1,13 @@
 import axios from "axios";
 import { domain } from "../config";
 import { toast } from "react-toastify";
-import { setAccount } from "store/reducers/accountSlice";
+import {
+    createAccount,
+    deleteAccount,
+    setAccount,
+    setAccountList,
+    updateAccount,
+} from "store/reducers/accountSlice";
 
 export const updateDetailAccount = async (payload, dispatch) => {
     try {
@@ -24,6 +30,104 @@ export const updateDetailAccount = async (payload, dispatch) => {
             // show toast
             toast.success(response.data.message);
         } else toast.error(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const createAccountApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.post(`${domain}/account/`, {
+            username: payload.username,
+            password: payload.password,
+            fullName: payload.fullName,
+            urlAvatar: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+            role: payload.role,
+        });
+        if (response.data.status) {
+            // set state and close modal
+            dispatch(
+                createAccount({
+                    username: payload.username,
+                    password: payload.password,
+                    fullName: payload.fullName,
+                    role: payload.role,
+                    status: true,
+                    urlAvatar:
+                        "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                })
+            );
+
+            // show toast
+            toast.success(response.data.message);
+        } else toast.error(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateAccountApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.patch(`${domain}/account/`, {
+            username: payload.username,
+            password: payload.password,
+            fullName: payload.fullName,
+            role: payload.role,
+            status: payload.status,
+            urlAvatar: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+        });
+        if (response.data.status) {
+            // set state and close modal
+            dispatch(
+                updateAccount({
+                    username: payload.username,
+                    password: payload.password,
+                    fullName: payload.fullName,
+                    role: payload.role,
+                    urlAvatar:
+                        "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                    status: payload.status,
+                })
+            );
+
+            // show toast
+            toast.success(response.data.message);
+        } else toast.error(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const deleteAccountApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.delete(`${domain}/account/`, {
+            data: {
+                username: payload.username,
+            },
+        });
+        if (response.data.status) {
+            // set state and close modal
+            dispatch(
+                deleteAccount({
+                    username: payload.username,
+                })
+            );
+
+            // show toast
+            toast.success(response.data.message);
+        } else toast.error(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAllAccountApi = async (dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/account/`);
+        if (response.data.status) {
+            // set state and close modal
+            dispatch(setAccountList(response.data.userList));
+        }
     } catch (error) {
         console.log(error);
     }

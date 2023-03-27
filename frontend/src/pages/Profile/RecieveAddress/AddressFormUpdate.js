@@ -8,17 +8,22 @@ function UpdateAddressForm({ setShowFormUpdate }) {
     const { addressReceive } = useSelector(
         ({ addressReceiveReducer }) => addressReceiveReducer
     );
+    const { account } = useSelector(({ accountReducer }) => accountReducer);
+
     const [fullName, setFullName] = useState(addressReceive.fullName);
     const [address, setAddress] = useState(addressReceive.address);
+    const [isDefault, setIsDefault] = useState(addressReceive.isDefault);
 
     const [phoneNumber, setPhoneNumber] = useState(addressReceive.phoneNumber);
     const handleUpdateAddress = () => {
         updateAddressReceiveApi(
             {
                 id: addressReceive.id,
+                username: account.username,
                 fullName,
                 address,
                 phoneNumber,
+                isDefault,
             },
             dispatch
         );
@@ -70,6 +75,22 @@ function UpdateAddressForm({ setShowFormUpdate }) {
                                     dispatch(setAddressReceive(address));
                                 }}
                                 className="border rounded p-2 focus:outline-teal-400 w-4/5"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="">
+                            Mặc định:
+                            <span className="text-red-600">*</span>
+                        </td>
+                        <td className="">
+                            <input
+                                type="checkbox"
+                                checked={isDefault}
+                                onChange={(e) => {
+                                    setIsDefault(e.target.checked);
+                                }}
+                                className="border rounded p-2 focus:outline-teal-400  w-5 h-5 cursor-pointer"
                             />
                         </td>
                     </tr>

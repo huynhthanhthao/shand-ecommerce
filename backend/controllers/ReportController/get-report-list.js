@@ -10,6 +10,20 @@ const getReportList = async (req, res, next) => {
                         exclude: ["createdAt", "updatedAt", "password", "role"],
                     },
                 },
+                {
+                    model: db.User,
+                    as: "reportedStudent",
+                    attributes: {
+                        exclude: ["createdAt", "updatedAt", "password", "role"],
+                    },
+                },
+                {
+                    model: db.Product,
+                    as: "product",
+                    attributes: {
+                        exclude: ["createdAt", "updatedAt"],
+                    },
+                },
             ],
         });
 

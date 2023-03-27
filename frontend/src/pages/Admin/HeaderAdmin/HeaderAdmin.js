@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
+
 function HeaderAdmin() {
+    const account = useSelector((state) => state.accountReducer.account);
     return (
         <div className="header-admin flex justify-between items-center px-10 bg-[#1f2937]  py-2">
             <div className="flex">
@@ -8,7 +11,7 @@ function HeaderAdmin() {
                         className="w-10 mr-2 rounded"
                         alt="admin "
                     />
-                    <p className="font-bold text-white">ADMIN</p>
+                    <p className="font-bold text-white">{account.fullName}</p>
                 </div>
                 <div className="flex bg-white p-2 rounded w-[550px]">
                     <svg

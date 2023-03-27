@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
-import { getOrderSent } from "api/orderApi";
+import { getOrderSent, deleteOrderApi } from "api/orderApi";
 import { useSelector, useDispatch } from "react-redux";
 
 import { useParams } from "react-router-dom";
+import Moment from "react-moment";
 
 function OrderSent() {
     const dispatch = useDispatch();
@@ -21,6 +22,10 @@ function OrderSent() {
         };
         fetchData();
     }, [dispatch, account.username, status]);
+
+    const handleDeleteOrder = async (id) => {
+        await deleteOrderApi({ id }, dispatch);
+    };
 
     return (
         <div className="add-product">
@@ -65,7 +70,7 @@ function OrderSent() {
                         to="/profile/order-sent/refuse"
                         activeclassname="active"
                     >
-                        Từ chối
+                        Bị từ chối
                     </NavLink>
                 </ul>
                 {orderList && (
@@ -97,15 +102,27 @@ function OrderSent() {
                                                     &nbsp;#{order.id} | Chi tiết
                                                 </Link>
                                             </div>
-                                            <p>Đặt ngày: {order.createdAt}</p>
+                                            <p>
+                                                Đặt ngày:{" "}
+                                                <Moment format="DD/MM/YYYY">
+                                                    {order.createdAt}
+                                                </Moment>
+                                            </p>
                                         </div>
                                         <div>
                                             <p>Người nhận:</p>
                                             <p>{order.buyer.fullName}</p>
                                         </div>
-                                        <div className="text-right">
+                                        <div className="text-center">
                                             <p>Tổng tiền:</p>
-                                            <p>{order.total}</p>
+                                            <p>{order.total}đ</p>
+                                        </div>
+                                        <div className="text-right">
+                                            {order.paid && (
+                                                <div className="w-36 border  text-center bg-green-500 p-3 text-white font-bold">
+                                                    Đã thanh toán
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="flex  p-3">
@@ -121,7 +138,7 @@ function OrderSent() {
                                                                 src={
                                                                     JSON.parse(
                                                                         product.images
-                                                                    )[1]
+                                                                    )[0]
                                                                 }
                                                                 alt="product"
                                                                 className="w-16 border mr-2"
@@ -156,7 +173,7 @@ function OrderSent() {
 
                                             {status === "refuse" ? (
                                                 <div className="w-36 border border-dashed  text-center border-red-500 p-1 text-red-500">
-                                                    Đã hủy
+                                                    Đã bị từ chối
                                                 </div>
                                             ) : (
                                                 <div
@@ -425,16 +442,30 @@ function OrderSent() {
                                                 {order.buyer.phoneNumber}
                                             </p>
                                         </div>
-                                        <NavLink
-                                            exact="true"
-                                            className="btn3 p-2"
-                                            to={
-                                                "/profile/detail-order/" +
-                                                order.id
-                                            }
-                                        >
-                                            Theo dõi đơn hàng
-                                        </NavLink>
+                                        <div>
+                                            {order.status === "pending" && (
+                                                <button
+                                                    onClick={() =>
+                                                        handleDeleteOrder(
+                                                            order.id
+                                                        )
+                                                    }
+                                                    className="bg-red-500 font-bold rounded hover:opacity-80 text-white p-2 mr-3"
+                                                >
+                                                    Hủy đơn hàng
+                                                </button>
+                                            )}
+                                            <NavLink
+                                                exact="true"
+                                                className="btn3 p-2"
+                                                to={
+                                                    "/profile/detail-order/" +
+                                                    order.id
+                                                }
+                                            >
+                                                Theo dõi đơn hàng
+                                            </NavLink>
+                                        </div>
                                     </div>
                                 </li>
                             ))}

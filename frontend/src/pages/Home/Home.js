@@ -1,16 +1,17 @@
 import Topic from "./Topic";
-import Ads from "./Ads";
-import Suggest from "./Suggest";
+import Event from "./Event";
+import ProductList from "./ProductList";
 
 function Home() {
     return (
         <div className="home">
             <div className="nav bg-white">
                 <Topic />
-                <Ads />
+                <Event />
             </div>
             <div className="container  bg-[#f5f5f5] px-24 py-5 ">
-                <Suggest />
+                <ProductList />
+                <ProductList />
             </div>
         </div>
     );
