@@ -55,7 +55,7 @@ const getOrderList = async (req, res, next) => {
         return res.status(200).json({
             status: true,
             message: "Lấy thông tin đơn hàng thành công!",
-            orderList: newOrders,
+            orderList: newOrders.reverse(),
         });
     } catch (error) {
         console.log(error);

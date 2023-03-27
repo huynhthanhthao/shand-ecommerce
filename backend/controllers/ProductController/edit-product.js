@@ -4,7 +4,6 @@ const editProduct = async (req, res, next) => {
         const {
             id,
             productId,
-            ownId,
             categoryId,
             name,
             description,
@@ -37,7 +36,6 @@ const editProduct = async (req, res, next) => {
         await db.Product.update(
             {
                 productId,
-                ownId,
                 categoryId,
                 name,
                 description,

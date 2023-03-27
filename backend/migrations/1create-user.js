@@ -24,6 +24,8 @@ module.exports = {
             },
             urlAvatar: {
                 type: Sequelize.STRING,
+                default:
+                    "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             },
             address: {
                 type: Sequelize.STRING,
@@ -31,6 +33,10 @@ module.exports = {
             role: {
                 type: Sequelize.ENUM,
                 values: ["student", "admin", "shop"],
+            },
+            status: {
+                type: Sequelize.BOOLEAN,
+                default: true,
             },
             classId: {
                 type: Sequelize.STRING,

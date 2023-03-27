@@ -2,10 +2,10 @@ const db = require("../../models");
 const argon2 = require("argon2");
 const updateAccount = async (req, res, next) => {
     try {
-        const { userName, password, fullName, role } = req.body;
+        const { username, password, fullName, role, status } = req.body;
 
         // Missing data
-        if (!userName || !password || !fullName || !role) {
+        if (!username || !password || !fullName || !role) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",
@@ -14,10 +14,10 @@ const updateAccount = async (req, res, next) => {
         const hashedPassword = await argon2.hash(password);
         // All good
         await db.User.update(
-            { password: hashedPassword, fullName, role },
+            { password: hashedPassword, fullName, role, status },
             {
                 where: {
-                    userName,
+                    username,
                 },
             }
         );

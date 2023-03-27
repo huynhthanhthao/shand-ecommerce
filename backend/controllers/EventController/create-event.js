@@ -1,10 +1,10 @@
 const db = require("../../models");
 const createEvent = async (req, res, next) => {
     try {
-        const { title, address, date, purpose, status } = req.body;
+        const { title, address, date, purpose, status, time } = req.body;
 
         // Missing data
-        if (!title || !address || !date || !purpose || !status) {
+        if (!title || !address || !date || !purpose || !status || !time) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",
@@ -17,6 +17,7 @@ const createEvent = async (req, res, next) => {
             date,
             purpose,
             status,
+            time,
         });
 
         return res.status(200).json({

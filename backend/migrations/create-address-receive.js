@@ -15,7 +15,7 @@ module.exports = {
                     model: {
                         tableName: "Users",
                     },
-                    key: "userName",
+                    key: "username",
                 },
             },
             fullName: {
@@ -26,6 +26,9 @@ module.exports = {
             },
             phoneNumber: {
                 type: Sequelize.STRING,
+            },
+            isDefault: {
+                type: Sequelize.BOOLEAN,
             },
             createdAt: {
                 allowNull: false,

@@ -2,9 +2,8 @@ const db = require("../../models");
 const createCategory = async (req, res, next) => {
     try {
         const { nameCategory, parent } = req.body;
-
         // missing data
-        if (!nameCategory || !parent) {
+        if (!nameCategory) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",

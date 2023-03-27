@@ -16,7 +16,7 @@ module.exports = {
                     model: {
                         tableName: "Users",
                     },
-                    key: "userName",
+                    key: "username",
                 },
             },
             studentId: {
@@ -26,7 +26,7 @@ module.exports = {
                     model: {
                         tableName: "Users",
                     },
-                    key: "userName",
+                    key: "username",
                 },
             },
             title: {

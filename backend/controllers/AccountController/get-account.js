@@ -1,9 +1,9 @@
 const db = require("../../models");
 const getAccount = async (req, res, next) => {
     try {
-        const { userName } = req.query;
+        const { username } = req.query;
 
-        const user = await db.User.findOne({ where: { userName } });
+        const user = await db.User.findOne({ where: { username } });
 
         return res.status(200).json({
             status: true,

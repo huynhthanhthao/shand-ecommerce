@@ -2,10 +2,12 @@ const db = require("../../models");
 const argon2 = require("argon2");
 const createAccount = async (req, res, next) => {
     try {
-        const { userName, password, fullName, role } = req.body;
+        const { username, password, fullName, role, urlAvatar } = req.body;
+
+        // console.log(username, password, fullName, role, urlAvatar);
 
         // Missing data
-        if (!userName || !password || !fullName || !role) {
+        if (!username || !password || !fullName || !role) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",
@@ -13,7 +15,7 @@ const createAccount = async (req, res, next) => {
         }
 
         // account existed
-        const user = await db.User.findOne({ where: { userName } });
+        const user = await db.User.findOne({ where: { username } });
 
         if (user) {
             return res.json({
@@ -25,10 +27,12 @@ const createAccount = async (req, res, next) => {
         // All good
         const hashedPassword = await argon2.hash(password);
         await db.User.create({
-            userName,
+            username,
             password: hashedPassword,
             fullName,
             role,
+            urlAvatar,
+            status: true,
         });
 
         res.status(200).json({

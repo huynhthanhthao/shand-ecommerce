@@ -1,7 +1,8 @@
 const db = require("../../models");
 const addAddress = async (req, res, next) => {
     try {
-        const { username, fullName, phoneNumber, address } = req.body;
+        const { username, fullName, phoneNumber, address, isDefault } =
+            req.body;
         // Missing data
         if (!fullName || !phoneNumber || !address) {
             return res.json({
@@ -10,11 +11,21 @@ const addAddress = async (req, res, next) => {
             });
         }
 
+        if (isDefault) {
+            await db.AddressReceive.update(
+                {
+                    isDefault: false,
+                },
+                { where: { isDefault: true } }
+            );
+        }
+
         const response = await db.AddressReceive.create({
             username,
             fullName,
             phoneNumber,
             address,
+            isDefault,
         });
         return res.json({
             status: true,

@@ -1,11 +1,11 @@
 const db = require("../../models");
 const createAccount = async (req, res, next) => {
     try {
-        const { userName } = req.body;
+        const { username } = req.body;
 
         await db.User.destroy({
             where: {
-                userName,
+                username,
             },
         });
 

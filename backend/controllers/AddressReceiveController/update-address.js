@@ -1,7 +1,8 @@
 const db = require("../../models");
 const updateAddress = async (req, res, next) => {
     try {
-        const { id, fullName, address, phoneNumber } = req.body;
+        const { id, username, fullName, address, phoneNumber, isDefault } =
+            req.body;
         // Missing data
         if (!fullName || !address || !phoneNumber) {
             return res.json({
@@ -10,14 +11,33 @@ const updateAddress = async (req, res, next) => {
             });
         }
 
-        await db.AddressReceive.update(
-            {
-                fullName,
-                address,
-                phoneNumber,
-            },
-            { where: { id } }
-        );
+        if (isDefault) {
+            await db.AddressReceive.update(
+                {
+                    isDefault: false,
+                },
+                { where: { isDefault: true, username } }
+            );
+
+            await db.AddressReceive.update(
+                {
+                    isDefault,
+                    fullName,
+                    address,
+                    phoneNumber,
+                },
+                { where: { id } }
+            );
+        } else
+            await db.AddressReceive.update(
+                {
+                    isDefault,
+                    fullName,
+                    address,
+                    phoneNumber,
+                },
+                { where: { id } }
+            );
         return res.json({
             status: true,
             message: "Cập nhật thành công!",

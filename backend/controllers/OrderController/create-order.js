@@ -1,7 +1,7 @@
 const db = require("../../models");
 const createOrder = async (req, res, next) => {
     try {
-        const { productsInformation, sellerId, buyerId, total, status } =
+        const { productsInformation, sellerId, buyerId, total, status, paid } =
             req.body;
 
         const order = await db.Order.create({
@@ -9,12 +9,13 @@ const createOrder = async (req, res, next) => {
             buyerId,
             productsInformation: JSON.parse(productsInformation),
             total,
+            paid,
             status,
         });
 
         return res.status(200).json({
             status: true,
-            message: "Tạo hóa đơn thành công!",
+            message: "Đặt hàng thành công!",
             order,
         });
     } catch (error) {
