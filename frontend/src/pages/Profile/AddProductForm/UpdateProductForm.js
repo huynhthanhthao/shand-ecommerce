@@ -5,7 +5,7 @@ import ImageProduct from "./ImageProduct";
 import StatusProduct from "./StatusProduct";
 import OtherInforProduct from "./OtherInforProduct";
 import ShipInfor from "./ShipInfor";
-import ImageProve from "./ImageProve";
+import ImageSource from "./ImageSource";
 function UpdateProductForm() {
     return (
         <div className="add-product">
@@ -26,7 +26,7 @@ function UpdateProductForm() {
                             <ImageProduct />
                         </tr>
                         <tr>
-                            <ImageProve />
+                            <ImageSource />
                         </tr>
                         <tr>
                             <td className="w-[15%] text-right"></td>

@@ -5,8 +5,15 @@ import ImageProduct from "./ImageProduct";
 import StatusProduct from "./StatusProduct";
 import OtherInforProduct from "./OtherInforProduct";
 import ShipInfor from "./ShipInfor";
-import ImageProve from "./ImageProve";
+import ImageSource from "./ImageSource";
+import { useDispatch, useSelector } from "react-redux";
+import { setNewProduct } from "store/reducers/productSlice";
+// import { useState } from "react";
 function AddProductForm() {
+    const dispatch = useDispatch();
+    const { newProduct } = useSelector(({ productReducer }) => productReducer);
+    // console.log(newProduct);
+
     return (
         <div className="add-product">
             <label className="font-bold">THÔNG TIN SẢN PHẨM</label>
@@ -14,19 +21,39 @@ function AddProductForm() {
                 <table className="w-full border-separate border-spacing-2  text-sm">
                     <tbody>
                         <tr>
-                            <NameProduct />
+                            <NameProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <CategorySelect />
+                            <CategorySelect
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <Description />
+                            <Description
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <ImageProduct />
+                            <ImageProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <ImageProve />
+                            <ImageSource
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
                             <td className="w-[15%] text-right"></td>
@@ -58,7 +85,18 @@ function AddProductForm() {
                                 <span className="text-red-600">*</span>
                             </td>
                             <td className="px-5">
-                                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                                <input
+                                    value={newProduct.price}
+                                    onChange={(e) => {
+                                        dispatch(
+                                            setNewProduct({
+                                                ...newProduct,
+                                                price: e.target.value,
+                                            })
+                                        );
+                                    }}
+                                    className=" w-full input focus:shadow-input py-1 px-3"
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -67,17 +105,41 @@ function AddProductForm() {
                                 <span className="text-red-600">*</span>
                             </td>
                             <td className="px-5">
-                                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                                <input
+                                    className=" w-full input focus:shadow-input py-1 px-3"
+                                    value={newProduct.quantityAvailable}
+                                    onChange={(e) => {
+                                        dispatch(
+                                            setNewProduct({
+                                                ...newProduct,
+                                                quantityAvailable:
+                                                    e.target.value,
+                                            })
+                                        );
+                                    }}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <StatusProduct />
+                            <StatusProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <OtherInforProduct />
+                            <OtherInforProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <ShipInfor />
+                            <ShipInfor
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr className="">
                             <td className="w-[15%] text-right "></td>

@@ -1,4 +1,4 @@
-function OtherInforProduct() {
+function OtherInforProduct(props) {
     return (
         <>
             <td className="w-[15%] text-right">
@@ -10,6 +10,15 @@ function OtherInforProduct() {
                     <input
                         className=" w-full input focus:shadow-input py-1 px-3"
                         placeholder="Thương hiệu"
+                        value={props.newProduct.trademark}
+                        onChange={(e) => {
+                            props.dispatch(
+                                props.setNewProduct({
+                                    ...props.newProduct,
+                                    trademark: props.target.value,
+                                })
+                            );
+                        }}
                     />
                 </div>
 
@@ -19,6 +28,15 @@ function OtherInforProduct() {
                     <input
                         className=" w-full input focus:shadow-input py-1 px-3"
                         placeholder="Kích thước"
+                        value={props.newProduct.size}
+                        onChange={(e) => {
+                            props.dispatch(
+                                props.setNewProduct({
+                                    ...props.newProduct,
+                                    size: props.target.value,
+                                })
+                            );
+                        }}
                     />
                 </div>
             </td>

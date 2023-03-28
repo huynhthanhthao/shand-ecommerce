@@ -1,14 +1,51 @@
+import { getCategoryListApi } from "api/categoryApi";
 import { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function CategorySelect() {
+function CategorySelect(props) {
+    const dispatch = useDispatch();
+
     const [showTopic, setShowTopic] = useState(false);
-    const [showDetai, setShowDetai] = useState(false);
+    const [showDetail, setShowDetail] = useState(false);
+    const [rootActive, setRootActive] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await getCategoryListApi(dispatch);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, [dispatch]);
+
+    const { categoryList } = useSelector(
+        ({ categoryReducer }) => categoryReducer
+    );
+
+    const rootCategory = categoryList.filter(
+        (category) => category.parent === null
+    );
+    const getChild = (id) => {
+        return categoryList.filter((category) => {
+            if (category.parent !== null) {
+                return category.parent.id === id;
+            } else return false;
+        });
+    };
+
+    const getNameCategory = (id) => {
+        for (let i = 0; i < categoryList.length; i++) {
+            if (categoryList[i].id === id) return categoryList[i].nameCategory;
+        }
+    };
 
     const useOutsideBox = function (ref) {
         useEffect(() => {
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
-                    alert("You clicked outside of me!");
+                    setShowTopic(false);
                 }
             }
 
@@ -34,7 +71,9 @@ function CategorySelect() {
                     onClick={() => setShowTopic(true)}
                     className="w-full flex justify-between text-left input focus:shadow-input py-2 px-3"
                 >
-                    Chọn loại sản phẩm
+                    {props.newProduct.categoryId
+                        ? getNameCategory(props.newProduct.categoryId)
+                        : "Chọn loại sản phẩm"}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 512 512"
@@ -50,44 +89,60 @@ function CategorySelect() {
                     >
                         <div
                             className="topic-list"
-                            onMouseOver={() => setShowDetai(true)}
+                            onMouseOver={() => setShowDetail(true)}
                         >
-                            <div className="topic-list-item flex justify-between font-bold  min-w-[200px] h-8 topic px-4 py-1 hover:bg-orange-200 cursor-pointer rounded">
-                                Thời trang nam
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                    className="w-2"
+                            {rootCategory.map((root, index) => (
+                                <div
+                                    key={index}
+                                    className="topic-list-item flex justify-between font-bold  min-w-[200px] h-8 topic px-4 py-1 hover:bg-orange-200 cursor-pointer rounded"
+                                    onMouseEnter={() => {
+                                        setRootActive(root.id);
+                                    }}
+                                    onClick={() => {
+                                        setShowTopic(false);
+                                        props.dispatch(
+                                            props.setNewProduct({
+                                                ...props.newProduct,
+                                                categoryId: root.id,
+                                            })
+                                        );
+                                    }}
                                 >
-                                    <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
-                                </svg>
-                            </div>
-                            <div className="topic-list-item flex justify-between font-bold  min-w-[200px] h-8 topic px-4 py-1 hover:bg-orange-200 cursor-pointer rounded">
-                                Thời trang nữ
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 320 512"
-                                    className="w-2"
-                                >
-                                    <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
-                                </svg>
-                            </div>
+                                    {root.nameCategory}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 320 512"
+                                        className="w-2"
+                                    >
+                                        <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
+                                    </svg>
+                                </div>
+                            ))}
                         </div>
 
-                        {showDetai && (
+                        {showDetail && (
                             <div className="border-l px-3 rounded-sm detail-product ">
                                 <ul>
-                                    <li className="my-2">Áo sơ mi nam</li>
-                                    <li className="my-2">Áo khoác nam</li>
-                                    <li className="my-2">
-                                        Áo thun, áo polo nam
-                                    </li>
-                                    <li className="my-2">Quần dài nam</li>
-                                    <li className="my-2">Quần thể thao nam</li>
-                                    <li className="my-2">Quần short nam</li>
-                                    <li className="my-2">
-                                        Phụ kiện thời trang nam
-                                    </li>
+                                    {getChild(rootActive).map(
+                                        (category, index) => (
+                                            <li
+                                                onClick={() => {
+                                                    setShowTopic(false);
+                                                    props.dispatch(
+                                                        props.setNewProduct({
+                                                            ...props.newProduct,
+                                                            categoryId:
+                                                                category.id,
+                                                        })
+                                                    );
+                                                }}
+                                                key={index}
+                                                className="my-2 topic-list-item flex justify-between font-bold  min-w-[50px] h-8 topic px-2 py-1 hover:bg-orange-200 cursor-pointer rounded"
+                                            >
+                                                {category.nameCategory}
+                                            </li>
+                                        )
+                                    )}
                                 </ul>
                             </div>
                         )}

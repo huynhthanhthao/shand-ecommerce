@@ -1,4 +1,4 @@
-function ImageProve() {
+function ImageSource() {
     return (
         <>
             <td className="w-[15%] text-right">
@@ -28,4 +28,4 @@ function ImageProve() {
     );
 }
 
-export default ImageProve;
+export default ImageSource;

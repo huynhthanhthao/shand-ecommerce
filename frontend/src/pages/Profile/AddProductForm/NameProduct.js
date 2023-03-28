@@ -1,4 +1,4 @@
-function NameProduct() {
+function NameProduct(props) {
     return (
         <>
             <td className="w-[15%] text-right">
@@ -6,7 +6,18 @@ function NameProduct() {
                 <span className="text-red-600">*</span>
             </td>
             <td className="px-5">
-                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                <input
+                    className=" w-full input focus:shadow-input py-1 px-3"
+                    value={props.newProduct.name}
+                    onChange={(e) => {
+                        props.dispatch(
+                            props.setNewProduct({
+                                ...props.newProduct,
+                                name: e.target.value,
+                            })
+                        );
+                    }}
+                />
             </td>
         </>
     );
