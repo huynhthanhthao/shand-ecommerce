@@ -23,13 +23,13 @@ const addCart = async (req, res, next) => {
             });
             return res.json({
                 status: true,
-                message: "Thêm sản phẩm vào giỏ thành công!",
+                message: "Đã thêm vào giỏ hàng!",
                 product: response,
             });
         } else {
             return res.json({
                 status: false,
-                message: "Sản phẩm này đã có trong giỏ hàng!",
+                message: "Sản phẩm này đã có trong giỏ!",
             });
         }
     } catch (error) {

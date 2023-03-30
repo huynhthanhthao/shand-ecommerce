@@ -10,8 +10,8 @@ function Home() {
                 <Event />
             </div>
             <div className="container  bg-[#f5f5f5] px-24 py-5 ">
-                <ProductList />
-                <ProductList />
+                <ProductList label="Sản phẩm mới nhất" />
+                <ProductList label="Sản phẩm miễn phí" />
             </div>
         </div>
     );

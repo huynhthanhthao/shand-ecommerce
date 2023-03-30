@@ -9,6 +9,7 @@ import transactionReducer from "./reducers/transactionSlice";
 import categoryReducer from "./reducers/categorySlice";
 import eventReducer from "./reducers/eventSlice";
 import reportReducer from "./reducers/reportSlice";
+import loadingReducer from "./reducers/loadingSlice";
 
 import {
     persistStore,
@@ -39,6 +40,7 @@ const reducer = combineReducers({
     categoryReducer,
     eventReducer,
     reportReducer,
+    loadingReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

@@ -1,0 +1,53 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @sashido/teachablemachine-node
+
+PATH: 
+  C:\Users\S145\AppData\Roaming\npm;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_311\bin;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Users\S145\AppData\Local\Yarn\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\S145\AppData\Roaming\npm\node_modules\npm\bin;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\xampp\php;C:\composer;C:\xampp\mysql\bin;C:\Users\S145\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\S145\AppData\Local\Programs\Python\Python310\;C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Program Files\nodejs;C:\Users\S145\AppData\Local\Yarn\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\S145\AppData\Roaming\npm\node_modules\npm\bin;C:\Users\S145\AppData\Roaming\npm;C:\Users\S145\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Users\S145\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;C:\Users\S145\AppData\Roaming\Composer\vendor\bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  16.13.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'D:\KTPM\LuanVan\ecommerce\backend\node_modules\argon2\lib\binding\napi-v3\argon2.node'
+
+npm manifest: 
+  {
+      "name": "backend",
+      "version": "0.0.0",
+      "private": true,
+      "scripts": {
+          "start": "nodemon app.js"
+      },
+      "dependencies": {
+          "argon2": "^0.30.3",
+          "body-parser": "^1.20.2",
+          "cookie-parser": "~1.4.4",
+          "cors": "^2.8.5",
+          "debug": "~2.6.9",
+          "dotenv": "^16.0.3",
+          "express": "~4.16.1",
+          "http-errors": "~1.6.3",
+          "jade": "~1.11.0",
+          "jsonwebtoken": "^9.0.0",
+          "morgan": "~1.9.1",
+          "mysql2": "^3.2.0",
+          "sequelize": "^6.29.3",
+          "uuid": "^9.0.0"
+      },
+      "devDependencies": {
+          "nodemon": "^2.0.21",
+          "sequelize-cli": "^6.6.0"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -23,7 +23,9 @@ function DiscriptionProduct({ product }) {
                             <th scope="row" className="px-6 py-4 font-medium ">
                                 Kích thước
                             </th>
-                            <td className="px-6 py-4">{product.size}</td>
+                            <td className="px-6 py-4">
+                                {product.size ? product.size : "-"}
+                            </td>
                         </tr>
 
                         <tr className="  ">

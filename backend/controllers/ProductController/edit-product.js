@@ -32,6 +32,15 @@ const editProduct = async (req, res, next) => {
             });
         }
 
+        const product = await db.Product.findOne({
+            where: { productId, ownId },
+        });
+
+        if (product)
+            return res.status(200).json({
+                status: false,
+                message: "Mã sản phẩm bị trùng!",
+            });
         // All good
         await db.Product.update(
             {

@@ -1,31 +1,25 @@
-import { useState } from "react";
+import { createUrlImage } from "api/cloudinaryApi";
+import { useEffect, useState } from "react";
 
 function ImageProduct(props) {
-    // const [imageAvatar, setImageAvatar] = useState("");
-    const [fileList, setFileList] = useState([]);
-    const setImages = () => {
-        // Save image in the cloudinary
-        // const CLOUDINARY_UPLOAD_PRESET = "qle01vei";
-        const formData = new FormData();
-        // let detailImage = {};
-        fileList.forEach((file, index) => {
-            formData.append(`file-${index}`, file);
-        });
+    const [imageList, setImageList] = useState([]);
 
-        // if (file.name) {
-        // formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-        // const CLOUDINARY_URL =
-        //     "https://api.cloudinary.com/v1_1/drjynwuyt/upload";
-        // detailImage = await fetch(CLOUDINARY_URL, {
-        //     method: "POST",
-        //     body: formData,
-        // }).then((data) => {
-        //     return data.json();
-        // });
-        // }
-        props.dispatch(props.setNewProduct(formData));
+    const setImageStore = async (e) => {
+        const file = e.target.files[0];
+
+        const url = await createUrlImage(file);
+
+        setImageList((prev) => [...prev, url]);
     };
-    console.log();
+
+    useEffect(() => {
+        props.dispatch(
+            props.setNewProduct({
+                ...props.newProduct,
+                images: imageList,
+            })
+        );
+    }, [imageList.length]);
 
     return (
         <>
@@ -38,11 +32,8 @@ function ImageProduct(props) {
                     id="file"
                     type="file"
                     className="hidden"
-                    onChange={(e) => {
-                        const file = e.target.files[0];
-                        // setImageAvatar(URL.createObjectURL(file));
-                        setFileList((prev) => [...prev, file]);
-                        setImages();
+                    onChange={async (e) => {
+                        await setImageStore(e);
                     }}
                 />
                 <label
@@ -61,6 +52,34 @@ function ImageProduct(props) {
                     </svg>
                     Thêm ảnh
                 </label>
+                <div>
+                    <ul className="flex mt-2">
+                        {imageList.map((image, index) => (
+                            <li key={index} className="relative">
+                                <img
+                                    alt="product"
+                                    className="w-20 h-20 mr-2"
+                                    src={image}
+                                />
+                                <svg
+                                    onClick={() => {
+                                        setImageList((prev) => {
+                                            return prev.filter(
+                                                (image, indexList) =>
+                                                    index !== indexList
+                                            );
+                                        });
+                                    }}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 352 512"
+                                    className="w-3 fill-orange-600 cursor-pointer hover:opacity-80  absolute top-0 right-3"
+                                >
+                                    <path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" />
+                                </svg>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </td>
         </>
     );

@@ -5,57 +5,108 @@ import ImageProduct from "./AddProductForm/ImageProduct";
 import StatusProduct from "./AddProductForm/StatusProduct";
 import OtherInforProduct from "./AddProductForm/OtherInforProduct";
 import ShipInfor from "./AddProductForm/ShipInfor";
+import ImageSource from "./AddProductForm/ImageSource";
+import { useDispatch, useSelector } from "react-redux";
+import { setUpdateProduct as setNewProduct } from "store/reducers/productSlice";
+import ProductId from "./AddProductForm/ProductId";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { updateProductApi } from "api/productApi";
+// import { useState } from "react";
 function EditProductForm() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { updateProduct: newProduct } = useSelector(
+        ({ productReducer }) => productReducer
+    );
+    const { account } = useSelector(({ accountReducer }) => accountReducer);
+    const handleEditProduct = async () => {
+        try {
+            const status = await updateProductApi(newProduct, dispatch);
+            if (status) {
+                return navigate("/profile/products");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        dispatch(
+            setNewProduct({
+                ...newProduct,
+                ownId: account.username,
+            })
+        );
+    }, [dispatch, account.username]);
     return (
-        <div className="edit-product">
+        <div className="add-product">
             <label className="font-bold">THÔNG TIN SẢN PHẨM</label>
             <div className="px-10 py-5 border-t my-3 bg-white">
                 <table className="w-full border-separate border-spacing-2  text-sm">
                     <tbody>
                         <tr>
-                            <NameProduct />
+                            <NameProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <CategorySelect />
+                            <ProductId
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <Description />
+                            <CategorySelect
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <ImageProduct />
+                            <Description
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <td className="w-[15%] text-right"></td>
-                            <td className="px-5 ">
-                                <div>
-                                    <ul className="flex">
-                                        <li className="relative">
-                                            <img
-                                                src={require("assets/images/sp.jpg")}
-                                                className="w-16 mx-1"
-                                                alt="product"
-                                            />
-                                            <button>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 320 512"
-                                                    className="absolute w-3 top-0 right-2 hover:opacity-70"
-                                                >
-                                                    <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
-                                                </svg>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
+                            <ImageProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <td className="w-[15%] text-right ">
+                            <ImageSource
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
+                        </tr>
+
+                        <tr>
+                            <td className="w-[15%] text-right">
                                 <strong>Giá sản phẩm (VND)</strong>
                                 <span className="text-red-600">*</span>
                             </td>
                             <td className="px-5">
-                                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                                <input
+                                    type="number"
+                                    value={newProduct.price}
+                                    onChange={(e) => {
+                                        dispatch(
+                                            setNewProduct({
+                                                ...newProduct,
+                                                price: parseInt(e.target.value),
+                                            })
+                                        );
+                                    }}
+                                    className=" w-full input focus:shadow-input py-1 px-3"
+                                />
                             </td>
                         </tr>
                         <tr>
@@ -64,22 +115,53 @@ function EditProductForm() {
                                 <span className="text-red-600">*</span>
                             </td>
                             <td className="px-5">
-                                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                                <input
+                                    type="number"
+                                    className=" w-full input focus:shadow-input py-1 px-3"
+                                    value={newProduct.quantityAvailable}
+                                    onChange={(e) => {
+                                        dispatch(
+                                            setNewProduct({
+                                                ...newProduct,
+                                                quantityAvailable: parseInt(
+                                                    e.target.value
+                                                ),
+                                            })
+                                        );
+                                    }}
+                                />
                             </td>
                         </tr>
                         <tr>
-                            <StatusProduct />
+                            <StatusProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <OtherInforProduct />
+                            <OtherInforProduct
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr>
-                            <ShipInfor />
+                            <ShipInfor
+                                newProduct={newProduct}
+                                dispatch={dispatch}
+                                setNewProduct={setNewProduct}
+                            />
                         </tr>
                         <tr className="">
                             <td className="w-[15%] text-right "></td>
                             <td className="grid grid-cols-4  px-5">
-                                <button className="btn3 px-2 py-2">
+                                <button
+                                    className="btn3 px-2 py-2"
+                                    onClick={() => {
+                                        handleEditProduct();
+                                    }}
+                                >
                                     Lưu sản phẩm
                                 </button>
                             </td>

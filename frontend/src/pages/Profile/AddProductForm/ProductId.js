@@ -1,25 +1,26 @@
-function Description(props) {
+function ProductId(props) {
     return (
         <>
             <td className="w-[15%] text-right">
-                <strong>Mô tả</strong>
+                <strong>Mã sản phẩm</strong>
+                <span className="text-red-600">*</span>
             </td>
             <td className="px-5">
-                <textarea
+                <input
                     className=" w-full input focus:shadow-input py-1 px-3"
-                    value={props.newProduct.description}
+                    value={props.newProduct.productId}
                     onChange={(e) => {
                         props.dispatch(
                             props.setNewProduct({
                                 ...props.newProduct,
-                                description: e.target.value,
+                                productId: e.target.value,
                             })
                         );
                     }}
-                ></textarea>
+                />
             </td>
         </>
     );
 }
 
-export default Description;
+export default ProductId;

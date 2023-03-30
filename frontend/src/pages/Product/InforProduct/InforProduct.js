@@ -1,7 +1,11 @@
+import { addCartApi } from "api/cartApi";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function InforProduct({ product }) {
     const [amount, setAmount] = useState(1);
+    const { account } = useSelector(({ accountReducer }) => accountReducer);
+
     return (
         <div className="infor-product col-span-2">
             <h4>{product.detail.name}</h4>
@@ -67,7 +71,16 @@ function InforProduct({ product }) {
             </div>
             <div className="w-full flex">
                 <div className="w-1/2 mx-1">
-                    <button className="bg-[#e7e8ea] text-[#292a2d] px-5 py-3 font-bold rounded-md hover:opacity-80  w-full">
+                    <button
+                        onClick={() => {
+                            addCartApi({
+                                productId: product.id,
+                                studentId: account.username,
+                                amount,
+                            });
+                        }}
+                        className="bg-[#e7e8ea] text-[#292a2d] px-5 py-3 font-bold rounded-md hover:opacity-80  w-full"
+                    >
                         Thêm vào giỏ
                     </button>
                 </div>

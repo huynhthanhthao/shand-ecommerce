@@ -7,6 +7,7 @@ import {
     setMyProductList,
     deleteProduct,
     setDetailProduct,
+    setSearchProductList,
 } from "store/reducers/productSlice";
 export const getMyProductList = async (payload, dispatch) => {
     try {
@@ -67,13 +68,45 @@ export const deleteProductById = async (payload, dispatch) => {
     }
 };
 
-// export const updateProductQuantity = async (payload, dispatch) => {
-//     try {
-//         await axios.patch(`${domain}/product/edit-quantity`, {
-//             id: payload.id,
-//             quantity: payload.quantity,
-//         });
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+export const createProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.post(`${domain}/product/`, { ...payload });
+        if (response.data.status) {
+            toast.success(response.data.message);
+            return true;
+        } else toast.error(response.data.message);
+        return false;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.patch(`${domain}/product/`, {
+            ...payload,
+        });
+        if (response.data.status) {
+            toast.success(response.data.message);
+            return true;
+        } else toast.error(response.data.message);
+        return false;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const searchProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/search`, {
+            params: {
+                name: payload.key,
+            },
+        });
+        if (response.data.status) {
+            dispatch(setSearchProductList(response.data.productList));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};

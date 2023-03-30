@@ -2,10 +2,13 @@
 import { useEffect } from "react";
 import { getMyProductList } from "api/productApi";
 import { useSelector, useDispatch } from "react-redux";
-import { setProduct } from "store/reducers/productSlice";
+import { setProduct, setUpdateProduct } from "store/reducers/productSlice";
+import { useNavigate } from "react-router-dom";
 
 function AllProduct() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const { account } = useSelector(({ accountReducer }) => accountReducer);
 
     useEffect(() => {
@@ -61,7 +64,19 @@ function AllProduct() {
                                                 : "Người bán trả"}
                                         </td>
                                         <td className="border border-slate-200 p-2 ">
-                                            <button className="hover:opacity-80 mx-1">
+                                            <button
+                                                className="hover:opacity-80 mx-1"
+                                                onClick={() => {
+                                                    dispatch(
+                                                        setUpdateProduct(
+                                                            product
+                                                        )
+                                                    );
+                                                    return navigate(
+                                                        "/profile/edit-product"
+                                                    );
+                                                }}
+                                            >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 512 512"
@@ -79,11 +94,11 @@ function AllProduct() {
                                                 className="hover:opacity-80 mx-1"
                                                 data-te-toggle="modal"
                                                 data-te-target="#delete_product"
-                                                onClick={() =>
+                                                onClick={() => {
                                                     dispatch(
                                                         setProduct(product)
-                                                    )
-                                                }
+                                                    );
+                                                }}
                                             >
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

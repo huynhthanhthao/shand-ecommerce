@@ -15,7 +15,7 @@ function OtherInforProduct(props) {
                             props.dispatch(
                                 props.setNewProduct({
                                     ...props.newProduct,
-                                    trademark: props.target.value,
+                                    trademark: e.target.value,
                                 })
                             );
                         }}
@@ -33,7 +33,7 @@ function OtherInforProduct(props) {
                             props.dispatch(
                                 props.setNewProduct({
                                     ...props.newProduct,
-                                    size: props.target.value,
+                                    size: e.target.value,
                                 })
                             );
                         }}

@@ -16,6 +16,7 @@ const accountRouter = require("./routes/account-router");
 const categoryRouter = require("./routes/category-router");
 const addressRouter = require("./routes/address-receive-router");
 const transactionRouter = require("./routes/transaction-router");
+const checkImageRouter = require("./routes/check-image-router");
 
 // Connect database
 connectionDatabase();
@@ -38,6 +39,7 @@ app.use("/category", categoryRouter);
 app.use("/event", eventRouter);
 app.use("/address-receive", addressRouter);
 app.use("/transaction", transactionRouter);
+app.use("/check-image", checkImageRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

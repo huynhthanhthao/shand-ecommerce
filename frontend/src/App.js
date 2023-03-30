@@ -25,9 +25,16 @@ import DetailOrder from "pages/Profile/DetailOrder/DetailOrder";
 import OrderReceive from "pages/Profile/OrderRecieve/OrderRecieve";
 import Transaction from "pages/Profile/Transaction/Transaction";
 
+import Loading from "./components/Loading";
+import { useSelector } from "react-redux";
+
 function App() {
+    const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
+
     return (
-        <div className="App">
+        <div className="App relative">
+            {isLoading && <Loading />}
+
             <ToastContainer />
             <Routes>
                 {publicRoutes.map((route, index) => {
@@ -79,7 +86,7 @@ function App() {
                                         element={<AddProductForm />}
                                     ></Route>
                                     <Route
-                                        path="edit-product/:id"
+                                        path="edit-product/"
                                         element={<EditProductForm />}
                                     ></Route>
                                     <Route

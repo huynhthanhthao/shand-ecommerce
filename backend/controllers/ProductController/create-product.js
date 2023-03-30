@@ -42,7 +42,7 @@ const createProduct = async (req, res, next) => {
 
         if (product)
             return res.status(200).json({
-                status: true,
+                status: false,
                 message: "Mã sản phẩm bị trùng!",
             });
         // All good
@@ -53,8 +53,8 @@ const createProduct = async (req, res, next) => {
             categoryId,
             name,
             description,
-            images: JSON.parse(images),
-            imagesSource: JSON.parse(imagesSource),
+            images,
+            imagesSource,
             price,
             transport,
         });

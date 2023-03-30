@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAccountApi } from "api/accountApi";
 import { deleteCategoryApi } from "api/categoryApi";
 import { deleteEventApi } from "api/eventApi";
+import { deleteProductById } from "api/productApi";
 
 function Confirm(props) {
     const dispatch = useDispatch();
@@ -103,11 +104,11 @@ function Confirm(props) {
                                     handleDeleteCategory();
                                 else if (props.id === "delete_event")
                                     handleDeleteEvent();
-
-                                // deleteProductById(
-                                //     { id: props.product.id },
-                                //     dispatch
-                                // );
+                                else
+                                    deleteProductById(
+                                        { id: props.product.id },
+                                        dispatch
+                                    );
                             }}
                         >
                             Xác nhận

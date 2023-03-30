@@ -2,12 +2,15 @@ import { useDispatch } from "react-redux";
 import { showLogin, logout } from "store/reducers/authSlice";
 import { setAccount } from "store/reducers/accountSlice";
 import { useSelector } from "react-redux";
-import { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useEffect, useState, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [option, setOption] = useState(false);
+    const [resultSearch, setResultSearch] = useState(false);
+    const [name, setName] = useState("");
 
     const useOutsideBox = function (ref) {
         useEffect(() => {
@@ -16,7 +19,6 @@ function Header() {
                     setOption(false);
                 }
             }
-
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
                 // Unbind the event listener on clean up
@@ -25,11 +27,15 @@ function Header() {
         }, [ref]);
     };
 
-    const wrapperRef = useRef(null);
+    const wrapperRefOption = useRef(null);
 
-    useOutsideBox(wrapperRef);
+    useOutsideBox(wrapperRefOption);
 
     const account = useSelector((state) => state.accountReducer.account);
+
+    const { searchProductList } = useSelector(
+        ({ productReducer }) => productReducer
+    );
     return (
         <header className="flex justify-between items-center py-4 px-24 bground ">
             <div className="flex">
@@ -50,16 +56,29 @@ function Header() {
                     fillRule="nonzero"
                 ></path>
             </svg>
-            <div className="relative  flex-1">
+
+            <div className="relative flex-1 ">
                 <input
+                    value={name}
                     type="text"
-                    className="w-full py-2 px-4 border-none outline-none bg-[#f5f7f9] rounded-lg "
+                    className="w-full py-2 px-4 border-none outline-none bg-[#f5f7f9] rounded "
                     placeholder="Tìm kiếm sản phẩm..."
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            return navigate(`/search/${name}`);
+                        }
+                    }}
+                    onChange={(e) => {
+                        setName(e.target.value);
+                    }}
                 />
                 <img
+                    onClick={() => {
+                        return navigate(`/search/${name}`);
+                    }}
                     alt="Search icon"
                     src={require("assets/images/search.png")}
-                    className="w-5 absolute right-4 top-[50%] -translate-y-1/2"
+                    className="w-5 absolute right-4 top-[50%] -translate-y-1/2 hover:opacity-75 cursor-pointer"
                 />
             </div>
             <div className="flex items-center">
@@ -84,7 +103,7 @@ function Header() {
                 {account ? (
                     <>
                         <div
-                            ref={wrapperRef}
+                            ref={wrapperRefOption}
                             className="relative flex bg-[white]   p-1 rounded-3xl"
                         >
                             <div

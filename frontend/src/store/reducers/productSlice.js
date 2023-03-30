@@ -7,6 +7,8 @@ const productSlice = createSlice({
         product: null,
         detailProduct: null,
         newProduct: {},
+        updateProduct: {},
+        searchProductList: [],
     },
     reducers: {
         setMyProductList(state, action) {
@@ -17,6 +19,12 @@ const productSlice = createSlice({
         },
         setNewProduct(state, action) {
             state.newProduct = action.payload;
+        },
+        setSearchProductList(state, action) {
+            state.searchProductList = action.payload;
+        },
+        setUpdateProduct(state, action) {
+            state.updateProduct = action.payload;
         },
         deleteProduct(state, action) {
             state.productList = state.productList.filter(
@@ -39,6 +47,8 @@ export const {
     deleteProduct,
     setDetailProduct,
     setNewProduct,
+    setUpdateProduct,
+    setSearchProductList,
 } = productSlice.actions;
 
 // export selector
@@ -51,6 +61,13 @@ export const productSelector = (state) => {
 
 export const newProductSelector = (state) => {
     return state.productReducer.newProduct;
+};
+export const updateProductSelector = (state) => {
+    return state.productReducer.updateProduct;
+};
+
+export const searchProductListSelector = (state) => {
+    return state.productReducer.searchProductList;
 };
 
 export default productReducer;

@@ -25,6 +25,20 @@ export const getCart = async (payload, dispatch) => {
     }
 };
 
+export const addCartApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.post(`${domain}/cart/`, {
+            ...payload,
+        });
+
+        if (response.data.status) {
+            toast.success(response.data.message);
+        } else toast.error(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const updateCartApi = async (payload, dispatch) => {
     try {
         const response = await axios.patch(`${domain}/cart/`, {

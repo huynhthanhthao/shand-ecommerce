@@ -2,10 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeLogin } from "store/reducers/authSlice";
 import { login } from "../../api/authApi";
-import { useNavigate } from "react-router-dom";
 
 function LoginModal() {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
