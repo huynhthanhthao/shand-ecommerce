@@ -21,7 +21,6 @@ const editProduct = async (req, res, next) => {
             !categoryId ||
             !name ||
             !description ||
-            !price ||
             !status ||
             !quantityAvailable ||
             !transport
@@ -52,6 +51,7 @@ const editProduct = async (req, res, next) => {
                 imagesSource,
                 price,
                 transport,
+                status,
             },
             {
                 where: {

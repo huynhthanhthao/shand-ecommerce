@@ -6,6 +6,7 @@
         "start": "nodemon app.js"
     },
     "dependencies": {
+        "@sashido/teachablemachine-node": "^1.2.2",
         "argon2": "^0.30.3",
         "body-parser": "^1.20.2",
         "cookie-parser": "~1.4.4",

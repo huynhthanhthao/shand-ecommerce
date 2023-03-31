@@ -1,9 +1,9 @@
 import Card from "components/Card";
-function ProductList() {
+function ProductList(props) {
     return (
         <div className="suggest text-[#3c3c3c] ">
-            <div className="py-4 text-center bg-white font-bold border-b-4 border-b-[#3c3c3c]">
-                GỢI Ý HÔM NAY
+            <div className="py-4 text-center uppercase bg-white font-bold border-b-4 border-b-[#3c3c3c]">
+                {props.label}
             </div>
             <ul className="grid grid-cols-6 gap-2 my-3">
                 <li>

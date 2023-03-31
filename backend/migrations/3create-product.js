@@ -52,6 +52,10 @@ module.exports = {
                 type: Sequelize.ENUM,
                 values: ["buyer", "seller"],
             },
+            status: {
+                type: Sequelize.ENUM,
+                values: ["1", "2", "3", "4", "5"],
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

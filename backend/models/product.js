@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             imagesSource: DataTypes.JSON,
             price: DataTypes.INTEGER,
             transport: DataTypes.ENUM("buyer", "seller"),
+            status: DataTypes.ENUM("1", "2", "3", "4", "5"),
         },
         {
             sequelize,

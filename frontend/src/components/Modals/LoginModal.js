@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeLogin } from "store/reducers/authSlice";
 import { login } from "../../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 function LoginModal() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -42,10 +44,10 @@ function LoginModal() {
                 />
 
                 <button
-                    onClick={() => {
-                        const success = login({ username, password }, dispatch);
-                        if (success) {
-                            // navigate("/admin/student-list");
+                    onClick={async () => {
+                        const response = await login({ username, password }, dispatch);
+                        if (response.user.role === "admin") {
+                            navigate("/admin/student-list");
                         }
                     }}
                     className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80"
@@ -55,9 +57,7 @@ function LoginModal() {
 
                 <div className="text-center mt-auto">
                     <>
-                        <button className="text-cyan-800">
-                            &nbsp;Quên mật khẩu?
-                        </button>
+                        <button className="text-cyan-800">&nbsp;Quên mật khẩu?</button>
                     </>
                 </div>
             </div>

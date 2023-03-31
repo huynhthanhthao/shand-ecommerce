@@ -39,7 +39,11 @@ function Header() {
     return (
         <header className="flex justify-between items-center py-4 px-24 bground ">
             <div className="flex">
-                <h3 className="text-white font-[Prompt] from-sky-50">SHAND</h3>
+                <Link to="/">
+                    <h3 className="text-white font-[Prompt] from-sky-50">
+                        SHAND
+                    </h3>
+                </Link>
             </div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,18 +127,24 @@ function Header() {
                                 <div className="bg-white shadow-lg shadow-slate-400/20 w-[182px] py-2  px-2 rounded-md absolute top-10 right-0">
                                     <ul>
                                         <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
-                                            Thông tin tài khoản
+                                            <Link to="/profile/account">
+                                                Thông tin tài khoản
+                                            </Link>
                                         </li>
                                         <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
-                                            Sản phẩm yêu thích
+                                            <Link to="/profile/love-products">
+                                                Sản phẩm yêu thích
+                                            </Link>
                                         </li>
                                         <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
-                                            Theo dõi đơn hàng
+                                            <Link to="/profile/order-receive/pending">
+                                                Theo dõi đơn hàng
+                                            </Link>
                                         </li>
                                         <li
                                             onClick={() => {
-                                                dispatch(logout());
-                                                dispatch(setAccount(null));
+                                                localStorage.clear();
+                                                window.location.reload();
                                             }}
                                             className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1"
                                         >

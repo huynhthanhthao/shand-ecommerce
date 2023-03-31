@@ -1,6 +1,6 @@
 import { searchProductApi } from "api/productApi";
 import Card from "components/Card";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -13,6 +13,74 @@ function SearchResdivt() {
     const { searchProductList: productList } = useSelector(
         ({ productReducer }) => productReducer
     );
+
+    const [productFilter, setProductFilter] = useState(productList);
+
+    useEffect(() => {
+        setProductFilter(productList);
+    }, [productList]);
+
+    console.log(productList);
+
+    const handleSortPrice = (option) => {
+        if (option === "big_to_small") {
+            setProductFilter((prev) => {
+                return [...productList].sort((a, b) => {
+                    return b.price - a.price;
+                });
+            });
+        } else if (option === "small_to_big") {
+            setProductFilter((prev) => {
+                return [...productList].sort((a, b) => {
+                    return a.price - b.price;
+                });
+            });
+        } else {
+            setProductFilter((prev) => {
+                return productList.filter((product) => {
+                    return product.price === 0;
+                });
+            });
+        }
+    };
+
+    const handleFilterStatus = (option) => {
+        if (option === "1") {
+            setProductFilter((prev) => {
+                return productList.filter((product) => {
+                    return product.status === "1";
+                });
+            });
+        } else if (option === "2") {
+            setProductFilter((prev) => {
+                return productList.filter((product) => {
+                    return product.status === "2";
+                });
+            });
+        } else if (option === "3") {
+            setProductFilter((prev) => {
+                return productList.filter((product) => {
+                    return product.status === "3";
+                });
+            });
+        } else if (option === "4") {
+            setProductFilter((prev) => {
+                return productList.filter((product) => {
+                    return product.status === "4";
+                });
+            });
+        }
+    };
+
+    const handleFilterTransport = (option) => {
+        if (option === "free") {
+            setProductFilter((prev) => {
+                return productList.filter((product) => {
+                    return product.transport === "seller";
+                });
+            });
+        }
+    };
 
     return (
         <div className="px-24 pt-8 grid grid-cols-6 gap-3 text-[#555] fill-[#555]">
@@ -33,19 +101,43 @@ function SearchResdivt() {
                         <div className="py-1">
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="small_to_big"
+                                        onChange={(e) => {
+                                            handleSortPrice(e.target.value);
+                                        }}
+                                    />
                                     Thấp nhất
                                 </div>
                             </div>
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="big_to_small"
+                                        onChange={(e) => {
+                                            handleSortPrice(e.target.value);
+                                        }}
+                                    />
                                     Cao nhất
                                 </div>
                             </div>
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="free"
+                                        onChange={(e) => {
+                                            handleSortPrice(e.target.value);
+                                        }}
+                                    />
                                     Các sản phẩm miễn phí
                                 </div>
                             </div>
@@ -56,25 +148,57 @@ function SearchResdivt() {
                         <div className="py-1">
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="1"
+                                        onChange={(e) => {
+                                            handleFilterStatus(e.target.value);
+                                        }}
+                                    />
                                     Mới
                                 </div>
                             </div>
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="2"
+                                        onChange={(e) => {
+                                            handleFilterStatus(e.target.value);
+                                        }}
+                                    />
                                     Như mới
                                 </div>
                             </div>
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="3"
+                                        onChange={(e) => {
+                                            handleFilterStatus(e.target.value);
+                                        }}
+                                    />
                                     Tốt
                                 </div>
                             </div>
                             <div>
                                 <div className="my-1">
-                                    <input type="radio" className="mr-1" />
+                                    <input
+                                        type="radio"
+                                        name="option"
+                                        className="mr-1"
+                                        value="4"
+                                        onChange={(e) => {
+                                            handleFilterStatus(e.target.value);
+                                        }}
+                                    />
                                     Trung bình
                                 </div>
                             </div>
@@ -84,7 +208,15 @@ function SearchResdivt() {
                         <label>Vận chuyển</label>{" "}
                         <div>
                             <div className="my-1">
-                                <input type="radio" className="mr-1" />
+                                <input
+                                    name="option"
+                                    type="radio"
+                                    className="mr-1"
+                                    value="free"
+                                    onChange={(e) => {
+                                        handleFilterTransport(e.target.value);
+                                    }}
+                                />
                                 Miễn phí vận chuyển
                             </div>
                         </div>
@@ -123,12 +255,12 @@ function SearchResdivt() {
                     Kết quả tìm kiếm
                 </div>
                 <div className="grid grid-cols-5 gap-3 mt-3">
-                    {productList.length === 0 ? (
+                    {productFilter.length === 0 ? (
                         <div className="col-span-2">
                             Không tìm thấy sản phẩm nào.
                         </div>
                     ) : (
-                        productList.map((product, index) => (
+                        productFilter.map((product, index) => (
                             <Card key={index} product={product} />
                         ))
                     )}

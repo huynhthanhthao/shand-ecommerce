@@ -25,7 +25,6 @@ const createProduct = async (req, res, next) => {
             !categoryId ||
             !name ||
             !description ||
-            !price ||
             !status ||
             !quantityAvailable ||
             !transport
@@ -57,6 +56,7 @@ const createProduct = async (req, res, next) => {
             imagesSource,
             price,
             transport,
+            status,
         });
 
         await db.DetailProduct.create({
