@@ -1,16 +1,12 @@
 const sequelize = require("sequelize");
+const Op = sequelize.Op;
 const db = require("../../models");
 const searchProduct = async (req, res, next) => {
     try {
         const { name } = req.query;
-
         const response = await db.Product.findAll({
             where: {
-                name: sequelize.where(
-                    sequelize.fn("LOWER", sequelize.col("name")),
-                    "LIKE",
-                    "%" + name + "%"
-                ),
+                name: { [Op.like]: `%${name}%` },
             },
         });
 

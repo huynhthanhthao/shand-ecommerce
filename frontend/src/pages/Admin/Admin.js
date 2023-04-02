@@ -17,24 +17,10 @@ function Admin() {
     return (
         <>
             <div className="admin bg-[#364050] relative">
-                <AddAccountForm
-                    label="Thêm tài khoản sinh viên"
-                    role="student"
-                    idModal="add_student"
-                />
-                <AddAccountForm
-                    label="Thêm tài khoản cửa hàng"
-                    idModal="add_shop"
-                    role="shop"
-                />
-                <EditAccountForm
-                    label="Chỉnh sửa tài khoản sinh viên"
-                    idModal="edit_student"
-                />
-                <EditAccountForm
-                    label="Chỉnh sửa tài khoản cửa hàng"
-                    idModal="edit_shop"
-                />
+                <AddAccountForm label="Thêm tài khoản sinh viên" role="student" idModal="add_student" />
+                <AddAccountForm label="Thêm tài khoản cửa hàng" idModal="add_shop" role="shop" />
+                <EditAccountForm label="Chỉnh sửa tài khoản sinh viên" idModal="edit_student" />
+                <EditAccountForm label="Chỉnh sửa tài khoản cửa hàng" idModal="edit_shop" />
                 <AddCategoryForm />
                 <EditCategoryForm />
 
@@ -42,26 +28,10 @@ function Admin() {
                 <EditEventForm />
                 <AddSupportForm />
                 <EditSupportForm />
-                <Confirm
-                    title="Xóa tài khoản"
-                    description="Bạn có muốn xóa tài khoản này?"
-                    id="delete_student"
-                />
-                <Confirm
-                    title="Xóa tài khoản"
-                    description="Bạn có muốn xóa tài khoản này?"
-                    id="delete_shop"
-                />
-                <Confirm
-                    title="Xóa danh mục"
-                    description="Bạn có muốn xóa danh mục này?"
-                    id="delete_category"
-                />
-                <Confirm
-                    title="Xóa sự kiện"
-                    description="Bạn có muốn xóa sự kiện này?"
-                    id="delete_event"
-                />
+                <Confirm title="Xóa tài khoản" description="Bạn có muốn xóa tài khoản này?" id="delete_student" />
+                <Confirm title="Xóa tài khoản" description="Bạn có muốn xóa tài khoản này?" id="delete_shop" />
+                <Confirm title="Xóa danh mục" description="Bạn có muốn xóa danh mục này?" id="delete_category" />
+                <Confirm title="Xóa sự kiện" description="Bạn có muốn xóa sự kiện này?" id="delete_event" />
                 <Confirm
                     title="Xóa thông tin hỗ trợ"
                     description="Bạn có muốn xóa thông tin hỗ trợ này?"

@@ -47,23 +47,14 @@ function EventList() {
                                     >
                                         <td className="px-4 py-3">
                                             <div className="flex items-center text-sm">
-                                                <p className="font-semibold">
-                                                    {index + 1}
-                                                </p>
+                                                <p className="font-semibold">{index + 1}</p>
                                             </div>
                                         </td>
+                                        <td className="px-4 py-3 text-sm">{event.title}</td>
                                         <td className="px-4 py-3 text-sm">
-                                            {event.title}
+                                            {event.time} ngày <Moment format="DD/MM/YYYY">{event.date}</Moment>
                                         </td>
-                                        <td className="px-4 py-3 text-sm">
-                                            {event.time} ngày{" "}
-                                            <Moment format="DD/MM/YYYY">
-                                                {event.date}
-                                            </Moment>
-                                        </td>
-                                        <td className="px-4 py-3 text-sm">
-                                            {event.address}
-                                        </td>
+                                        <td className="px-4 py-3 text-sm">{event.address}</td>
                                         <td className="px-4 py-3 text-xs">
                                             {event.status ? (
                                                 <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full  ">

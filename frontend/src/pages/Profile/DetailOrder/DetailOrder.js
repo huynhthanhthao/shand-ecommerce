@@ -22,9 +22,7 @@ function DetailOrderSent() {
     const { order } = useSelector(({ orderReducer }) => orderReducer);
     const { account } = useSelector(({ accountReducer }) => accountReducer);
     const isTransport = () => {
-        const buyerTransport = order.productList.some(
-            (product) => product.transport === "buyer"
-        );
+        const buyerTransport = order.productList.some((product) => product.transport === "buyer");
 
         return buyerTransport;
     };
@@ -43,15 +41,10 @@ function DetailOrderSent() {
                             <div>
                                 <div className="flex ">
                                     Mã đơn hàng:
-                                    <p className="cursor-pointer text-blue-500">
-                                        &nbsp;#{order.id}
-                                    </p>
+                                    <p className="cursor-pointer text-blue-500">&nbsp;#{order.id}</p>
                                 </div>
                                 <p>
-                                    Đặt ngày:{" "}
-                                    <Moment format="DD/MM/YYYY">
-                                        {order.createdAt}
-                                    </Moment>
+                                    Đặt ngày: <Moment format="DD/MM/YYYY">{order.createdAt}</Moment>
                                 </p>
                             </div>
                             <div className="flex justify-between items-center ml-64 ">
@@ -158,8 +151,7 @@ function DetailOrderSent() {
                                         width="40"
                                         height="40"
                                         className={
-                                            order.status === "expired" ||
-                                            order.status === "received"
+                                            order.status === "expired" || order.status === "received"
                                                 ? "fill-green-500"
                                                 : ""
                                         }
@@ -199,8 +191,7 @@ function DetailOrderSent() {
                                     </svg>
                                     <p
                                         className={
-                                            order.status === "expired" ||
-                                            order.status === "received"
+                                            order.status === "expired" || order.status === "received"
                                                 ? "text-green-500 mt-1"
                                                 : "mt-1"
                                         }
@@ -210,8 +201,7 @@ function DetailOrderSent() {
                                 </div>
                                 <div
                                     className={
-                                        order.status === "expired" ||
-                                        order.status === "received"
+                                        order.status === "expired" || order.status === "received"
                                             ? "w-16 border-t-2  border-green-400 mt-1"
                                             : "w-16 border-t-2 border-slate-400 "
                                     }
@@ -222,11 +212,7 @@ function DetailOrderSent() {
                                         viewBox="0 0 32 32"
                                         width="40"
                                         height="40"
-                                        className={
-                                            order.status === "received"
-                                                ? "fill-green-500"
-                                                : ""
-                                        }
+                                        className={order.status === "received" ? "fill-green-500" : ""}
                                     >
                                         <path
                                             className="path1"
@@ -237,13 +223,7 @@ function DetailOrderSent() {
                                             d="M25.6 7.68h-14.293c-0.32 0-0.533 0.213-0.533 0.533v4.053h-2.027c-0.64 0-1.28 0.213-1.813 0.533-0.107-0.213-0.32-0.32-0.533-0.32h-1.92c-0.213 0-0.427 0.213-0.533 0.427-0.213 0.96-0.32 1.92-0.32 2.88 0 0.747 0 1.493 0.107 2.24 0 0.213 0.213 0.427 0.533 0.427h2.027c0.213 0 0.427-0.213 0.533-0.427 0 0 0.107 0.107 0.107 0.107l2.667 2.027c0.213 0.213 0.533 0.32 0.853 0.32 0.107 0 0.213 0 0.32 0v3.413c0 0.32 0.213 0.533 0.533 0.533h14.293c0.32 0 0.533-0.213 0.533-0.533v-15.68c0-0.32-0.213-0.533-0.533-0.533zM11.84 8.747h13.227v5.76h-13.227v-5.76zM11.84 15.573h13.227v0.853h-13.227v-0.853zM5.973 17.387h-1.067c-0.107-0.533-0.107-1.067-0.107-1.6 0-0.747 0.107-1.493 0.213-2.24h0.96v3.84zM10.453 17.6c-0.213 0-0.427 0.107-0.533 0.32s0 0.427 0.213 0.64l0.533 0.427c0.107 0.107 0.107 0.107 0.107 0.213 0 0 0 0.107-0.107 0.213s-0.32 0.107-0.427 0l-2.56-2.027c-0.213-0.107-0.32-0.213-0.533-0.427-0.107-0.107-0.107-0.107-0.213-0.107v-2.667c0.107 0 0.213-0.107 0.213-0.107 0.427-0.427 0.96-0.64 1.493-0.64h1.92v4.16h-0.107zM25.067 23.253h-13.227v-5.76h13.227v5.76z"
                                         ></path>
                                     </svg>
-                                    <p
-                                        className={
-                                            order.status === "received"
-                                                ? "text-green-500 mt-1"
-                                                : "mt-1"
-                                        }
-                                    >
+                                    <p className={order.status === "received" ? "text-green-500 mt-1" : "mt-1"}>
                                         Đã nhận hàng
                                     </p>
                                 </div>
@@ -252,35 +232,21 @@ function DetailOrderSent() {
                         <div className="grid grid-cols-2 gap-3">
                             <div className="border p-2 mt-5 border-dashed flex justify-between">
                                 <div>
-                                    <p className="font-bold uppercase mb-2">
-                                        TÌNH TRẠNG VẬN CHUYỂN
-                                    </p>
+                                    <p className="font-bold uppercase mb-2">TÌNH TRẠNG VẬN CHUYỂN</p>
                                     <div className="flex items-center my-1 ">
                                         <p className="">Phí giao hàng:&nbsp;</p>
                                         <p className="font-bold">
-                                            {isTransport()
-                                                ? "Người mua thanh toán"
-                                                : "Người bán thanh toán"}
+                                            {isTransport() ? "Người mua thanh toán" : "Người bán thanh toán"}
                                         </p>
                                     </div>
                                     <div className="flex items-center my-1 ">
                                         <p className="">Tình trạng:&nbsp;</p>
                                         <p className="font-bold">
-                                            {order.status === "pending"
-                                                ? "Đang chờ xác nhận"
-                                                : ""}
-                                            {order.status === "confirmed"
-                                                ? "Đã xác nhận"
-                                                : ""}
-                                            {order.status === "expired"
-                                                ? "Đang vận chuyển"
-                                                : ""}
-                                            {order.status === "received"
-                                                ? "Đã giao hàng"
-                                                : ""}
-                                            {order.status === "refuse"
-                                                ? "Đã bị từ chối"
-                                                : ""}
+                                            {order.status === "pending" ? "Đang chờ xác nhận" : ""}
+                                            {order.status === "confirmed" ? "Đã xác nhận" : ""}
+                                            {order.status === "expired" ? "Đang vận chuyển" : ""}
+                                            {order.status === "received" ? "Đã giao hàng" : ""}
+                                            {order.status === "refuse" ? "Đã bị từ chối" : ""}
                                         </p>
                                     </div>
                                 </div>
@@ -296,32 +262,18 @@ function DetailOrderSent() {
                                                 : "w-36 h-8 border border-dashed  text-center border-green-500 p-1 text-green-500"
                                         }
                                     >
-                                        {order.status === "pending"
-                                            ? "Đang chờ xác nhận"
-                                            : ""}
-                                        {order.status === "confirmed"
-                                            ? "Đã xác nhận"
-                                            : ""}
-                                        {order.status === "expired"
-                                            ? "Đang vận chuyển"
-                                            : ""}
-                                        {order.status === "received"
-                                            ? "Đã giao hàng"
-                                            : ""}
+                                        {order.status === "pending" ? "Đang chờ xác nhận" : ""}
+                                        {order.status === "confirmed" ? "Đã xác nhận" : ""}
+                                        {order.status === "expired" ? "Đang vận chuyển" : ""}
+                                        {order.status === "received" ? "Đã giao hàng" : ""}
                                     </div>
                                 )}
                             </div>
                             <div className="border p-2 mt-5 border-dashed ">
-                                <p className="font-bold uppercase mb-2">
-                                    THÔNG TIN NHẬN HÀNG
-                                </p>
+                                <p className="font-bold uppercase mb-2">THÔNG TIN NHẬN HÀNG</p>
                                 <div>
-                                    <p className="font-bold">
-                                        {order.buyer.fullName}
-                                    </p>
-                                    <p className="my-1 ">
-                                        {order.buyer.phoneNumber}
-                                    </p>
+                                    <p className="font-bold">{order.buyer.fullName}</p>
+                                    <p className="my-1 ">{order.buyer.phoneNumber}</p>
                                 </div>
                                 <p>{order.buyer.address}</p>
                             </div>
@@ -331,25 +283,18 @@ function DetailOrderSent() {
                                 <div className="flex px-2">
                                     <p>Người bán:&nbsp;</p>
                                     <p className="font-bold">
-                                        {order.buyer.fullName} -{" "}
-                                        {order.buyer.username}
+                                        {order.seller.fullName} - {order.seller.username}
                                     </p>
                                 </div>
                                 <div className="flex px-2 mb-2">
                                     <p>Hình thức thanh toán:&nbsp;</p>
-                                    <p className="font-bold">
-                                        {order.paid
-                                            ? "Thanh toán trực tuyến"
-                                            : "Trả tiền mặt"}
-                                    </p>
+                                    <p className="font-bold">{order.paid ? "Thanh toán trực tuyến" : "Trả tiền mặt"}</p>
                                 </div>
                             </div>
                             <table className="table-fixed w-full border-separate border-spacing-2 border border-white">
                                 <thead>
                                     <tr className="p-2">
-                                        <th className="w-1/2 text-left">
-                                            Sản phẩm
-                                        </th>
+                                        <th className="w-1/2 text-left">Sản phẩm</th>
                                         <th>Đơn giá</th>
                                         <th>Số lượng</th>
                                         <th>Thành tiền</th>
@@ -360,32 +305,19 @@ function DetailOrderSent() {
                                         <tr key={product.id}>
                                             <td className="flex items-start ">
                                                 <img
-                                                    src={
-                                                        JSON.parse(
-                                                            product.images
-                                                        )[0]
-                                                    }
+                                                    src={JSON.parse(product.images)[0]}
                                                     alt="product"
                                                     className="w-20 h-20 border mr-2"
                                                 />
                                                 <div>
-                                                    <a
-                                                        href="/"
-                                                        className="font-bold"
-                                                    >
+                                                    <a href="/" className="font-bold">
                                                         {product.name}
                                                     </a>
                                                 </div>
                                             </td>
-                                            <td className="text-center">
-                                                {product.price}
-                                            </td>
-                                            <td className="text-center">
-                                                {product.amount}
-                                            </td>
-                                            <td className="text-center">
-                                                {product.price * product.amount}
-                                            </td>
+                                            <td className="text-center">{product.price}</td>
+                                            <td className="text-center">{product.amount}</td>
+                                            <td className="text-center">{product.price * product.amount}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -400,9 +332,7 @@ function DetailOrderSent() {
                                         >
                                             <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" />
                                         </svg>
-                                        <p className="font-bold">
-                                            {order.seller.phoneNumber}
-                                        </p>
+                                        <p className="font-bold">{order.seller.phoneNumber}</p>
                                     </div>
                                     <div className="">
                                         <div className="flex justify-between my-2">
@@ -415,9 +345,7 @@ function DetailOrderSent() {
                                         </div>
                                         <div className="flex justify-between my-2">
                                             <div>
-                                                <p className="font-bold mb-2">
-                                                    Tổng thanh toán
-                                                </p>
+                                                <p className="font-bold mb-2">Tổng thanh toán</p>
                                                 <p className="">
                                                     {isTransport()
                                                         ? "(Chưa tính phí vận chuyển)"
@@ -425,9 +353,7 @@ function DetailOrderSent() {
                                                 </p>
                                             </div>
 
-                                            <p className="font-bold text-orange-600">
-                                                {order.total}
-                                            </p>
+                                            <p className="font-bold text-orange-600">{order.total}</p>
                                         </div>
                                         {order.paid && (
                                             <div className="w-full border  text-center bg-green-500 p-3 text-white font-bold">
@@ -435,16 +361,12 @@ function DetailOrderSent() {
                                             </div>
                                         )}
 
-                                        {account.username !==
-                                        order.seller.username ? (
+                                        {account.username !== order.seller.username ? (
                                             <>
                                                 {order.status === "expired" && (
                                                     <button
                                                         onClick={() => {
-                                                            updateStatusOrder(
-                                                                order.id,
-                                                                "received"
-                                                            );
+                                                            updateStatusOrder(order.id, "received");
                                                         }}
                                                         className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
                                                     >
@@ -457,24 +379,17 @@ function DetailOrderSent() {
                                                 {order.status === "pending" && (
                                                     <button
                                                         onClick={() => {
-                                                            updateStatusOrder(
-                                                                order.id,
-                                                                "confirmed"
-                                                            );
+                                                            updateStatusOrder(order.id, "confirmed");
                                                         }}
                                                         className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
                                                     >
                                                         Xác nhận đơn hàng
                                                     </button>
                                                 )}
-                                                {order.status ===
-                                                    "confirmed" && (
+                                                {order.status === "confirmed" && (
                                                     <button
                                                         onClick={() => {
-                                                            updateStatusOrder(
-                                                                order.id,
-                                                                "expired"
-                                                            );
+                                                            updateStatusOrder(order.id, "expired");
                                                         }}
                                                         className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
                                                     >
@@ -488,10 +403,7 @@ function DetailOrderSent() {
                             </div>
                         </div>
 
-                        <button
-                            onClick={() => navigate(-1)}
-                            className="btn3 p-2 mt-3  w-64 mx-auto text-center"
-                        >
+                        <button onClick={() => navigate(-1)} className="btn3 p-2 mt-3  w-64 mx-auto text-center">
                             QUAY LẠI DANH SÁCH ĐƠN HÀNG
                         </button>
                     </div>

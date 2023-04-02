@@ -1,13 +1,7 @@
 import axios from "axios";
 import { domain } from "../config";
 import { toast } from "react-toastify";
-import {
-    createAccount,
-    deleteAccount,
-    setAccount,
-    setAccountList,
-    updateAccount,
-} from "store/reducers/accountSlice";
+import { createAccount, deleteAccount, setAccount, setAccountList, updateAccount } from "store/reducers/accountSlice";
 
 export const updateDetailAccount = async (payload, dispatch) => {
     try {
@@ -53,8 +47,7 @@ export const createAccountApi = async (payload, dispatch) => {
                     fullName: payload.fullName,
                     role: payload.role,
                     status: true,
-                    urlAvatar:
-                        "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                    urlAvatar: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
                 })
             );
 
@@ -74,18 +67,15 @@ export const updateAccountApi = async (payload, dispatch) => {
             fullName: payload.fullName,
             role: payload.role,
             status: payload.status,
-            urlAvatar: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
         });
         if (response.data.status) {
             // set state and close modal
             dispatch(
                 updateAccount({
                     username: payload.username,
-                    password: payload.password,
                     fullName: payload.fullName,
                     role: payload.role,
-                    urlAvatar:
-                        "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                    urlAvatar: payload.urlAvatar,
                     status: payload.status,
                 })
             );

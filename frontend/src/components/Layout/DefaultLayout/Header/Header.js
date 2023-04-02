@@ -1,15 +1,14 @@
 import { useDispatch } from "react-redux";
-import { showLogin, logout } from "store/reducers/authSlice";
-import { setAccount } from "store/reducers/accountSlice";
+import { showLogin } from "store/reducers/authSlice";
 import { useSelector } from "react-redux";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { searchProductApi } from "api/productApi";
 
 function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [option, setOption] = useState(false);
-    const [resultSearch, setResultSearch] = useState(false);
     const [name, setName] = useState("");
 
     const useOutsideBox = function (ref) {
@@ -33,16 +32,11 @@ function Header() {
 
     const account = useSelector((state) => state.accountReducer.account);
 
-    const { searchProductList } = useSelector(
-        ({ productReducer }) => productReducer
-    );
     return (
         <header className="flex justify-between items-center py-4 px-24 bground ">
             <div className="flex">
                 <Link to="/">
-                    <h3 className="text-white font-[Prompt] from-sky-50">
-                        SHAND
-                    </h3>
+                    <h3 className="text-white font-[Prompt] from-sky-50">SHAND</h3>
                 </Link>
             </div>
             <svg
@@ -67,9 +61,9 @@ function Header() {
                     type="text"
                     className="w-full py-2 px-4 border-none outline-none bg-[#f5f7f9] rounded "
                     placeholder="Tìm kiếm sản phẩm..."
-                    onKeyDown={(e) => {
+                    onKeyDown={async (e) => {
                         if (e.key === "Enter") {
-                            return navigate(`/search/${name}`);
+                            await searchProductApi({ key: name }, dispatch);
                         }
                     }}
                     onChange={(e) => {
@@ -106,45 +100,30 @@ function Header() {
                 </div>
                 {account ? (
                     <>
-                        <div
-                            ref={wrapperRefOption}
-                            className="relative flex bg-[white]   p-1 rounded-3xl"
-                        >
+                        <div ref={wrapperRefOption} className="relative flex bg-[white] z-10  p-1 rounded-3xl">
                             <div
                                 onClick={() => setOption(true)}
                                 className="flex items-center cursor-pointer hover:opacity-80"
                             >
-                                <img
-                                    src={account.urlAvatar}
-                                    alt="avatar"
-                                    className="w-7 h-7 rounded-full "
-                                />
-                                <p className="font-bold text-sm px-1">
-                                    {account.fullName}
-                                </p>
+                                <img src={account.urlAvatar} alt="avatar" className="w-7 h-7 rounded-full " />
+                                <p className="font-bold text-sm px-1">{account.fullName}</p>
                             </div>
                             {option && (
                                 <div className="bg-white shadow-lg shadow-slate-400/20 w-[182px] py-2  px-2 rounded-md absolute top-10 right-0">
                                     <ul>
                                         <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
-                                            <Link to="/profile/account">
-                                                Thông tin tài khoản
-                                            </Link>
+                                            <Link to="/profile/account">Thông tin tài khoản</Link>
                                         </li>
                                         <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
-                                            <Link to="/profile/love-products">
-                                                Sản phẩm yêu thích
-                                            </Link>
+                                            <Link to="/profile/love-products">Sản phẩm yêu thích</Link>
                                         </li>
                                         <li className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1">
-                                            <Link to="/profile/order-receive/pending">
-                                                Theo dõi đơn hàng
-                                            </Link>
+                                            <Link to="/profile/order-receive/pending">Theo dõi đơn hàng</Link>
                                         </li>
                                         <li
                                             onClick={() => {
                                                 localStorage.clear();
-                                                window.location.reload();
+                                                window.location.replace("/");
                                             }}
                                             className="px-2 hover:bg-[#f2f3f4] hover:font-bold cursor-pointer py-1"
                                         >

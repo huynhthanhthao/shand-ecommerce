@@ -25,6 +25,8 @@ module.exports = {
                         tableName: "DetailProducts",
                     },
                     key: "id",
+                    onUpdate: "CASCADE",
+                    onDelete: "CASCADE",
                 },
             },
             amount: {

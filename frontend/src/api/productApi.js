@@ -39,6 +39,34 @@ export const getProduct = async (payload, dispatch) => {
     }
 };
 
+export const getAllProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/all`, {
+            params: {
+                limit: payload.limit,
+            },
+        });
+
+        return response.data.productList;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getFreeProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/free`, {
+            params: {
+                limit: payload.limitFree,
+            },
+        });
+
+        return response.data.productList;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getDetailProduct = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/product/`, {
@@ -59,6 +87,7 @@ export const deleteProductById = async (payload, dispatch) => {
         const response = await axios.delete(`${domain}/product/`, {
             data: { id: payload.id },
         });
+        console.log(response);
         if (response.data.status) {
             toast.success(response.data.message);
             dispatch(deleteProduct({ id: payload.id }));

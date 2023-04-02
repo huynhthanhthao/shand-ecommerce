@@ -31,26 +31,23 @@ export const deleteReportApi = async (payload, dispatch) => {
     }
 };
 
-// export const createEventApi = async (payload, dispatch) => {
-//     try {
-//         const response = await axios.post(`${domain}/event/`, {
-//             title: payload.title,
-//             address: payload.address,
-//             time: payload.time,
-//             date: payload.date,
-//             purpose: payload.purpose,
-//             status: payload.status,
-//         });
+export const createReportApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.post(`${domain}/report/`, {
+            reportedStudentId: payload.reportedStudentId,
+            studentId: payload.studentId,
+            title: payload.title,
+            content: payload.content,
+            productId: payload.productId,
+        });
 
-//         if (response.data.status) {
-//             getEventListApi(dispatch);
-
-//             toast.success(response.data.message);
-//         } else toast.error(response.data.message);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+        if (response.data.status) {
+            toast.success(response.data.message);
+        } else toast.error(response.data.message);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // export const updateEventApi = async (payload, dispatch) => {
 //     try {

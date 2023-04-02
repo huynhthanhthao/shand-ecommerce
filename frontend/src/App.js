@@ -33,6 +33,9 @@ import Profile from "pages/Profile/Profile";
 import Admin from "pages/Admin/Admin";
 import RequireAuth from "utils/RequireAuth";
 import RequireAdmin from "utils/RequireAdmin";
+import SearchResult from "./pages/SearchResult/SearchResult";
+import Product from "pages/Product/Product";
+import ConfirmOrder from "pages/ConfirmOrder/ConfirmOrder";
 
 function App() {
     const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
@@ -42,8 +45,11 @@ function App() {
             {isLoading && <Loading />}
             <ToastContainer />
             <Routes>
+                <Route path="/search/:key" element={<SearchResult />}></Route>
                 <Route path="/" element={<Home />}></Route>
+                <Route path="/product/:id" element={<Product />}></Route>
                 <Route element={<RequireAuth />}>
+                    <Route path="/confirm-order/" element={<ConfirmOrder />}></Route>
                     <Route path="/cart" element={<Cart />}></Route>
                     <Route path="/profile/*" element={<Profile />}>
                         <Route path="account" element={<InforAccount />}></Route>
