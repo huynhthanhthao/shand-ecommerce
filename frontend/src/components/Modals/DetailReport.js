@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 function DetailReport() {
     const dispatch = useDispatch();
     const { report } = useSelector(({ reportReducer }) => reportReducer);
-    console.log(report);
     const handleDeleteProduct = async () => {
         try {
             await deleteProductById({ id: report.product.id }, dispatch);

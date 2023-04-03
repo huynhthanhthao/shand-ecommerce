@@ -2,6 +2,7 @@ import axios from "axios";
 import { domain } from "../config";
 import { toast } from "react-toastify";
 import { setTransaction } from "store/reducers/transactionSlice";
+import headerConfig from "utils/headerConfig";
 
 export const getTransaction = async (payload, dispatch) => {
     try {
@@ -9,6 +10,7 @@ export const getTransaction = async (payload, dispatch) => {
             params: {
                 username: payload.username,
             },
+            headers: headerConfig,
         });
 
         if (response.data.status) {
@@ -22,12 +24,16 @@ export const getTransaction = async (payload, dispatch) => {
 
 export const updateTransactionApi = async (payload, dispatch) => {
     try {
-        const response = await axios.patch(`${domain}/transaction`, {
-            username: payload.username,
-            fullName: payload.fullName,
-            bankCode: payload.bankCode,
-            bankName: payload.bankName,
-        });
+        const response = await axios.patch(
+            `${domain}/transaction`,
+            {
+                username: payload.username,
+                fullName: payload.fullName,
+                bankCode: payload.bankCode,
+                bankName: payload.bankName,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             // set state and close modal
@@ -48,12 +54,16 @@ export const updateTransactionApi = async (payload, dispatch) => {
 
 export const addTransactionApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/transaction`, {
-            username: payload.username,
-            fullName: payload.fullName,
-            bankCode: payload.bankCode,
-            bankName: payload.bankName,
-        });
+        const response = await axios.post(
+            `${domain}/transaction`,
+            {
+                username: payload.username,
+                fullName: payload.fullName,
+                bankCode: payload.bankCode,
+                bankName: payload.bankName,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             // set state and close modal

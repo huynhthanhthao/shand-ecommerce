@@ -3,6 +3,7 @@ import { domain } from "../config";
 import { toast } from "react-toastify";
 
 import { setEventList } from "store/reducers/eventSlice";
+import headerConfig from "utils/headerConfig";
 
 export const getEventListApi = async (dispatch) => {
     try {
@@ -18,14 +19,18 @@ export const getEventListApi = async (dispatch) => {
 
 export const createEventApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/event/`, {
-            title: payload.title,
-            address: payload.address,
-            time: payload.time,
-            date: payload.date,
-            purpose: payload.purpose,
-            status: payload.status,
-        });
+        const response = await axios.post(
+            `${domain}/event/`,
+            {
+                title: payload.title,
+                address: payload.address,
+                time: payload.time,
+                date: payload.date,
+                purpose: payload.purpose,
+                status: payload.status,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             getEventListApi(dispatch);
@@ -39,15 +44,19 @@ export const createEventApi = async (payload, dispatch) => {
 
 export const updateEventApi = async (payload, dispatch) => {
     try {
-        const response = await axios.patch(`${domain}/event/`, {
-            id: payload.id,
-            title: payload.title,
-            address: payload.address,
-            time: payload.time,
-            date: payload.date,
-            purpose: payload.purpose,
-            status: payload.status,
-        });
+        const response = await axios.patch(
+            `${domain}/event/`,
+            {
+                id: payload.id,
+                title: payload.title,
+                address: payload.address,
+                time: payload.time,
+                date: payload.date,
+                purpose: payload.purpose,
+                status: payload.status,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             getEventListApi(dispatch);
@@ -62,6 +71,7 @@ export const deleteEventApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/event/`, {
             data: { id: payload.id },
+            headers: headerConfig,
         });
         if (response.data.status) {
             getEventListApi(dispatch);

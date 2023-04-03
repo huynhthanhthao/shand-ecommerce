@@ -2,7 +2,6 @@ const db = require("../../models");
 const deleteCategory = async (req, res, next) => {
     try {
         const { id } = req.body;
-
         await db.Category.destroy({
             where: {
                 id,

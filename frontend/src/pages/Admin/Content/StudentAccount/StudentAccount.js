@@ -53,30 +53,20 @@ function AccountList() {
                                                 key={account.username}
                                                 className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                                             >
-                                                <td className="px-4 py-3 text-sm">
-                                                    {index}
-                                                </td>
-                                                <td className="px-4 py-3 text-sm">
-                                                    {account.username}
-                                                </td>
+                                                <td className="px-4 py-3 text-sm">{index}</td>
+                                                <td className="px-4 py-3 text-sm">{account.username}</td>
                                                 <td className="px-4 py-3">
                                                     <div className="flex items-center text-sm">
                                                         <div className="  w-8 h-8 mr-3 rounded-full md:block">
                                                             <img
                                                                 className="object-cover w-full h-full rounded-full"
-                                                                src={
-                                                                    account.urlAvatar
-                                                                }
+                                                                src={account.urlAvatar}
                                                                 alt=""
                                                                 loading="lazy"
                                                             />
                                                         </div>
                                                         <div>
-                                                            <p className="font-semibold">
-                                                                {
-                                                                    account.fullName
-                                                                }
-                                                            </p>
+                                                            <p className="font-semibold">{account.fullName}</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -96,11 +86,7 @@ function AccountList() {
                                                     <button
                                                         className="hover:opacity-80 mx-1"
                                                         onClick={() => {
-                                                            dispatch(
-                                                                setAccountTarget(
-                                                                    account
-                                                                )
-                                                            );
+                                                            dispatch(setAccountTarget(account));
                                                         }}
                                                     >
                                                         <svg
@@ -121,11 +107,7 @@ function AccountList() {
                                                         data-te-toggle="modal"
                                                         data-te-target="#delete_student"
                                                         onClick={() => {
-                                                            dispatch(
-                                                                setAccountTarget(
-                                                                    account
-                                                                )
-                                                            );
+                                                            dispatch(setAccountTarget(account));
                                                         }}
                                                     >
                                                         <svg
@@ -142,8 +124,7 @@ function AccountList() {
                                                 </td>
                                             </tr>
                                         );
-                                    } else
-                                        return <tr key={account.username}></tr>;
+                                    } else return <tr key={account.username}></tr>;
                                 })}
                             </tbody>
                         </table>
@@ -173,7 +154,7 @@ function AccountList() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>
@@ -183,7 +164,7 @@ function AccountList() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             3
                                         </button>
                                     </li>

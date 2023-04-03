@@ -10,15 +10,20 @@ const updateQuantity = require("../controllers/ProductController/updateQuantity"
 const searchProduct = require("../controllers/ProductController/search-product");
 const getAllProduct = require("../controllers/ProductController/get-all-product");
 const getFreeProduct = require("../controllers/ProductController/get-free-product");
+const getProductByCategory = require("../controllers/ProductController/get-prodyct-by-category");
 
-router.post("/", createProduct);
-router.delete("/", deleteProduct);
+// Import middleware
+const { verifyToken } = require("../middleware/verifyToken.js");
+
+router.post("/", verifyToken, createProduct);
+router.delete("/", verifyToken, deleteProduct);
 router.get("/", getProduct);
 router.get("/all", getAllProduct);
 router.get("/free", getFreeProduct);
 router.get("/my-product", getMyProduct);
-router.patch("/", editProduct);
-router.patch("/edit-quantity/", updateQuantity);
+router.patch("/", verifyToken, editProduct);
+router.patch("/edit-quantity/", verifyToken, updateQuantity);
 router.get("/search/", searchProduct);
+router.get("/product-by-category/", getProductByCategory);
 
 module.exports = router;

@@ -9,6 +9,9 @@ import {
     setDetailProduct,
     setSearchProductList,
 } from "store/reducers/productSlice";
+
+import headerConfig from "utils/headerConfig";
+
 export const getMyProductList = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/product/my-product`, {
@@ -67,6 +70,20 @@ export const getFreeProductApi = async (payload, dispatch) => {
     }
 };
 
+export const getProductByCategory = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/product-by-category`, {
+            params: {
+                categoryId: payload.categoryId,
+            },
+        });
+
+        return response.data.productList;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getDetailProduct = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/product/`, {
@@ -86,6 +103,7 @@ export const deleteProductById = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/product/`, {
             data: { id: payload.id },
+            headers: headerConfig,
         });
         console.log(response);
         if (response.data.status) {
@@ -99,7 +117,7 @@ export const deleteProductById = async (payload, dispatch) => {
 
 export const createProductApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/product/`, { ...payload });
+        const response = await axios.post(`${domain}/product/`, { ...payload }, { headers: headerConfig });
         if (response.data.status) {
             toast.success(response.data.message);
             return true;
@@ -112,9 +130,13 @@ export const createProductApi = async (payload, dispatch) => {
 
 export const updateProductApi = async (payload, dispatch) => {
     try {
-        const response = await axios.patch(`${domain}/product/`, {
-            ...payload,
-        });
+        const response = await axios.patch(
+            `${domain}/product/`,
+            {
+                ...payload,
+            },
+            { headers: headerConfig }
+        );
         if (response.data.status) {
             toast.success(response.data.message);
             return true;

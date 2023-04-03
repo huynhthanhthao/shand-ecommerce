@@ -3,10 +3,11 @@ import { domain } from "../config";
 import { toast } from "react-toastify";
 
 import { setReportList } from "store/reducers/reportSlice";
+import headerConfig from "utils/headerConfig";
 
 export const getReportListApi = async (dispatch) => {
     try {
-        const response = await axios.get(`${domain}/report/`);
+        const response = await axios.get(`${domain}/report/`, { headers: headerConfig });
 
         if (response.data.status) {
             dispatch(setReportList(response.data.reportList));
@@ -20,6 +21,7 @@ export const deleteReportApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/report/`, {
             data: { id: payload.id },
+            headers: headerConfig,
         });
 
         if (response.data.status) {
@@ -33,13 +35,17 @@ export const deleteReportApi = async (payload, dispatch) => {
 
 export const createReportApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/report/`, {
-            reportedStudentId: payload.reportedStudentId,
-            studentId: payload.studentId,
-            title: payload.title,
-            content: payload.content,
-            productId: payload.productId,
-        });
+        const response = await axios.post(
+            `${domain}/report/`,
+            {
+                reportedStudentId: payload.reportedStudentId,
+                studentId: payload.studentId,
+                title: payload.title,
+                content: payload.content,
+                productId: payload.productId,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             toast.success(response.data.message);

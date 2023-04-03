@@ -7,9 +7,7 @@ import { deleteProductById } from "api/productApi";
 
 function Confirm(props) {
     const dispatch = useDispatch();
-    const { accountTarget } = useSelector(
-        ({ accountReducer }) => accountReducer
-    );
+    const { accountTarget } = useSelector(({ accountReducer }) => accountReducer);
     const { category } = useSelector(({ categoryReducer }) => categoryReducer);
     const { event } = useSelector(({ eventReducer }) => eventReducer);
     const handleDeleteAccount = async () => {
@@ -42,11 +40,7 @@ function Confirm(props) {
                             className="text-xl flex items-center font-medium leading-normal text-neutral-800"
                             id="exampleModalLabel"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 512 512"
-                                className="w-7 mr-2"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-7 mr-2">
                                 <path
                                     className="fill-yellow-600"
                                     d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"
@@ -68,18 +62,11 @@ function Confirm(props) {
                                 stroke="currentColor"
                                 className="h-6 w-6"
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
-                    <div
-                        className="relative flex-auto p-4"
-                        data-te-modal-body-ref
-                    >
+                    <div className="relative flex-auto p-4" data-te-modal-body-ref>
                         {props.description}
                     </div>
                     <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
@@ -98,17 +85,10 @@ function Confirm(props) {
                             data-te-modal-dismiss
                             data-te-ripple-color="light"
                             onClick={() => {
-                                if (props.id === "delete_student")
-                                    handleDeleteAccount();
-                                else if (props.id === "delete_category")
-                                    handleDeleteCategory();
-                                else if (props.id === "delete_event")
-                                    handleDeleteEvent();
-                                else
-                                    deleteProductById(
-                                        { id: props.product.id },
-                                        dispatch
-                                    );
+                                if (props.id === "delete_student") handleDeleteAccount();
+                                else if (props.id === "delete_category") handleDeleteCategory();
+                                else if (props.id === "delete_event") handleDeleteEvent();
+                                else deleteProductById({ id: props.product.id }, dispatch);
                             }}
                         >
                             Xác nhận

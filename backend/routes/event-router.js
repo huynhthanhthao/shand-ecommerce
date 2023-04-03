@@ -9,10 +9,14 @@ const getEventList = require("../controllers/EventController/get-event-list.js")
 const getEvent = require("../controllers/EventController/get-event.js");
 const updateEvent = require("../controllers/EventController/update-event.js");
 
+// Import middleware
+const { verifyToken } = require("../middleware/verifyToken.js");
+const { adminRole } = require("../middleware/verifyToken.js");
+
 //Event router
-router.post("/", createEvent);
-router.delete("/", deleteEvent);
-router.patch("/", updateEvent);
+router.post("/", verifyToken, adminRole, createEvent);
+router.delete("/", verifyToken, adminRole, deleteEvent);
+router.patch("/", verifyToken, adminRole, updateEvent);
 router.get("/detail", getEvent);
 router.get("/", getEventList);
 

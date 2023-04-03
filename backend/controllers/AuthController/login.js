@@ -17,10 +17,7 @@ const loginController = async (req, res, next) => {
                 message: "Tên đăng nhập hoặc mật khẩu không chính xác!",
             });
         else {
-            const passwordValid = await argon2.verify(
-                user.dataValues.password,
-                password
-            );
+            const passwordValid = await argon2.verify(user.dataValues.password, password);
             if (!passwordValid)
                 return res.json({
                     status: false,
@@ -30,7 +27,7 @@ const loginController = async (req, res, next) => {
             // All good
             // Create token
             const accessToken = jwt.sign(
-                user.dataValues.username,
+                { user: user.dataValues.username, role: user.dataValues.role },
                 process.env.ACCESS_TOKEN_SECRET
             );
 

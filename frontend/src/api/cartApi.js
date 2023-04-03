@@ -9,12 +9,15 @@ import {
     updateCart,
 } from "store/reducers/cartSlice";
 
+import headerConfig from "utils/headerConfig";
+
 export const getCart = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/cart/`, {
             params: {
                 studentId: payload.studentId,
             },
+            headers: headerConfig,
         });
 
         if (response.data.status) {
@@ -27,9 +30,13 @@ export const getCart = async (payload, dispatch) => {
 
 export const addCartApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/cart/`, {
-            ...payload,
-        });
+        const response = await axios.post(
+            `${domain}/cart/`,
+            {
+                ...payload,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             toast.success(response.data.message);
@@ -41,10 +48,14 @@ export const addCartApi = async (payload, dispatch) => {
 
 export const updateCartApi = async (payload, dispatch) => {
     try {
-        const response = await axios.patch(`${domain}/cart/`, {
-            id: payload.id,
-            amount: payload.amount,
-        });
+        const response = await axios.patch(
+            `${domain}/cart/`,
+            {
+                id: payload.id,
+                amount: payload.amount,
+            },
+            { headers: headerConfig }
+        );
 
         if (response.data.status) {
             dispatch(updateCart({ id: payload.id, amount: payload.amount }));
@@ -58,6 +69,7 @@ export const deleteCartApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/cart/`, {
             data: { id: payload.id },
+            headers: headerConfig,
         });
         if (response.data.status) {
             dispatch(deleteProduct({ id: payload.id }));

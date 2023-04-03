@@ -39,21 +39,14 @@ function Report() {
                                             key={index + 1}
                                             className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400"
                                         >
-                                            <td className="px-4 py-3 text-sm">
-                                                {index + 1}
-                                            </td>
-                                            <td className="px-4 py-3 text-sm">
-                                                {report.title}
-                                            </td>
+                                            <td className="px-4 py-3 text-sm">{index + 1}</td>
+                                            <td className="px-4 py-3 text-sm">{report.title}</td>
                                             <td className="px-4 py-3">
                                                 <div className="flex items-center text-sm">
                                                     <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                                         <img
                                                             className="object-cover w-full h-full rounded-full"
-                                                            src={
-                                                                report.student
-                                                                    .urlAvatar
-                                                            }
+                                                            src={report.student.urlAvatar}
                                                             alt=""
                                                             loading="lazy"
                                                         />
@@ -63,34 +56,22 @@ function Report() {
                                                         ></div>
                                                     </div>
                                                     <div>
-                                                        <p className="font-semibold">
-                                                            {
-                                                                report.student
-                                                                    .fullName
-                                                            }
-                                                        </p>
+                                                        <p className="font-semibold">{report.student.fullName}</p>
                                                         <p className="text-xs text-gray-600 dark:text-gray-400">
-                                                            {
-                                                                report.student
-                                                                    .username
-                                                            }
+                                                            {report.student.username}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
 
-                                            <td className="px-4 py-3 text-xs">
-                                                {report.content}
-                                            </td>
+                                            <td className="px-4 py-3 text-xs">{report.content}</td>
                                             <td className="px-4 py-3 text-sm text-black">
                                                 <button
                                                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
                                                     data-te-toggle="modal"
                                                     data-te-target="#detail_report"
                                                     onClick={() => {
-                                                        dispatch(
-                                                            setReport(report)
-                                                        );
+                                                        dispatch(setReport(report));
                                                     }}
                                                 >
                                                     Xem chi tiết
@@ -127,7 +108,7 @@ function Report() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>
@@ -137,7 +118,7 @@ function Report() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             3
                                         </button>
                                     </li>

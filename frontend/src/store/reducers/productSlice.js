@@ -9,6 +9,7 @@ const productSlice = createSlice({
         newProduct: {},
         updateProduct: {},
         searchProductList: [],
+        productCategory: [],
     },
     reducers: {
         setMyProductList(state, action) {
@@ -20,6 +21,9 @@ const productSlice = createSlice({
         setNewProduct(state, action) {
             state.newProduct = action.payload;
         },
+        setProductCategory(state, action) {
+            state.productCategory = action.payload;
+        },
         setSearchProductList(state, action) {
             state.searchProductList = action.payload;
         },
@@ -27,9 +31,7 @@ const productSlice = createSlice({
             state.updateProduct = action.payload;
         },
         deleteProduct(state, action) {
-            state.productList = state.productList.filter(
-                (product) => product.id !== action.payload.id
-            );
+            state.productList = state.productList.filter((product) => product.id !== action.payload.id);
         },
         setDetailProduct(state, action) {
             state.detailProduct = action.payload;
@@ -49,6 +51,7 @@ export const {
     setNewProduct,
     setUpdateProduct,
     setSearchProductList,
+    setProductCategory,
 } = productSlice.actions;
 
 // export selector
@@ -68,6 +71,10 @@ export const updateProductSelector = (state) => {
 
 export const searchProductListSelector = (state) => {
     return state.productReducer.searchProductList;
+};
+
+export const productCategorySelector = (state) => {
+    return state.productReducer.productCategory;
 };
 
 export default productReducer;

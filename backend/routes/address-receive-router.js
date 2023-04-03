@@ -7,12 +7,15 @@ const getAddressDefault = require("../controllers/AddressReceiveController/get-a
 const getAllAddress = require("../controllers/AddressReceiveController/get-all-address");
 const updateAddress = require("../controllers/AddressReceiveController/update-address");
 
+// Import middleware
+const { verifyToken } = require("../middleware/verifyToken.js");
+
 // Account router
-router.post("/", addAddress);
-router.get("/", getAddress);
-router.get("/all", getAllAddress);
-router.get("/default", getAddressDefault);
-router.delete("/", deleteAddress);
-router.patch("/", updateAddress);
+router.post("/", verifyToken, addAddress);
+router.get("/", verifyToken, getAddress);
+router.get("/all", verifyToken, getAllAddress);
+router.get("/default", verifyToken, getAddressDefault);
+router.delete("/", verifyToken, deleteAddress);
+router.patch("/", verifyToken, updateAddress);
 
 module.exports = router;

@@ -24,12 +24,8 @@ function SupportUser() {
                             </thead>
                             <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                                 <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                    <td className="px-4 py-3 text-sm">
-                                        thaob1906570@student.ctu.edu.vn
-                                    </td>
-                                    <td className="px-4 py-3 text-sm">
-                                        0559 554 544
-                                    </td>
+                                    <td className="px-4 py-3 text-sm">thaob1906570@student.ctu.edu.vn</td>
+                                    <td className="px-4 py-3 text-sm">0559 554 544</td>
 
                                     <td className="px-4 py-3 text-sm">
                                         <button
@@ -94,7 +90,7 @@ function SupportUser() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>
@@ -104,7 +100,7 @@ function SupportUser() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             3
                                         </button>
                                     </li>

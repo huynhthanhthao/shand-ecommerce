@@ -7,11 +7,15 @@ const getCategoryList = require("../controllers/CategoryController/get-category-
 const getCategory = require("../controllers/CategoryController/get-category.js");
 const updateCategory = require("../controllers/CategoryController/update-category.js");
 
+// Import middleware
+const { verifyToken } = require("../middleware/verifyToken.js");
+const { adminRole } = require("../middleware/verifyToken.js");
+
 // Category router
-router.post("/", createCategory);
-router.delete("/", deleteCategory);
-router.patch("/", updateCategory);
-router.get("/detail", getCategory);
-router.get("/", getCategoryList);
+router.post("/", verifyToken, adminRole, createCategory);
+router.delete("/", verifyToken, adminRole, deleteCategory);
+router.patch("/", verifyToken, adminRole, updateCategory);
+router.get("/detail", verifyToken, getCategory);
+router.get("/", verifyToken, getCategoryList);
 
 module.exports = router;

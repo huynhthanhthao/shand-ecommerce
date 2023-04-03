@@ -37,6 +37,7 @@ function LoginModal() {
                     onChange={changeUsername}
                 />
                 <input
+                    type="password"
                     className="input px-2 py-3 my-2"
                     placeholder="Mật khẩu"
                     value={password}
@@ -47,7 +48,7 @@ function LoginModal() {
                     onClick={async () => {
                         const response = await login({ username, password }, dispatch);
                         if (response.user.role === "admin") {
-                            navigate("/admin/student-list");
+                            window.location.replace("/admin/student-list");
                         }
                     }}
                     className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80"

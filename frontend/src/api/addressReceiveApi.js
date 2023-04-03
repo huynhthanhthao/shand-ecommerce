@@ -8,6 +8,7 @@ import {
     updateAddressReceive,
     setAddressDefault,
 } from "store/reducers/addressReceiveSlice";
+import headerConfig from "utils/headerConfig";
 
 export const getAddressList = async (payload, dispatch) => {
     try {
@@ -15,6 +16,7 @@ export const getAddressList = async (payload, dispatch) => {
             params: {
                 username: payload.username,
             },
+            headers: headerConfig,
         });
         if (response.data.status) {
             // set state and close modal
@@ -29,6 +31,7 @@ export const getAddressDefault = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/address-receive/default`, {
             params: { username: payload.username },
+            headers: headerConfig,
         });
 
         if (response.data.status) {
@@ -42,13 +45,17 @@ export const getAddressDefault = async (payload, dispatch) => {
 
 export const addAddressListApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/address-receive/`, {
-            username: payload.username,
-            phoneNumber: payload.phoneNumber,
-            address: payload.address,
-            fullName: payload.fullName,
-            isDefault: payload.isDefault,
-        });
+        const response = await axios.post(
+            `${domain}/address-receive/`,
+            {
+                username: payload.username,
+                phoneNumber: payload.phoneNumber,
+                address: payload.address,
+                fullName: payload.fullName,
+                isDefault: payload.isDefault,
+            },
+            { headers: headerConfig }
+        );
         if (response.data.status) {
             // set state and close modal
             toast.success(response.data.message);
@@ -64,6 +71,7 @@ export const deleteAddressReceiveApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/address-receive/`, {
             data: { id: payload.id },
+            headers: headerConfig,
         });
         if (response.data.status) {
             // set state and close modal
@@ -79,14 +87,18 @@ export const deleteAddressReceiveApi = async (payload, dispatch) => {
 
 export const updateAddressReceiveApi = async (payload, dispatch) => {
     try {
-        const response = await axios.patch(`${domain}/address-receive/`, {
-            username: payload.username,
-            id: payload.id,
-            fullName: payload.fullName,
-            phoneNumber: payload.phoneNumber,
-            address: payload.address,
-            isDefault: payload.isDefault,
-        });
+        const response = await axios.patch(
+            `${domain}/address-receive/`,
+            {
+                username: payload.username,
+                id: payload.id,
+                fullName: payload.fullName,
+                phoneNumber: payload.phoneNumber,
+                address: payload.address,
+                isDefault: payload.isDefault,
+            },
+            { headers: headerConfig }
+        );
         if (response.data.status) {
             // set state and close modal
             dispatch(updateAddressReceive(payload));

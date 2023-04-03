@@ -15,16 +15,10 @@ const editProduct = async (req, res, next) => {
             status,
             trademark,
             size,
+            ownId,
         } = req.body;
 
-        if (
-            !categoryId ||
-            !name ||
-            !description ||
-            !status ||
-            !quantityAvailable ||
-            !transport
-        ) {
+        if (!categoryId || !name || !description || !status || !quantityAvailable || !transport) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",

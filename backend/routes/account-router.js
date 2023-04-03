@@ -8,12 +8,16 @@ const getAccount = require("../controllers/AccountController/get-account.js");
 const updateAccount = require("../controllers/AccountController/update-account.js");
 const updateDetailAccount = require("../controllers/AccountController/update-detail-account.js");
 
+// Import middleware
+const { verifyToken } = require("../middleware/verifyToken.js");
+const { adminRole } = require("../middleware/verifyToken.js");
+
 // Account router
-router.post("/", createAccount);
-router.delete("/", deleteAccount);
-router.patch("/", updateAccount);
-router.patch("/detail", updateDetailAccount);
-router.get("/detail", getAccount);
-router.get("/", getAccountList);
+router.post("/", verifyToken, adminRole, createAccount);
+router.delete("/", verifyToken, adminRole, deleteAccount);
+router.patch("/", verifyToken, adminRole, updateAccount);
+router.patch("/detail", verifyToken, updateDetailAccount);
+router.get("/detail", verifyToken, getAccount);
+router.get("/", verifyToken, adminRole, getAccountList);
 
 module.exports = router;

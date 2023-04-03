@@ -1,14 +1,8 @@
 import { getCategoryListApi } from "api/categoryApi";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "store/reducers/categorySlice";
-function Topic() {
+function Topic(props) {
     const dispatch = useDispatch();
-
-    const [showDetailCategory, setShowDetailCategory] = useState(false);
-
-    // const [childCategory, setChildCategory] = useState([]);
-    const [parent, setParent] = useState(0);
 
     useEffect(() => {
         const fetchData = () => {
@@ -17,17 +11,11 @@ function Topic() {
         fetchData();
     }, [dispatch]);
 
-    const { categoryList } = useSelector(
-        ({ categoryReducer }) => categoryReducer
-    );
+    const { categoryList } = useSelector(({ categoryReducer }) => categoryReducer);
 
-    const rootCategory = categoryList.filter(
-        (category) => category.parent === null
-    );
+    const rootCategory = categoryList.filter((category) => category.parent === null);
 
-    const allChildCategory = categoryList.filter(
-        (category) => category.parent !== null
-    );
+    const allChildCategory = categoryList.filter((category) => category.parent !== null);
 
     return (
         <>
@@ -35,15 +23,15 @@ function Topic() {
                 <ul className="flex mx-20 text-white">
                     {rootCategory.map((root, index) => (
                         <li
+                            onClick={() => {
+                                props.setCategory(root);
+                            }}
                             key={index}
                             className="topic-item relative font-bold border-white border-b-4 "
                         >
                             <div className="flex justify-center">
                                 <div>
-                                    <div
-                                        className="relative "
-                                        data-te-dropdown-ref
-                                    >
+                                    <div className="relative " data-te-dropdown-ref>
                                         <a
                                             className="flex px-20 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757] "
                                             href="#"
@@ -61,28 +49,27 @@ function Topic() {
                                             aria-labelledby="dropdownMenuButton2"
                                             data-te-dropdown-menu-ref
                                         >
-                                            {allChildCategory.map(
-                                                (child, index) => {
-                                                    if (
-                                                        child.parent.id ===
-                                                        root.id
-                                                    )
-                                                        return (
-                                                            <li key={index}>
-                                                                <a
-                                                                    className="block w-full bg-transparent px-16 shadow py-2  font-normal text-white hover:bg-neutral-100 hover:text-neutral-800 transition "
-                                                                    href="#"
-                                                                    data-te-dropdown-item-ref
-                                                                >
-                                                                    {
-                                                                        child.nameCategory
-                                                                    }
-                                                                </a>
-                                                            </li>
-                                                        );
-                                                    else return "";
-                                                }
-                                            )}
+                                            {allChildCategory.map((child, index) => {
+                                                if (child.parent.id === root.id)
+                                                    return (
+                                                        <li
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                props.setCategory(child);
+                                                            }}
+                                                            key={index}
+                                                        >
+                                                            <a
+                                                                className="block w-full bg-transparent px-16 shadow py-2  font-normal text-white hover:bg-neutral-100 hover:text-neutral-800 transition "
+                                                                href="#"
+                                                                data-te-dropdown-item-ref
+                                                            >
+                                                                {child.nameCategory}
+                                                            </a>
+                                                        </li>
+                                                    );
+                                                else return "";
+                                            })}
                                         </ul>
                                     </div>
                                 </div>

@@ -12,9 +12,7 @@ function CategoryProduct() {
         fetchData();
     }, [dispatch]);
 
-    const { categoryList } = useSelector(
-        ({ categoryReducer }) => categoryReducer
-    );
+    const { categoryList } = useSelector(({ categoryReducer }) => categoryReducer);
     return (
         <>
             <div className="bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
@@ -47,28 +45,17 @@ function CategoryProduct() {
                                     >
                                         <td className="px-4 py-3">
                                             <div className="flex items-center text-sm ">
-                                                <p className="font-semibold ">
-                                                    {index + 1}
-                                                </p>
+                                                <p className="font-semibold ">{index + 1}</p>
                                             </div>
                                         </td>
+                                        <td className="px-4 py-3 text-sm">{category.nameCategory}</td>
                                         <td className="px-4 py-3 text-sm">
-                                            {category.nameCategory}
-                                        </td>
-                                        <td className="px-4 py-3 text-sm">
-                                            {(category.parent === null ||
-                                                category.parent === 0) &&
-                                                "-"}
-                                            {category.parent !== null &&
-                                                category.parent !== 0 && (
-                                                    <div>
-                                                        [{category.parent.id}]{" "}
-                                                        {
-                                                            category.parent
-                                                                .nameCategory
-                                                        }
-                                                    </div>
-                                                )}
+                                            {(category.parent === null || category.parent === 0) && "-"}
+                                            {category.parent !== null && category.parent !== 0 && (
+                                                <div>
+                                                    [{category.parent.id}] {category.parent.nameCategory}
+                                                </div>
+                                            )}
                                         </td>
 
                                         <td className="px-4 py-3 text-sm">
@@ -77,9 +64,7 @@ function CategoryProduct() {
                                                 data-te-toggle="modal"
                                                 data-te-target="#edit_category"
                                                 onClick={() => {
-                                                    dispatch(
-                                                        setCategory(category)
-                                                    );
+                                                    dispatch(setCategory(category));
                                                 }}
                                             >
                                                 <svg
@@ -98,9 +83,7 @@ function CategoryProduct() {
                                                 data-te-toggle="modal"
                                                 data-te-target="#delete_category"
                                                 onClick={() => {
-                                                    dispatch(
-                                                        setCategory(category)
-                                                    );
+                                                    dispatch(setCategory(category));
                                                 }}
                                             >
                                                 <svg
@@ -145,7 +128,7 @@ function CategoryProduct() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>
@@ -155,7 +138,7 @@ function CategoryProduct() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             3
                                         </button>
                                     </li>
