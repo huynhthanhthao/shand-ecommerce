@@ -4,7 +4,7 @@ const updateCategory = async (req, res, next) => {
         const { id, nameCategory, parent } = req.body;
 
         // Missing data
-        if (!nameCategory || !parent || !id) {
+        if (!nameCategory || !id) {
             return res.json({
                 status: false,
                 message: "Vui lòng điền đầy đủ thông tin!",
@@ -12,7 +12,7 @@ const updateCategory = async (req, res, next) => {
         }
         // All good
         await db.Category.update(
-            { nameCategory, parent },
+            { nameCategory, parent: parent ?? 0 },
             {
                 where: {
                     id,

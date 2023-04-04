@@ -1,10 +1,7 @@
 const headerConfig = () => {
     const accountStore = localStorage.getItem("persist:root");
-    if (JSON.parse(JSON.parse(accountStore).accountReducer).account) {
-        const token = JSON.parse(JSON.parse(accountStore).accountReducer).account.token;
-        return { Authorization: "Bearer " + token };
-    }
-    return {};
+    const token = JSON.parse(JSON.parse(accountStore)?.accountReducer ?? "null")?.account?.token;
+    return { Authorization: "Bearer " + token };
 };
 
-export default headerConfig();
+export default headerConfig;

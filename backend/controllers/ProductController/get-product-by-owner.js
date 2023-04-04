@@ -3,13 +3,14 @@ const sequelize = require("sequelize");
 const db = require("../../models");
 const Op = sequelize.Op;
 
-const getProductByCategory = async (req, res, next) => {
+const getProductByOwner = async (req, res, next) => {
     try {
-        const { categoryId } = req.query;
+        const { ownId } = req.query;
 
         const response = await db.Product.findAll({
+            limit: 2,
             where: {
-                [Op.or]: [{ categoryId: categoryId }],
+                ownId,
             },
         });
 
@@ -24,4 +25,4 @@ const getProductByCategory = async (req, res, next) => {
     }
 };
 
-module.exports = getProductByCategory;
+module.exports = getProductByOwner;

@@ -24,7 +24,7 @@ function AccountList() {
                 <button
                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
                     data-te-toggle="modal"
-                    data-te-target="#add_student"
+                    data-te-target="#add_shop"
                     // data-te-ripple-init
                     // data-te-ripple-color="light"
                 >

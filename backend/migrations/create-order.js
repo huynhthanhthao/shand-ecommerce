@@ -17,6 +17,8 @@ module.exports = {
                     },
                     key: "username",
                 },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
             sellerId: {
                 type: Sequelize.STRING,
@@ -36,13 +38,7 @@ module.exports = {
             },
             status: {
                 type: Sequelize.ENUM,
-                values: [
-                    "pending",
-                    "confirmed",
-                    "expired",
-                    "received",
-                    "refuse",
-                ],
+                values: ["pending", "confirmed", "expired", "received", "refuse"],
             },
             paid: {
                 type: Sequelize.BOOLEAN,

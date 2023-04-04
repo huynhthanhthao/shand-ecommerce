@@ -7,20 +7,14 @@ function EditCategoryForm() {
     const dispatch = useDispatch();
     const handleUpdateCategory = async () => {
         try {
-            console.log(category);
-
             await updateCategoryApi(category, dispatch);
         } catch (error) {
             console.log(error);
         }
     };
-    const { categoryList } = useSelector(
-        ({ categoryReducer }) => categoryReducer
-    );
+    const { categoryList } = useSelector(({ categoryReducer }) => categoryReducer);
 
-    const rootCategory = categoryList.filter(
-        (category) => category.parent === null
-    );
+    const rootCategory = categoryList.filter((category) => category.parent === null);
 
     return (
         <>
@@ -80,8 +74,7 @@ function EditCategoryForm() {
                                             dispatch(
                                                 setCategory({
                                                     ...category,
-                                                    nameCategory:
-                                                        e.target.value,
+                                                    nameCategory: e.target.value,
                                                 })
                                             );
                                         }}
@@ -106,13 +99,8 @@ function EditCategoryForm() {
                                                 root
                                             </option>
                                             {rootCategory.map((root) => (
-                                                <option
-                                                    className="p-2"
-                                                    value={root.id}
-                                                    key={root.id}
-                                                >
-                                                    [{root.id}] -{" "}
-                                                    {root.nameCategory}
+                                                <option className="p-2" value={root.id} key={root.id}>
+                                                    [{root.id}] - {root.nameCategory}
                                                 </option>
                                             ))}
                                         </select>

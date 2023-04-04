@@ -11,6 +11,7 @@ const searchProduct = require("../controllers/ProductController/search-product")
 const getAllProduct = require("../controllers/ProductController/get-all-product");
 const getFreeProduct = require("../controllers/ProductController/get-free-product");
 const getProductByCategory = require("../controllers/ProductController/get-prodyct-by-category");
+const getProductByOwner = require("../controllers/ProductController/get-product-by-owner");
 
 // Import middleware
 const { verifyToken } = require("../middleware/verifyToken.js");
@@ -25,5 +26,6 @@ router.patch("/", verifyToken, editProduct);
 router.patch("/edit-quantity/", verifyToken, updateQuantity);
 router.get("/search/", searchProduct);
 router.get("/product-by-category/", getProductByCategory);
+router.get("/product-by-owner/", getProductByOwner);
 
 module.exports = router;

@@ -86,6 +86,7 @@ function Confirm(props) {
                             data-te-ripple-color="light"
                             onClick={() => {
                                 if (props.id === "delete_student") handleDeleteAccount();
+                                else if (props.id === "delete_shop") handleDeleteAccount();
                                 else if (props.id === "delete_category") handleDeleteCategory();
                                 else if (props.id === "delete_event") handleDeleteEvent();
                                 else deleteProductById({ id: props.product.id }, dispatch);

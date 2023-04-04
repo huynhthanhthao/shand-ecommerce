@@ -1,22 +1,29 @@
+import { getProductByOwner } from "api/productApi";
 import Cart from "components/Card";
+import { useEffect, useState } from "react";
 function InforSelller({ product }) {
+    const [productSuggest, setProductSuggest] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getProductByOwner({ ownId: product.detail.owner.username });
+                setProductSuggest(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, []);
     return (
         <div className="bg-white p-5 rounded-md">
             <div className=" font-bold ">Thông tin nguời bán</div>
             <div className="avatar-shop my-3 flex items-center">
-                <img
-                    alt="avatar"
-                    src={product.detail.owner.urlAvatar}
-                    className="w-16 h-16 rounded-full"
-                />
+                <img alt="avatar" src={product.detail.owner.urlAvatar} className="w-16 h-16 rounded-full" />
                 <div className="name-shop mx-3">
                     <div className="font-bold">
-                        {product.detail.owner.fullName}{" "}
-                        {product.detail.owner.username}
+                        {product.detail.owner.fullName} {product.detail.owner.username}
                     </div>
-                    <div className="text-slate-600 text-sm">
-                        {product.detail.owner.address}
-                    </div>
+                    <div className="text-slate-600 text-sm">{product.detail.owner.address}</div>
                 </div>
             </div>
             <div className="option flex justify-between ">
@@ -34,7 +41,7 @@ function InforSelller({ product }) {
                             fillRule="nonzero"
                         ></path>
                     </svg>
-                    Theo dõi shop
+                    Theo dõi người bán
                 </button>
                 <button className="justify-center btn2 ">
                     <svg
@@ -58,12 +65,11 @@ function InforSelller({ product }) {
                 <div className="font-bold pb-3">Gợi ý thêm từ người bán</div>
                 <div className="suggest bg-[linear-gradient(180deg,#fff,#fbcbcb)] rounded-md">
                     <ul className="flex">
-                        <li className="mx-1 my-2">
-                            <Cart />
-                        </li>
-                        <li className="mx-1 my-2">
-                            <Cart />
-                        </li>
+                        {productSuggest?.map((product, index) => (
+                            <li key={index} className="mx-1 my-2">
+                                <Cart product={product} />
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

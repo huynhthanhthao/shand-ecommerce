@@ -12,9 +12,7 @@ function OrderSent() {
     const { status } = useParams();
     const { account } = useSelector(({ accountReducer }) => accountReducer);
 
-    const { orderSent: orderList } = useSelector(
-        ({ orderReducer }) => orderReducer
-    );
+    const { orderSent: orderList } = useSelector(({ orderReducer }) => orderReducer);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,37 +74,26 @@ function OrderSent() {
                 {orderList && (
                     <div>
                         {orderList.length === 0 ? (
-                            <div className="text-center ">
-                                Bạn chưa có đơn hàng tất cả gần đây.
-                            </div>
+                            <div className="text-center ">Bạn chưa có đơn hàng tất cả gần đây.</div>
                         ) : (
                             ""
                         )}
                         <ul>
                             {orderList.map((order) => (
-                                <li
-                                    key={order.id}
-                                    className="border rounded-sm text-sm mb-2"
-                                >
+                                <li key={order.id} className="border rounded-sm text-sm mb-2">
                                     <div className="flex justify-between p-3 bg-slate-100 ">
                                         <div>
                                             <div className="flex ">
                                                 Mã đơn hàng:
                                                 <Link
-                                                    to={
-                                                        "/profile/detail-order/" +
-                                                        order.id
-                                                    }
+                                                    to={"/profile/detail-order/" + order.id}
                                                     className="cursor-pointer text-blue-500"
                                                 >
                                                     &nbsp;#{order.id} | Chi tiết
                                                 </Link>
                                             </div>
                                             <p>
-                                                Đặt ngày:{" "}
-                                                <Moment format="DD/MM/YYYY">
-                                                    {order.createdAt}
-                                                </Moment>
+                                                Đặt ngày: <Moment format="DD/MM/YYYY">{order.createdAt}</Moment>
                                             </p>
                                         </div>
                                         <div>
@@ -128,47 +115,26 @@ function OrderSent() {
                                     <div className="flex  p-3">
                                         <div className="">
                                             <ul>
-                                                {order.productList.map(
-                                                    (product) => (
-                                                        <li
-                                                            key={product.id}
-                                                            className="flex items-start mb-2"
-                                                        >
-                                                            <img
-                                                                src={
-                                                                    JSON.parse(
-                                                                        product.images
-                                                                    )[0]
-                                                                }
-                                                                alt="product"
-                                                                className="w-16 border mr-2"
-                                                            />
-                                                            <div>
-                                                                <a
-                                                                    href="/"
-                                                                    className="font-bold"
-                                                                >
-                                                                    {
-                                                                        product.name
-                                                                    }
-                                                                </a>
-                                                                <div className="flex my-2 mt-1">
-                                                                    <p>
-                                                                        Người
-                                                                        bán:&nbsp;
-                                                                    </p>
-                                                                    <p className="text-blue-500">
-                                                                        {
-                                                                            order
-                                                                                .seller
-                                                                                .fullName
-                                                                        }
-                                                                    </p>
-                                                                </div>
+                                                {order.productList.map((product) => (
+                                                    <li key={product.id} className="flex items-start mb-2">
+                                                        <img
+                                                            src={JSON.parse(product.images)[0]}
+                                                            alt="product"
+                                                            className="w-16 border mr-2"
+                                                        />
+                                                        <div>
+                                                            <a href="/" className="font-bold">
+                                                                {product.name}
+                                                            </a>
+                                                            <div className="flex my-2 mt-1">
+                                                                <p>Người bán:&nbsp;</p>
+                                                                <p className="text-blue-500">
+                                                                    {order.seller.fullName} {order.seller.username}
+                                                                </p>
                                                             </div>
-                                                        </li>
-                                                    )
-                                                )}
+                                                        </div>
+                                                    </li>
+                                                ))}
                                             </ul>
 
                                             {status === "refuse" ? (
@@ -183,18 +149,10 @@ function OrderSent() {
                                                             : "w-36 border border-dashed  text-center border-green-500 p-1 text-green-500"
                                                     }
                                                 >
-                                                    {status === "pending"
-                                                        ? "Đang chờ xác nhận"
-                                                        : ""}
-                                                    {status === "confirmed"
-                                                        ? "Đã xác nhận"
-                                                        : ""}
-                                                    {status === "expired"
-                                                        ? "Đang vận chuyển"
-                                                        : ""}
-                                                    {status === "received"
-                                                        ? "Đã giao hàng"
-                                                        : ""}
+                                                    {status === "pending" ? "Đang chờ xác nhận" : ""}
+                                                    {status === "confirmed" ? "Đã xác nhận" : ""}
+                                                    {status === "expired" ? "Đang vận chuyển" : ""}
+                                                    {status === "received" ? "Đã giao hàng" : ""}
                                                 </div>
                                             )}
                                         </div>
@@ -207,14 +165,10 @@ function OrderSent() {
                                                     width="32"
                                                     height="32"
                                                     className={
-                                                        order.status ===
-                                                            "pending" ||
-                                                        order.status ===
-                                                            "confirmed" ||
-                                                        order.status ===
-                                                            "expired" ||
-                                                        order.status ===
-                                                            "received"
+                                                        order.status === "pending" ||
+                                                        order.status === "confirmed" ||
+                                                        order.status === "expired" ||
+                                                        order.status === "received"
                                                             ? "fill-green-500"
                                                             : ""
                                                     }
@@ -234,14 +188,10 @@ function OrderSent() {
                                                 </svg>
                                                 <p
                                                     className={
-                                                        order.status ===
-                                                            "pending" ||
-                                                        order.status ===
-                                                            "confirmed" ||
-                                                        order.status ===
-                                                            "expired" ||
-                                                        order.status ===
-                                                            "received"
+                                                        order.status === "pending" ||
+                                                        order.status === "confirmed" ||
+                                                        order.status === "expired" ||
+                                                        order.status === "received"
                                                             ? "text-green-500 mt-1"
                                                             : ""
                                                     }
@@ -251,12 +201,9 @@ function OrderSent() {
                                             </div>
                                             <div
                                                 className={
-                                                    order.status ===
-                                                        "pending" ||
-                                                    order.status ===
-                                                        "confirmed" ||
-                                                    order.status ===
-                                                        "expired" ||
+                                                    order.status === "pending" ||
+                                                    order.status === "confirmed" ||
+                                                    order.status === "expired" ||
                                                     order.status === "received"
                                                         ? "w-16 border-t-2  border-green-400 mt-1"
                                                         : "w-16 border-t-2 border-slate-400 "
@@ -269,12 +216,9 @@ function OrderSent() {
                                                     width="32"
                                                     height="32"
                                                     className={
-                                                        order.status ===
-                                                            "confirmed" ||
-                                                        order.status ===
-                                                            "expired" ||
-                                                        order.status ===
-                                                            "received"
+                                                        order.status === "confirmed" ||
+                                                        order.status === "expired" ||
+                                                        order.status === "received"
                                                             ? "fill-green-500"
                                                             : ""
                                                     }
@@ -298,12 +242,9 @@ function OrderSent() {
                                                 </svg>
                                                 <p
                                                     className={
-                                                        order.status ===
-                                                            "confirmed" ||
-                                                        order.status ===
-                                                            "expired" ||
-                                                        order.status ===
-                                                            "received"
+                                                        order.status === "confirmed" ||
+                                                        order.status === "expired" ||
+                                                        order.status === "received"
                                                             ? "text-green-500 mt-1"
                                                             : "mt-1"
                                                     }
@@ -313,10 +254,8 @@ function OrderSent() {
                                             </div>
                                             <div
                                                 className={
-                                                    order.status ===
-                                                        "confirmed" ||
-                                                    order.status ===
-                                                        "expired" ||
+                                                    order.status === "confirmed" ||
+                                                    order.status === "expired" ||
                                                     order.status === "received"
                                                         ? "w-16 border-t-2  border-green-400 mt-1"
                                                         : "w-16 border-t-2 border-slate-400  mt-1"
@@ -330,10 +269,7 @@ function OrderSent() {
                                                     width="32"
                                                     height="32"
                                                     className={
-                                                        order.status ===
-                                                            "expired" ||
-                                                        order.status ===
-                                                            "received"
+                                                        order.status === "expired" || order.status === "received"
                                                             ? "fill-green-500"
                                                             : ""
                                                     }
@@ -373,10 +309,7 @@ function OrderSent() {
                                                 </svg>
                                                 <p
                                                     className={
-                                                        order.status ===
-                                                            "expired" ||
-                                                        order.status ===
-                                                            "received"
+                                                        order.status === "expired" || order.status === "received"
                                                             ? "text-green-500 mt-1"
                                                             : "mt-1"
                                                     }
@@ -386,9 +319,7 @@ function OrderSent() {
                                             </div>
                                             <div
                                                 className={
-                                                    order.status ===
-                                                        "expired" ||
-                                                    order.status === "received"
+                                                    order.status === "expired" || order.status === "received"
                                                         ? "w-16 border-t-2  border-green-400 mt-1"
                                                         : "w-16 border-t-2 border-slate-400 "
                                                 }
@@ -400,12 +331,7 @@ function OrderSent() {
                                                     viewBox="0 0 32 32"
                                                     width="32"
                                                     height="32"
-                                                    className={
-                                                        order.status ===
-                                                        "received"
-                                                            ? "fill-green-500"
-                                                            : ""
-                                                    }
+                                                    className={order.status === "received" ? "fill-green-500" : ""}
                                                 >
                                                     <path
                                                         className="path1"
@@ -418,10 +344,7 @@ function OrderSent() {
                                                 </svg>
                                                 <p
                                                     className={
-                                                        order.status ===
-                                                        "received"
-                                                            ? "text-green-500 mt-1"
-                                                            : "mt-1"
+                                                        order.status === "received" ? "text-green-500 mt-1" : "mt-1"
                                                     }
                                                 >
                                                     Đã nhận hàng
@@ -438,18 +361,12 @@ function OrderSent() {
                                             >
                                                 <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" />
                                             </svg>
-                                            <p className="font-bold">
-                                                {order.buyer.phoneNumber}
-                                            </p>
+                                            <p className="font-bold">{order.buyer.phoneNumber}</p>
                                         </div>
                                         <div>
                                             {order.status === "pending" && (
                                                 <button
-                                                    onClick={() =>
-                                                        handleDeleteOrder(
-                                                            order.id
-                                                        )
-                                                    }
+                                                    onClick={() => handleDeleteOrder(order.id)}
                                                     className="bg-red-500 font-bold rounded hover:opacity-80 text-white p-2 mr-3"
                                                 >
                                                     Hủy đơn hàng
@@ -458,10 +375,7 @@ function OrderSent() {
                                             <NavLink
                                                 exact="true"
                                                 className="btn3 p-2"
-                                                to={
-                                                    "/profile/detail-order/" +
-                                                    order.id
-                                                }
+                                                to={"/profile/detail-order/" + order.id}
                                             >
                                                 Theo dõi đơn hàng
                                             </NavLink>

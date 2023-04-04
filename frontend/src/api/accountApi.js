@@ -15,7 +15,7 @@ export const updateDetailAccount = async (payload, dispatch) => {
                 phoneNumber: payload.phoneNumber,
                 fullName: payload.fullName,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             // set state and close modal
@@ -44,7 +44,7 @@ export const createAccountApi = async (payload, dispatch) => {
                 urlAvatar: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
                 role: payload.role,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             // set state and close modal
@@ -78,7 +78,7 @@ export const updateAccountApi = async (payload, dispatch) => {
                 role: payload.role,
                 status: payload.status,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             // set state and close modal
@@ -106,7 +106,7 @@ export const deleteAccountApi = async (payload, dispatch) => {
             data: {
                 username: payload.username,
             },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         if (response.data.status) {
             // set state and close modal
@@ -126,7 +126,7 @@ export const deleteAccountApi = async (payload, dispatch) => {
 
 export const getAllAccountApi = async (dispatch) => {
     try {
-        const response = await axios.get(`${domain}/account/`, { headers: headerConfig });
+        const response = await axios.get(`${domain}/account/`, { headers: headerConfig() });
         if (response.data.status) {
             // set state and close modal
             dispatch(setAccountList(response.data.userList));

@@ -20,6 +20,8 @@ module.exports = {
                     },
                     key: "username",
                 },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
             categoryId: {
                 type: Sequelize.INTEGER,
@@ -29,6 +31,8 @@ module.exports = {
                     },
                     key: "id",
                 },
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
             },
             name: {
                 type: Sequelize.STRING,

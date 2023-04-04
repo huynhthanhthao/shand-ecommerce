@@ -1,10 +1,19 @@
 import { addCartApi } from "api/cartApi";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { setOrderConfirm } from "store/reducers/orderSlice";
 
 function InforProduct({ product }) {
     const [amount, setAmount] = useState(1);
     const { account } = useSelector(({ accountReducer }) => accountReducer);
+    const dispatch = useDispatch();
+
+    // Mua ngay
+    const [order, setOrder] = useState({ product, amount });
+    useEffect(() => {
+        dispatch(setOrderConfirm([{ ...order, amount }]));
+    }, [dispatch, order, order.length]);
 
     return (
         <div className="relative infor-product col-span-2">
@@ -69,7 +78,9 @@ function InforProduct({ product }) {
                     </button>
                 </div>
                 <div className="w-1/2 mx-1">
-                    <button className="px-5 py-3 btn3  w-full">Mua ngay</button>
+                    <Link to="/confirm-order">
+                        <button className="bg-orange-500 w-full text-white font-bold py-3 rounded">Mua ngay</button>
+                    </Link>
                 </div>
             </div>
         </div>

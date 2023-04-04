@@ -2,23 +2,22 @@ import axios from "axios";
 import { domain } from "../config";
 import { toast } from "react-toastify";
 
-import {
-    deleteOrder,
-    setOrder,
-    setOrderReceived,
-    setOrderSent,
-    updateOrderList,
-} from "store/reducers/orderSlice";
+import { deleteOrder, setOrder, setOrderReceived, setOrderSent, updateOrderList } from "store/reducers/orderSlice";
+import headerConfig from "utils/headerConfig";
 
 export const createOrderApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/order/`, {
-            sellerId: payload.sellerId,
-            buyerId: payload.buyerId,
-            productsInformation: payload.productsInformation,
-            total: payload.total,
-            status: payload.status,
-        });
+        const response = await axios.post(
+            `${domain}/order/`,
+            {
+                sellerId: payload.sellerId,
+                buyerId: payload.buyerId,
+                productsInformation: payload.productsInformation,
+                total: payload.total,
+                status: payload.status,
+            },
+            { headers: headerConfig() }
+        );
 
         if (response.data.status) {
             toast.success(response.data.message);
@@ -32,10 +31,14 @@ export const createOrderApi = async (payload, dispatch) => {
 
 export const updateOrderApi = async (payload, dispatch) => {
     try {
-        const response = await axios.patch(`${domain}/order/`, {
-            id: payload.id,
-            status: payload.status,
-        });
+        const response = await axios.patch(
+            `${domain}/order/`,
+            {
+                id: payload.id,
+                status: payload.status,
+            },
+            { headers: headerConfig() }
+        );
 
         if (response.data.status) {
             toast.success(response.data.message);
@@ -45,9 +48,7 @@ export const updateOrderApi = async (payload, dispatch) => {
                 })
             );
 
-            dispatch(
-                updateOrderList({ id: payload.id, status: payload.status })
-            );
+            dispatch(updateOrderList({ id: payload.id, status: payload.status }));
         }
 
         return response.data.status;
@@ -63,6 +64,7 @@ export const getOrderSent = async (payload, dispatch) => {
                 status: payload.status,
                 buyerId: payload.buyerId,
             },
+            headers: headerConfig(),
         });
         if (response.data.status) {
             dispatch(setOrderSent(response.data.orderList));
@@ -79,6 +81,7 @@ export const getOrderReceived = async (payload, dispatch) => {
                 status: payload.status,
                 sellerId: payload.sellerId,
             },
+            headers: headerConfig(),
         });
         if (response.data.status) {
             dispatch(setOrderReceived(response.data.orderList));
@@ -94,6 +97,7 @@ export const getOrderById = async (payload, dispatch) => {
             params: {
                 id: payload.id,
             },
+            headers: headerConfig(),
         });
         if (response.data.status) {
             dispatch(setOrder(response.data.order));
@@ -107,6 +111,7 @@ export const deleteOrderApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/order/`, {
             data: { id: payload.id },
+            headers: headerConfig(),
         });
         if (response.data.status) {
             dispatch(deleteOrder({ id: payload.id }));

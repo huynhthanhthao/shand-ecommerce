@@ -17,7 +17,7 @@ export const getCart = async (payload, dispatch) => {
             params: {
                 studentId: payload.studentId,
             },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
 
         if (response.data.status) {
@@ -35,7 +35,7 @@ export const addCartApi = async (payload, dispatch) => {
             {
                 ...payload,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {
@@ -54,7 +54,7 @@ export const updateCartApi = async (payload, dispatch) => {
                 id: payload.id,
                 amount: payload.amount,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {
@@ -69,7 +69,7 @@ export const deleteCartApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/cart/`, {
             data: { id: payload.id },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         if (response.data.status) {
             dispatch(deleteProduct({ id: payload.id }));

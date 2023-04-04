@@ -16,7 +16,7 @@ export const getAddressList = async (payload, dispatch) => {
             params: {
                 username: payload.username,
             },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         if (response.data.status) {
             // set state and close modal
@@ -31,7 +31,7 @@ export const getAddressDefault = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/address-receive/default`, {
             params: { username: payload.username },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
 
         if (response.data.status) {
@@ -71,7 +71,7 @@ export const deleteAddressReceiveApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/address-receive/`, {
             data: { id: payload.id },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         if (response.data.status) {
             // set state and close modal

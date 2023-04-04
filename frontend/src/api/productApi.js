@@ -84,6 +84,20 @@ export const getProductByCategory = async (payload, dispatch) => {
     }
 };
 
+export const getProductByOwner = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/product-by-owner`, {
+            params: {
+                ownId: payload.ownId,
+            },
+        });
+
+        return response.data.productList;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getDetailProduct = async (payload, dispatch) => {
     try {
         const response = await axios.get(`${domain}/product/`, {
@@ -103,7 +117,7 @@ export const deleteProductById = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/product/`, {
             data: { id: payload.id },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         console.log(response);
         if (response.data.status) {
@@ -117,7 +131,7 @@ export const deleteProductById = async (payload, dispatch) => {
 
 export const createProductApi = async (payload, dispatch) => {
     try {
-        const response = await axios.post(`${domain}/product/`, { ...payload }, { headers: headerConfig });
+        const response = await axios.post(`${domain}/product/`, { ...payload }, { headers: headerConfig() });
         if (response.data.status) {
             toast.success(response.data.message);
             return true;
@@ -135,7 +149,7 @@ export const updateProductApi = async (payload, dispatch) => {
             {
                 ...payload,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             toast.success(response.data.message);

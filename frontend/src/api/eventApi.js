@@ -29,7 +29,7 @@ export const createEventApi = async (payload, dispatch) => {
                 purpose: payload.purpose,
                 status: payload.status,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {
@@ -55,7 +55,7 @@ export const updateEventApi = async (payload, dispatch) => {
                 purpose: payload.purpose,
                 status: payload.status,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {
@@ -71,7 +71,7 @@ export const deleteEventApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/event/`, {
             data: { id: payload.id },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         if (response.data.status) {
             getEventListApi(dispatch);

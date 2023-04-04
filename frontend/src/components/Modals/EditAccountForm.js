@@ -6,16 +6,11 @@ import { useState } from "react";
 function EditAccountForm(props) {
     const dispatch = useDispatch();
 
-    const { accountTarget } = useSelector(
-        ({ accountReducer }) => accountReducer
-    );
+    const { accountTarget } = useSelector(({ accountReducer }) => accountReducer);
 
     const handleUpdateAccount = async () => {
         if (password === "") password = accountTarget.password;
-        await updateAccountApi(
-            { ...accountTarget, password, fullName, status },
-            dispatch
-        );
+        await updateAccountApi({ ...accountTarget, password, fullName, status }, dispatch);
     };
 
     const [username, setUsername] = useState(accountTarget.username);
@@ -71,9 +66,7 @@ function EditAccountForm(props) {
                         <div className="relative p-4">
                             <form>
                                 <div className="flex flex-col mb-2">
-                                    <label className="pb-2">
-                                        Tên đăng nhập
-                                    </label>
+                                    <label className="pb-2">Tên đăng nhập</label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên đăng nhập..."
@@ -88,9 +81,7 @@ function EditAccountForm(props) {
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập họ tên..."
                                         value={fullName}
-                                        onChange={(e) =>
-                                            setFullName(e.target.value)
-                                        }
+                                        onChange={(e) => setFullName(e.target.value)}
                                     />
                                 </div>
 
@@ -101,9 +92,7 @@ function EditAccountForm(props) {
                                         placeholder="Nhập mật khẩu..."
                                         type="password"
                                         value={password}
-                                        onChange={(e) =>
-                                            setPassword(e.target.value)
-                                        }
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
                                 <div className="flex flex-col justify-between  mb-2">
@@ -113,9 +102,7 @@ function EditAccountForm(props) {
                                             className="mr-2 w-5 h-5 outline-neutral-400"
                                             type="checkbox"
                                             checked={status}
-                                            onChange={(e) =>
-                                                setStatus(e.target.checked)
-                                            }
+                                            onChange={(e) => setStatus(e.target.checked)}
                                         />
                                         Hoạt động
                                     </div>

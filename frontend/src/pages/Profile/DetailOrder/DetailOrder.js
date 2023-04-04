@@ -337,7 +337,7 @@ function DetailOrderSent() {
                                     <div className="">
                                         <div className="flex justify-between my-2">
                                             <p className="w-28">Tổng tiền:</p>
-                                            <p>{order.total}</p>
+                                            <p>{order.total}đ</p>
                                         </div>
                                         <div className="flex justify-between my-2">
                                             <p>Giảm giá:</p>
@@ -353,7 +353,7 @@ function DetailOrderSent() {
                                                 </p>
                                             </div>
 
-                                            <p className="font-bold text-orange-600">{order.total}</p>
+                                            <p className="font-bold text-orange-600">{order.total}đ</p>
                                         </div>
                                         {order.paid && (
                                             <div className="w-full border  text-center bg-green-500 p-3 text-white font-bold">

@@ -15,7 +15,7 @@ const { adminRole } = require("../middleware/verifyToken.js");
 router.post("/", verifyToken, adminRole, createCategory);
 router.delete("/", verifyToken, adminRole, deleteCategory);
 router.patch("/", verifyToken, adminRole, updateCategory);
-router.get("/detail", verifyToken, getCategory);
-router.get("/", verifyToken, getCategoryList);
+router.get("/detail", getCategory);
+router.get("/", getCategoryList);
 
 module.exports = router;

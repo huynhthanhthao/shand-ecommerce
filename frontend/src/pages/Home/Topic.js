@@ -23,17 +23,17 @@ function Topic(props) {
                 <ul className="flex mx-20 text-white">
                     {rootCategory.map((root, index) => (
                         <li
-                            onClick={() => {
-                                props.setCategory(root);
-                            }}
+                            // onClick={() => {
+                            //     props.setCategory(root);
+                            // }}
                             key={index}
-                            className="topic-item relative font-bold border-white border-b-4 "
+                            className="topic-item relative font-bold  "
                         >
                             <div className="flex justify-center">
                                 <div>
                                     <div className="relative " data-te-dropdown-ref>
                                         <a
-                                            className="flex px-20 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757] "
+                                            className="flex px-16 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757] "
                                             href="#"
                                             type="button"
                                             id="dropdownMenuButton2"
@@ -60,7 +60,7 @@ function Topic(props) {
                                                             key={index}
                                                         >
                                                             <a
-                                                                className="block w-full bg-transparent px-16 shadow py-2  font-normal text-white hover:bg-neutral-100 hover:text-neutral-800 transition "
+                                                                className="block w-full bg-transparent px-8 shadow py-2  font-normal text-white hover:bg-neutral-100 hover:text-neutral-800 transition "
                                                                 href="#"
                                                                 data-te-dropdown-item-ref
                                                             >

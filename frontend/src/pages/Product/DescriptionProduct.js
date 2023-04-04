@@ -48,7 +48,7 @@ function DiscriptionProduct({ product }) {
                                 Nguồn gốc
                             </th>
                             <td className="px-6 py-4">
-                                {JSON.parse(product.detail.imagesSource).length === 0 ? (
+                                {JSON.parse(product.detail.imagesSource)?.length === 0 ? (
                                     "-"
                                 ) : (
                                     <span className="text-green-600">Đã tải lên</span>

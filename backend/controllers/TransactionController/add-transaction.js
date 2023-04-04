@@ -2,6 +2,7 @@ const db = require("../../models");
 const addTransaction = async (req, res, next) => {
     try {
         const { username, fullName, bankName, bankCode } = req.body;
+        console.log(username, fullName, bankName, bankCode);
         // Missing data
         if (!fullName || !bankName || !bankCode) {
             return res.json({

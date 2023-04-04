@@ -1,6 +1,6 @@
 import ImageProduct from "./InforProduct/ImageProduct";
 import InforProduct from "./InforProduct/InforProduct";
-import InforSelller from "./InforSeller/InforSeller";
+import InforSeller from "./InforSeller/InforSeller";
 import DescriptionProduct from "./DescriptionProduct";
 import ProductList from "pages/Home/ProductList";
 import { getDetailProduct } from "api/productApi";
@@ -34,7 +34,7 @@ function Product() {
                         </div>
                         <div className="grid grid-cols-5 gap-4 my-5 ">
                             <div className="col-span-2">
-                                <InforSelller product={product} />
+                                <InforSeller product={product} />
                             </div>
                             <div className="col-span-3">
                                 <DescriptionProduct product={product} />

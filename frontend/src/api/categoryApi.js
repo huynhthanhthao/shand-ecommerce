@@ -24,7 +24,7 @@ export const createCategoryApi = async (payload, dispatch) => {
                 parent: payload.parent,
                 nameCategory: payload.nameCategory,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             getCategoryListApi(dispatch);
@@ -39,7 +39,7 @@ export const deleteCategoryApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/category/`, {
             data: { id: payload.id },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
         if (response.data.status) {
             getCategoryListApi(dispatch);
@@ -59,7 +59,7 @@ export const updateCategoryApi = async (payload, dispatch) => {
                 nameCategory: payload.nameCategory,
                 parent: payload.parent,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {

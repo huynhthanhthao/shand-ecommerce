@@ -7,7 +7,7 @@ import headerConfig from "utils/headerConfig";
 
 export const getReportListApi = async (dispatch) => {
     try {
-        const response = await axios.get(`${domain}/report/`, { headers: headerConfig });
+        const response = await axios.get(`${domain}/report/`, { headers: headerConfig() });
 
         if (response.data.status) {
             dispatch(setReportList(response.data.reportList));
@@ -21,7 +21,7 @@ export const deleteReportApi = async (payload, dispatch) => {
     try {
         const response = await axios.delete(`${domain}/report/`, {
             data: { id: payload.id },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
 
         if (response.data.status) {
@@ -44,7 +44,7 @@ export const createReportApi = async (payload, dispatch) => {
                 content: payload.content,
                 productId: payload.productId,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {

@@ -10,7 +10,7 @@ export const getTransaction = async (payload, dispatch) => {
             params: {
                 username: payload.username,
             },
-            headers: headerConfig,
+            headers: headerConfig(),
         });
 
         if (response.data.status) {
@@ -32,7 +32,7 @@ export const updateTransactionApi = async (payload, dispatch) => {
                 bankCode: payload.bankCode,
                 bankName: payload.bankName,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {
@@ -62,7 +62,7 @@ export const addTransactionApi = async (payload, dispatch) => {
                 bankCode: payload.bankCode,
                 bankName: payload.bankName,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
 
         if (response.data.status) {
