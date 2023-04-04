@@ -36,6 +36,7 @@ import RequireAdmin from "utils/RequireAdmin";
 import SearchResult from "./pages/SearchResult/SearchResult";
 import Product from "pages/Product/Product";
 import ConfirmOrder from "pages/ConfirmOrder/ConfirmOrder";
+import SearchSameProduct from "pages/SearchSameProduct/SearchSameResult";
 
 function App() {
     const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
@@ -46,6 +47,7 @@ function App() {
             <ToastContainer />
             <Routes>
                 <Route path="/search/:key" element={<SearchResult />}></Route>
+                <Route path="/search-same/:key" element={<SearchSameProduct />}></Route>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/product/:id" element={<Product />}></Route>
                 <Route element={<RequireAuth />}>

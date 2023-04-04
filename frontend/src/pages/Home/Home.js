@@ -3,9 +3,14 @@ import Event from "./Event";
 import ProductList from "./ProductList";
 import { DefaultLayout } from "components/Layout";
 import { useEffect, useState } from "react";
-import { getAllProductApi, getFreeProductApi, getProductByCategory } from "api/productApi";
+import { getAllProductApi, getFreeProductApi, getProductByCategory, getProductLoveApi } from "api/productApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setProductLove } from "store/reducers/productSlice";
 
 function Home() {
+    const dispatch = useDispatch();
+    const { account } = useSelector(({ accountReducer }) => accountReducer);
+
     let [allProduct, setAllProduct] = useState([]);
     let [freeProduct, setFreeProduct] = useState([]);
     let [productCategory, setProductCategory] = useState([]);
@@ -16,9 +21,12 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const allProduct = await getAllProductApi({ limit });
-                const freeProduct = await getFreeProductApi({ limitFree });
-                const productCategory = await getProductByCategory({ categoryId: category?.id ?? 1 });
+                const [allProduct, freeProduct, productCategory] = await Promise.all([
+                    getAllProductApi({ limit }),
+                    getFreeProductApi({ limitFree }),
+                    getProductByCategory({ categoryId: category?.id ?? 1 }),
+                ]);
+                await getProductLoveApi({ studentId: account.username }, dispatch);
                 setAllProduct(allProduct);
                 setFreeProduct(freeProduct);
                 setProductCategory(productCategory);

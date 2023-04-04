@@ -1,6 +1,7 @@
 import axios from "axios";
 import { domain } from "../config";
 import { toast } from "react-toastify";
+import Fuse from "fuse.js";
 
 import {
     setProduct,
@@ -8,6 +9,7 @@ import {
     deleteProduct,
     setDetailProduct,
     setSearchProductList,
+    setProductLove,
 } from "store/reducers/productSlice";
 
 import headerConfig from "utils/headerConfig";
@@ -163,13 +165,69 @@ export const updateProductApi = async (payload, dispatch) => {
 
 export const searchProductApi = async (payload, dispatch) => {
     try {
-        const response = await axios.get(`${domain}/product/search`, {
-            params: {
-                name: payload.key,
-            },
-        });
+        const response = await axios.get(`${domain}/product/search-same`);
+        const options = {
+            includeScore: true,
+            keys: ["name"],
+        };
+
+        const fuse = new Fuse(response.data.productList, options);
+
+        const result = fuse.search(payload);
+
         if (response.data.status) {
-            dispatch(setSearchProductList(response.data.productList));
+            dispatch(setSearchProductList(result.filter((item) => item.score <= 0.5)));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const searchSameProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/search-same`);
+
+        const options = {
+            includeScore: true,
+            keys: ["name"],
+        };
+
+        const fuse = new Fuse(response.data.productList, options);
+
+        const result = fuse.search(payload);
+
+        if (response.data.status) {
+            dispatch(setSearchProductList(result.filter((item) => item.score <= 0.2)));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const loveProductApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.patch(`${domain}/product/love`, { ...payload }, { headers: headerConfig() });
+
+        if (response.data.status) {
+            await getProductLoveApi({ studentId: payload.studentId }, dispatch);
+            toast.success(response.data.message);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getProductLoveApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/love`, {
+            params: {
+                studentId: payload.studentId,
+            },
+            headers: headerConfig(),
+        });
+
+        if (response.data.status) {
+            dispatch(setProductLove(response.data.productLove));
         }
     } catch (error) {
         console.log(error);

@@ -17,12 +17,7 @@ const getProduct = async (req, res, next) => {
                             model: db.User,
                             as: "owner",
                             attributes: {
-                                exclude: [
-                                    "createdAt",
-                                    "updatedAt",
-                                    "password",
-                                    "role",
-                                ],
+                                exclude: ["createdAt", "updatedAt", "password", "role"],
                             },
                         },
                         {

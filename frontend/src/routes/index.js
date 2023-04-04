@@ -5,6 +5,7 @@ import Admin from "../pages/Admin/Admin";
 import Cart from "../pages/Cart/Cart";
 import ConfirmOrder from "pages/ConfirmOrder/ConfirmOrder";
 import SearchResult from "pages/SearchResult/SearchResult";
+import SearchSameProduct from "pages/SearchSameProduct/SearchSameResult";
 
 export const publicRoutes = [
     { path: "/", component: Home },
@@ -14,6 +15,7 @@ export const publicRoutes = [
     { path: "/cart/", component: Cart },
     { path: "/confirm-order/", component: ConfirmOrder },
     { path: "/search/:key", component: SearchResult },
+    { path: "/search-same/:key", component: SearchSameProduct },
 ];
 
 export const privateRoutes = [];

@@ -63,7 +63,7 @@ function Header() {
                     placeholder="Tìm kiếm sản phẩm..."
                     onKeyDown={async (e) => {
                         if (e.key === "Enter") {
-                            await searchProductApi({ key: name }, dispatch);
+                            return navigate(`/search/${name}`);
                         }
                     }}
                     onChange={(e) => {

@@ -12,9 +12,13 @@ const getAllProduct = require("../controllers/ProductController/get-all-product"
 const getFreeProduct = require("../controllers/ProductController/get-free-product");
 const getProductByCategory = require("../controllers/ProductController/get-prodyct-by-category");
 const getProductByOwner = require("../controllers/ProductController/get-product-by-owner");
+const searchSameProduct = require("../controllers/ProductController/search-same-product");
+const getProductLove = require("../controllers/ProductController/get-product-love");
 
 // Import middleware
 const { verifyToken } = require("../middleware/verifyToken.js");
+const loveProduct = require("../controllers/ProductController/loveProduct");
+const getProductSuggest = require("../controllers/ProductController/get-product-suggest");
 
 router.post("/", verifyToken, createProduct);
 router.delete("/", verifyToken, deleteProduct);
@@ -24,8 +28,18 @@ router.get("/free", getFreeProduct);
 router.get("/my-product", getMyProduct);
 router.patch("/", verifyToken, editProduct);
 router.patch("/edit-quantity/", verifyToken, updateQuantity);
-router.get("/search/", searchProduct);
+
 router.get("/product-by-category/", getProductByCategory);
 router.get("/product-by-owner/", getProductByOwner);
+
+// search product
+router.get("/search/", searchProduct);
+router.get("/search-same/", searchSameProduct);
+
+// product love
+router.get("/love/", verifyToken, getProductLove);
+router.patch("/love", verifyToken, loveProduct);
+
+router.get("/product-suggest/", verifyToken, getProductSuggest);
 
 module.exports = router;

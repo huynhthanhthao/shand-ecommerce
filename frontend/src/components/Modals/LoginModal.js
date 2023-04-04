@@ -49,7 +49,8 @@ function LoginModal() {
                         const response = await login({ username, password }, dispatch);
                         if (response.user.role === "admin") {
                             window.location.replace("/admin/student-list");
-                        }
+                            window.location.replace("/admin/student-list");
+                        } else window.location.replace("/");
                     }}
                     className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80"
                 >

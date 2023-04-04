@@ -1,23 +1,25 @@
-import { searchProductApi } from "api/productApi";
+import { searchSameProductApi } from "api/productApi";
 import Card from "components/Card";
 import { DefaultLayout } from "components/Layout";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-function SearchResult() {
+function SearchSameProduct() {
     const dispatch = useDispatch();
     const { key } = useParams();
-    useEffect(() => {
-        searchProductApi(key, dispatch);
-    }, [dispatch, key]);
-    const { searchProductList: productList } = useSelector(({ productReducer }) => productReducer);
 
-    const [productFilter, setProductFilter] = useState(productList);
+    useEffect(() => {
+        searchSameProductApi(key, dispatch);
+    }, [dispatch, key]);
+
+    const { searchProductList: productList } = useSelector(({ productReducer }) => productReducer);
 
     useEffect(() => {
         setProductFilter(productList);
     }, [productList]);
+
+    const [productFilter, setProductFilter] = useState(productList);
 
     const handleSortPrice = (option) => {
         if (option === "big_to_small") {
@@ -240,7 +242,7 @@ function SearchResult() {
                                 </g>
                             </g>
                         </svg>
-                        Kết quả tìm kiếm
+                        Kết quả tìm kiếm sản phẩm tương tự
                     </div>
                     <div className="grid grid-cols-5 gap-3 mt-3">
                         {productFilter.length === 0 ? (
@@ -255,4 +257,4 @@ function SearchResult() {
     );
 }
 
-export default SearchResult;
+export default SearchSameProduct;

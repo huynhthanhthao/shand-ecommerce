@@ -10,6 +10,7 @@ const productSlice = createSlice({
         updateProduct: {},
         searchProductList: [],
         productCategory: [],
+        productLove: [],
     },
     reducers: {
         setMyProductList(state, action) {
@@ -23,6 +24,9 @@ const productSlice = createSlice({
         },
         setProductCategory(state, action) {
             state.productCategory = action.payload;
+        },
+        setProductLove(state, action) {
+            state.productLove = action.payload;
         },
         setSearchProductList(state, action) {
             state.searchProductList = action.payload;
@@ -52,6 +56,7 @@ export const {
     setUpdateProduct,
     setSearchProductList,
     setProductCategory,
+    setProductLove,
 } = productSlice.actions;
 
 // export selector
@@ -77,4 +82,7 @@ export const productCategorySelector = (state) => {
     return state.productReducer.productCategory;
 };
 
+export const productLoveSelector = (state) => {
+    return state.productReducer.productLove;
+};
 export default productReducer;
