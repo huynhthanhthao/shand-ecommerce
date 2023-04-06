@@ -17,6 +17,7 @@ const categoryRouter = require("./routes/category-router");
 const addressRouter = require("./routes/address-receive-router");
 const transactionRouter = require("./routes/transaction-router");
 const checkImageRouter = require("./routes/check-image-router");
+const billRouter = require("./routes/bill-router.js");
 
 // Connect database
 connectionDatabase();
@@ -37,6 +38,7 @@ app.use("/report", reportRouter);
 app.use("/account", accountRouter);
 app.use("/category", categoryRouter);
 app.use("/event", eventRouter);
+app.use("/bill", billRouter);
 app.use("/address-receive", addressRouter);
 app.use("/transaction", transactionRouter);
 app.use("/check-image", checkImageRouter);

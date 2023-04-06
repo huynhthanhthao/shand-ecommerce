@@ -26,7 +26,7 @@ function OrderSent() {
     };
 
     return (
-        <div className="add-product">
+        <div className="order-sent">
             <label className="font-bold">Đơn hàng đã đặt</label>
             <div className=" bg-white">
                 <ul className="border-b py-3 flex mb-3">

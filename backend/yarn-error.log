@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add recommender
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add ncdemon
 
 PATH: 
   C:\Users\S145\AppData\Roaming\npm;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_311\bin;C:\Windows\System32;C:\Windows;C:\Windows\System32\Wbem;C:\Users\S145\AppData\Local\Yarn\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\S145\AppData\Roaming\npm\node_modules\npm\bin;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\xampp\php;C:\composer;C:\xampp\mysql\bin;C:\Users\S145\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\S145\AppData\Local\Programs\Python\Python310\;C:\Windows;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Program Files\nodejs;C:\Users\S145\AppData\Local\Yarn\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\S145\AppData\Roaming\npm\node_modules\npm\bin;C:\Users\S145\AppData\Roaming\npm;C:\Users\S145\AppData\Local\Programs\Microsoft VS Code\bin;;C:\Users\S145\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;C:\Users\S145\AppData\Roaming\Composer\vendor\bin
@@ -14,7 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'D:\KTPM\LuanVan\ecommerce\backend\node_modules\argon2\lib\binding\napi-v3\argon2.node'
+  Error: https://registry.yarnpkg.com/ncdemon: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66096:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140748:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141720:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141642:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {

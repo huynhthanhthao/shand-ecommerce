@@ -50,7 +50,7 @@ function ConfirmOrder() {
     };
 
     const orderData = {
-        buyerId: orderConfirm[0].studentId,
+        buyerId: account.username,
         sellerId: orderConfirm[0].product.detail.ownId,
         productsInformation: JSON.stringify(orderConfirm),
         total: orderConfirm.reduce(function (total, currentValue) {
@@ -195,8 +195,8 @@ function ConfirmOrder() {
                                 </div>
                                 <div className="px-6 py-3">
                                     <ul>
-                                        {orderConfirm.map((item) => (
-                                            <li key={item.id} className="flex items-center justify-between mb-2">
+                                        {orderConfirm.map((item, index) => (
+                                            <li key={index} className="flex items-center justify-between mb-2">
                                                 <div className="flex items-center">
                                                     <img
                                                         className="w-12 h-12 mr-2"

@@ -23,39 +23,38 @@ const getOrderList = async (req, res, next) => {
             ],
         });
 
-        const promises = orders.map(async (order) => {
-            const productsInformation = JSON.parse(order.productsInformation);
+        const result = [];
+        for (let j = 0; j < orders.length; j++) {
+            const productsInformation = JSON.parse(orders[j].productsInformation);
             const productList = [];
+            const productIds = productsInformation.map((item) => item.product.id);
 
-            const productIds = productsInformation.map(
-                (item) => item.productId
-            );
-            const products = await db.Product.findAll({
-                where: { id: productIds },
-            });
+            const products = [];
+
+            for (let i = 0; i < productIds.length; i++) {
+                const product = await db.Product.findOne({
+                    where: { id: productIds[i] },
+                });
+                products.push(product.dataValues);
+            }
 
             products.forEach((product) => {
-                const productInfo = productsInformation.find(
-                    (item) => item.productId === product.id
-                );
+                const productInfo = productsInformation.find((item) => item.product.id === product.id);
                 productList.push({
-                    ...product.dataValues,
-                    amount: productInfo.amount,
+                    ...product,
+                    amount: productInfo.product.amount,
                 });
             });
-
-            return {
-                ...order.dataValues,
-                productList,
-            };
-        });
-
-        const newOrders = await Promise.all(promises);
+            result.push({
+                ...orders[j].dataValues,
+                productList: productList,
+            });
+        }
 
         return res.status(200).json({
             status: true,
             message: "Lấy thông tin đơn hàng thành công!",
-            orderList: newOrders.reverse(),
+            orderList: result.reverse(),
         });
     } catch (error) {
         console.log(error);

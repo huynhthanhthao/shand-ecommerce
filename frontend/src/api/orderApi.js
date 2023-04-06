@@ -66,6 +66,8 @@ export const getOrderSent = async (payload, dispatch) => {
             },
             headers: headerConfig(),
         });
+
+        console.log(response);
         if (response.data.status) {
             dispatch(setOrderSent(response.data.orderList));
         }

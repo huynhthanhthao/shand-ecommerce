@@ -37,6 +37,7 @@ import SearchResult from "./pages/SearchResult/SearchResult";
 import Product from "pages/Product/Product";
 import ConfirmOrder from "pages/ConfirmOrder/ConfirmOrder";
 import SearchSameProduct from "pages/SearchSameProduct/SearchSameResult";
+import Bill from "pages/Profile/Bill";
 
 function App() {
     const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
@@ -66,6 +67,7 @@ function App() {
                         <Route path="order-sent/:status" element={<OrderSent />}></Route>
                         <Route path="detail-order/:id" element={<DetailOrder />}></Route>
                         <Route path="order-receive/:status" element={<OrderReceive />}></Route>
+                        <Route path="bill/:type" element={<Bill />}></Route>
                     </Route>
                     <Route element={<RequireAdmin />}>
                         <Route path="/admin/*" element={<Admin />}>

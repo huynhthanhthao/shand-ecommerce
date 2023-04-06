@@ -23,7 +23,7 @@ function OrderReceive() {
         await updateOrderApi({ id, status }, dispatch);
     };
     return (
-        <div className="add-product">
+        <div className="order-received">
             <label className="font-bold">Đơn hàng đã nhận</label>
             <div className=" bg-white">
                 <ul className="border-b py-3 flex mb-3">
@@ -59,6 +59,14 @@ function OrderReceive() {
                     >
                         Đã nhận hàng
                     </NavLink>
+                    <NavLink
+                        exact="true"
+                        className="mr-8 hover:text-orange-500 cursor-pointer"
+                        to="/profile/order-receive/cancel"
+                        activeclassname="active"
+                    >
+                        Đã hủy
+                    </NavLink>
                 </ul>
             </div>
             {orderList && (
@@ -90,7 +98,7 @@ function OrderReceive() {
                                     </div>
                                     <div className="text-right">
                                         <p>Tổng tiền:</p>
-                                        <p>{order.total}</p>
+                                        <p>{order.total}đ</p>
                                     </div>
                                 </div>
                                 <div className="flex  p-3">
@@ -116,7 +124,7 @@ function OrderReceive() {
                                             ))}
                                         </ul>
 
-                                        {status !== "refuse" ? (
+                                        {status !== "refuse" && status !== "cancel" ? (
                                             <div
                                                 className={
                                                     status === "pending"
@@ -131,7 +139,7 @@ function OrderReceive() {
                                             </div>
                                         ) : (
                                             <div className="w-36 border border-dashed  text-center border-red-500 p-1 text-red-500">
-                                                Đã bị từ chối
+                                                {status === "refuse" ? "Đã bị từ chối" : "Đã hủy"}
                                             </div>
                                         )}
                                     </div>

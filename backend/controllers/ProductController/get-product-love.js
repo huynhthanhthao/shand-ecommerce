@@ -10,24 +10,29 @@ const getProductLove = async (req, res, next) => {
                 studentId,
             },
         });
+        if (response) {
+            const productsId = JSON.parse(response?.dataValues.productsId);
 
-        const productsId = JSON.parse(response.dataValues.productsId);
+            for (let i = 0; i < productsId.length; i++) {
+                const product = await db.Product.findOne({
+                    where: {
+                        id: productsId[i],
+                    },
+                });
 
-        for (let i = 0; i < productsId.length; i++) {
-            const product = await db.Product.findOne({
-                where: {
-                    id: productsId[i],
-                },
+                productDetail.push(product);
+            }
+
+            let result = { ...response.dataValues, productDetail: productDetail };
+            return res.status(200).json({
+                status: true,
+                message: "Lấy sản phẩm yêu thích thành công!",
+                productLove: result,
             });
-
-            productDetail.push(product);
         }
-
-        let result = { ...response.dataValues, productDetail: productDetail };
         return res.status(200).json({
-            status: true,
-            message: "Lấy sản phẩm yêu thích thành công!",
-            productLove: result,
+            status: false,
+            message: "Something wrong!",
         });
     } catch (error) {
         console.log(error);

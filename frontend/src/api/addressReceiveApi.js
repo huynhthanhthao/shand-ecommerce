@@ -54,7 +54,7 @@ export const addAddressListApi = async (payload, dispatch) => {
                 fullName: payload.fullName,
                 isDefault: payload.isDefault,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             // set state and close modal
@@ -97,7 +97,7 @@ export const updateAddressReceiveApi = async (payload, dispatch) => {
                 address: payload.address,
                 isDefault: payload.isDefault,
             },
-            { headers: headerConfig }
+            { headers: headerConfig() }
         );
         if (response.data.status) {
             // set state and close modal

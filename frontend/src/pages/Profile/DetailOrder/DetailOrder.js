@@ -250,9 +250,9 @@ function DetailOrderSent() {
                                         </p>
                                     </div>
                                 </div>
-                                {order.status === "refuse" ? (
+                                {order.status === "refuse" || order.status === "cancel" ? (
                                     <div className="w-36 h-8 border border-dashed  text-center border-red-500 p-1 text-red-500">
-                                        Đã bị từ chối
+                                        {order.status === "refuse" ? "Đã bị từ chối" : "Đã hủy"}
                                     </div>
                                 ) : (
                                     <div
@@ -275,7 +275,7 @@ function DetailOrderSent() {
                                     <p className="font-bold">{order.buyer.fullName}</p>
                                     <p className="my-1 ">{order.buyer.phoneNumber}</p>
                                 </div>
-                                <p>{order.buyer.address}</p>
+                                <p>Tan Log, Phung Hiep, Hau Giang</p>
                             </div>
                         </div>
                         <div className="border p-2 mt-5">
@@ -395,6 +395,26 @@ function DetailOrderSent() {
                                                     >
                                                         Xác nhận vận chuyển
                                                     </button>
+                                                )}
+                                                {order.status === "expired" && (
+                                                    <>
+                                                        <button
+                                                            onClick={() => {
+                                                                updateStatusOrder(order.id, "cancel");
+                                                            }}
+                                                            className="mr-3 bg-red-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
+                                                        >
+                                                            Hủy đơn hàng
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                updateStatusOrder(order.id, "received");
+                                                            }}
+                                                            className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
+                                                        >
+                                                            Đã nhận hàng
+                                                        </button>
+                                                    </>
                                                 )}
                                             </>
                                         )}

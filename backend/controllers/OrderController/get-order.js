@@ -22,12 +22,13 @@ const getOrder = async (req, res, next) => {
                 },
             ],
         });
+        // console.log(JSON.parse(order.productsInformation));
 
         const productList = [];
         for (let i = 0; i < JSON.parse(order.productsInformation).length; i++) {
             const product = await db.Product.findOne({
                 where: {
-                    id: JSON.parse(order.productsInformation)[i].productId,
+                    id: JSON.parse(order.productsInformation)[i].product.id,
                 },
             });
             productList.push({

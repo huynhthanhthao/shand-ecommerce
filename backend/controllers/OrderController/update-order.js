@@ -12,24 +12,50 @@ const updateOrder = async (req, res, next) => {
         );
 
         if (status === "confirmed") {
-            const product = await db.Order.findOne({
+            const order = await db.Order.findOne({
                 where: { id },
             });
 
-            const productsInformation = JSON.parse(
-                product.dataValues.productsInformation
-            );
-
+            const productsInformation = JSON.parse(order.dataValues.productsInformation);
             productsInformation.forEach(async (product) => {
-                console.log(product.product.quantityAvailable, product.amount);
                 await db.DetailProduct.update(
                     {
-                        quantityAvailable:
-                            product.product.quantityAvailable - product.amount,
+                        quantityAvailable: product.product.quantityAvailable - product.amount,
                     },
                     {
                         where: {
-                            id: product.productId,
+                            id: product.product.id,
+                        },
+                    }
+                );
+            });
+        }
+
+        if (status === "received") {
+            const order = await db.Order.findOne({
+                where: { id },
+            });
+            await db.Bill.create({
+                buyerId: order.dataValues.buyerId,
+                sellerId: order.dataValues.sellerId,
+                orderId: order.dataValues.id,
+            });
+        }
+
+        if (status === "cancel") {
+            const order = await db.Order.findOne({
+                where: { id },
+            });
+
+            const productsInformation = JSON.parse(order.dataValues.productsInformation);
+            productsInformation.forEach(async (product) => {
+                await db.DetailProduct.update(
+                    {
+                        quantityAvailable: product.product.quantityAvailable + product.amount,
+                    },
+                    {
+                        where: {
+                            id: product.product.id,
                         },
                     }
                 );
