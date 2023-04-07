@@ -40,6 +40,6 @@ router.get("/search-same/", searchSameProduct);
 router.get("/love/", verifyToken, getProductLove);
 router.patch("/love", verifyToken, loveProduct);
 
-router.get("/product-suggest/", verifyToken, getProductSuggest);
+router.get("/product-suggest", getProductSuggest);
 
 module.exports = router;

@@ -4,12 +4,14 @@ import { getMyProductList } from "api/productApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setProduct, setUpdateProduct } from "store/reducers/productSlice";
 import { useNavigate } from "react-router-dom";
+import Confirm from "components/Modals/Confirm";
 
 function AllProduct() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { account } = useSelector(({ accountReducer }) => accountReducer);
+    const { product } = useSelector(({ productReducer }) => productReducer);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,61 +22,43 @@ function AllProduct() {
     const { productList } = useSelector(({ productReducer }) => productReducer);
     return (
         <div className="all-product">
+            <Confirm
+                id="delete_product"
+                title="Xóa sản phẩm"
+                description="Bạn có chắc muốn xóa sản phẩm này?"
+                product={product}
+            />
             {productList && (
                 <>
                     <label className="font-bold">Sản phẩm của bạn</label>
-                    <div className=" py-5 border-t my-3">
+                    <div className=" py-5 border-t my-3 ">
                         <table className=" text-left border border-slate-200 w-full">
                             <thead>
                                 <tr className="bg-slate-300">
-                                    <th className="border border-slate-200 p-2 ">
-                                        MSP
-                                    </th>
-                                    <th className="border border-slate-200 p-2 ">
-                                        Tên sản phẩm
-                                    </th>
-                                    <th className="border border-slate-200 p-2 ">
-                                        Giá
-                                    </th>
-                                    <th className="border border-slate-200 p-2 ">
-                                        Vận chuyển
-                                    </th>
+                                    <th className="border border-slate-200 p-2 ">MSP</th>
+                                    <th className="border border-slate-200 p-2 ">Tên sản phẩm</th>
+                                    <th className="border border-slate-200 p-2 ">Giá</th>
+                                    <th className="border border-slate-200 p-2 ">Vận chuyển</th>
 
-                                    <th className="border border-slate-200 p-2 ">
-                                        Tùy chọn
-                                    </th>
+                                    <th className="border border-slate-200 p-2 ">Tùy chọn</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {productList.map((product) => (
                                     <tr key={product.id}>
-                                        <td className="border border-slate-200 p-2 ">
-                                            {product.productId}
-                                        </td>
-                                        <td className="border border-slate-200 p-2 ">
-                                            {product.name}
-                                        </td>
-                                        <td className="border border-slate-200 p-2 ">
-                                            {product.price}
-                                        </td>
+                                        <td className="border border-slate-200 p-2 ">{product.productId}</td>
+                                        <td className="border border-slate-200 p-2 ">{product.name}</td>
+                                        <td className="border border-slate-200 p-2 ">{product.price}</td>
 
                                         <td className="border border-slate-200 p-2 ">
-                                            {product.transport === "buyer"
-                                                ? "Người mua trả"
-                                                : "Người bán trả"}
+                                            {product.transport === "buyer" ? "Người mua trả" : "Người bán trả"}
                                         </td>
                                         <td className="border border-slate-200 p-2 ">
                                             <button
                                                 className="hover:opacity-80 mx-1"
                                                 onClick={() => {
-                                                    dispatch(
-                                                        setUpdateProduct(
-                                                            product
-                                                        )
-                                                    );
-                                                    return navigate(
-                                                        "/profile/edit-product"
-                                                    );
+                                                    dispatch(setUpdateProduct(product));
+                                                    return navigate("/profile/edit-product");
                                                 }}
                                             >
                                                 <svg
@@ -95,9 +79,7 @@ function AllProduct() {
                                                 data-te-toggle="modal"
                                                 data-te-target="#delete_product"
                                                 onClick={() => {
-                                                    dispatch(
-                                                        setProduct(product)
-                                                    );
+                                                    dispatch(setProduct(product));
                                                 }}
                                             >
                                                 <svg

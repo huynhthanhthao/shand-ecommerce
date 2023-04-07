@@ -23,7 +23,7 @@ function OrderReceive() {
         await updateOrderApi({ id, status }, dispatch);
     };
     return (
-        <div className="order-received">
+        <div className="order-received animate__animated animate__fadeIn">
             <label className="font-bold">Đơn hàng đã nhận</label>
             <div className=" bg-white">
                 <ul className="border-b py-3 flex mb-3">

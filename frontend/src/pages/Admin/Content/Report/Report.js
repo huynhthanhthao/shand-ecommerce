@@ -16,7 +16,7 @@ function Report() {
 
     return (
         <>
-            <div className="bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
+            <div className=" bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
                 <h4 className="text-white ">Đơn báo cáo</h4>
             </div>
             <div className="">

@@ -32,7 +32,7 @@ function DetailOrderSent() {
     };
 
     return (
-        <div className="add-product">
+        <div className="add-product animate__animated animate__fadeIn">
             {order && (
                 <>
                     <label className="font-bold flex">Chi tiết đơn hàng</label>

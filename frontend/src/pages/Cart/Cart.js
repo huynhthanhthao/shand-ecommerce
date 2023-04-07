@@ -22,7 +22,7 @@ function Cart() {
     }, [dispatch, order, order.length]);
     return (
         <DefaultLayout>
-            <div className="px-24 py-5 text-[#0f1e29]">
+            <div className="px-24 py-5 text-[#0f1e29] animate__animated animate__fadeIn">
                 <div className="font-bold text-xl gap-3 mb-3">Giỏ hàng của bạn (7)</div>
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2 ">

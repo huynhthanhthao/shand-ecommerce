@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateDetailAccount } from "api/accountApi";
+import { closeLoading, openLoading } from "store/reducers/loadingSlice";
 
 function InforAccount() {
     const dispatch = useDispatch();
@@ -23,8 +24,9 @@ function InforAccount() {
 
             if (file.name) {
                 formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-                const CLOUDINARY_URL =
-                    "https://api.cloudinary.com/v1_1/drjynwuyt/upload";
+                dispatch(openLoading(""));
+
+                const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/drjynwuyt/upload";
                 detailImage = await fetch(CLOUDINARY_URL, {
                     method: "POST",
                     body: formData,
@@ -37,9 +39,7 @@ function InforAccount() {
             updateDetailAccount(
                 {
                     ...account,
-                    urlAvatar: detailImage.secure_url
-                        ? detailImage.secure_url
-                        : account.urlAvatar,
+                    urlAvatar: detailImage.secure_url ? detailImage.secure_url : account.urlAvatar,
                     fullName,
                     email,
                     phoneNumber,
@@ -48,21 +48,18 @@ function InforAccount() {
                 },
                 dispatch
             );
+            dispatch(closeLoading());
         } catch (error) {
             console.log(error);
         }
     };
     return (
-        <div className="infor-account">
+        <div className="infor-account animate__animated animate__fadeIn">
             <label className="font-bold">Thông tin tài khoản</label>
             <div className="px-10 grid grid-cols-6 py-5 border-t my-3 ">
                 <div className="col-span-1">
                     <div className="relative w-28 h-28 rounded-full overflow-hidden  border border-[#5e6d81]">
-                        <img
-                            src={imageAvatar ? imageAvatar : account.urlAvatar}
-                            alt="account"
-                            className=""
-                        />
+                        <img src={imageAvatar ? imageAvatar : account.urlAvatar} alt="account" className="" />
                         <label
                             htmlFor="imageAvatar"
                             className="absolute cursor-pointer hover:opacity-75 text-center bottom-0 left-1/2 -translate-x-1/2 bg-[#0000008a] text-white text-xs py-1 w-full"
@@ -93,9 +90,7 @@ function InforAccount() {
                                     <input
                                         className="input w-4/5 focus:shadow-input  p-2"
                                         value={fullName}
-                                        onChange={(e) =>
-                                            setFullName(e.target.value)
-                                        }
+                                        onChange={(e) => setFullName(e.target.value)}
                                     />
                                 </td>
                             </tr>
@@ -108,9 +103,7 @@ function InforAccount() {
                                     <input
                                         className="input w-4/5 focus:shadow-input p-2"
                                         value={phoneNumber}
-                                        onChange={(e) =>
-                                            setPhoneNumber(e.target.value)
-                                        }
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
                                     />
                                 </td>
                             </tr>
@@ -123,9 +116,7 @@ function InforAccount() {
                                     <input
                                         className="input w-4/5 focus:shadow-input  p-2"
                                         value={email}
-                                        onChange={(e) =>
-                                            setEmail(e.target.value)
-                                        }
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </td>
                             </tr>
@@ -133,9 +124,7 @@ function InforAccount() {
                             <tr>
                                 <td className="w-1/6"></td>
                                 <td
-                                    onClick={() =>
-                                        setChangePassword(!changePassword)
-                                    }
+                                    onClick={() => setChangePassword(!changePassword)}
                                     className="text-sky-600 hover:cursor-pointer hover:opacity-80"
                                 >
                                     Đổi mật khẩu
@@ -150,9 +139,7 @@ function InforAccount() {
                                                 className="input w-4/5 focus:shadow-input  p-2"
                                                 type="password"
                                                 value={password}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
+                                                onChange={(e) => setPassword(e.target.value)}
                                             />
                                         </td>
                                     </tr>
@@ -163,11 +150,7 @@ function InforAccount() {
                                                 className="input w-4/5 focus:shadow-input  p-2"
                                                 type="password"
                                                 value={passwordAgain}
-                                                onChange={(e) =>
-                                                    setPasswordAgain(
-                                                        e.target.value
-                                                    )
-                                                }
+                                                onChange={(e) => setPasswordAgain(e.target.value)}
                                             />
                                         </td>
                                     </tr>
@@ -176,10 +159,7 @@ function InforAccount() {
                             <tr>
                                 <td className="w-1/6"></td>
                                 <td>
-                                    <button
-                                        onClick={() => updateInfor()}
-                                        className="px-16 text-base py-2 btn3 my-3"
-                                    >
+                                    <button onClick={() => updateInfor()} className="px-16 text-base py-2 btn3 my-3">
                                         Cập nhật
                                     </button>
                                 </td>

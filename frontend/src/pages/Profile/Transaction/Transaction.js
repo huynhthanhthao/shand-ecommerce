@@ -19,7 +19,7 @@ function Transaction() {
 
     const { transaction } = useSelector(({ transactionReducer }) => transactionReducer);
     return (
-        <div className=" flex flex-col">
+        <div className=" flex flex-col animate__animated animate__fadeIn">
             <label className="font-bold">Thông tin giao dịch</label>
             <div className="border-t my-3 py-5">
                 {transaction.fullName && (

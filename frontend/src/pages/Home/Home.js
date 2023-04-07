@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getAllProductApi, getFreeProductApi, getProductByCategory, getProductLoveApi } from "api/productApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setProductLove } from "store/reducers/productSlice";
+import { closeLoading, openLoading } from "store/reducers/loadingSlice";
 
 function Home() {
     const dispatch = useDispatch();
@@ -21,12 +22,16 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                dispatch(openLoading(""));
                 const [allProduct, freeProduct, productCategory] = await Promise.all([
                     getAllProductApi({ limit }),
                     getFreeProductApi({ limitFree }),
                     getProductByCategory({ categoryId: category?.id ?? 1 }),
                 ]);
-                await getProductLoveApi({ studentId: account.username }, dispatch);
+
+                if (account) await getProductLoveApi({ studentId: account.username }, dispatch);
+                dispatch(closeLoading());
+
                 setAllProduct(allProduct);
                 setFreeProduct(freeProduct);
                 setProductCategory(productCategory);
@@ -40,7 +45,7 @@ function Home() {
 
     return (
         <DefaultLayout>
-            <div className="home">
+            <div className="home animate__animated animate__fadeIn">
                 <div className="nav bg-white">
                     <Topic setCategory={setCategory} />
                     <Event />

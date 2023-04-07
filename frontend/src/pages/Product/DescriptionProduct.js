@@ -48,38 +48,46 @@ function DiscriptionProduct({ product }) {
                                 Nguồn gốc
                             </th>
                             <td className="px-6 py-4">
-                                {JSON.parse(product.detail.imagesSource)?.length === 0 ? (
+                                {console.log(JSON.parse(product.detail.imagesSource)?.length)}
+                                {JSON.parse(product.detail.imagesSource)?.length === undefined ? (
                                     "-"
                                 ) : (
                                     <span className="text-green-600">Đã tải lên</span>
                                 )}
                             </td>
                         </tr>
-                        <tr className=" ">
-                            <th
-                                className="px-6 py-4 hover:opacity-70 cursor-pointer"
-                                onClick={() => {
-                                    setShowDetail((prev) => !prev);
-                                }}
-                            >
-                                {showDetail ? "Ẩn" : "Xem chi tiết"}
-                            </th>
-                        </tr>
+                        {JSON.parse(product.detail.imagesSource)?.length && (
+                            <tr className=" ">
+                                <th
+                                    className="px-6 py-4 hover:opacity-70 cursor-pointer"
+                                    onClick={() => {
+                                        setShowDetail((prev) => !prev);
+                                    }}
+                                >
+                                    {showDetail ? "Ẩn" : "Xem chi tiết"}
+                                </th>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
                 {showDetail && (
-                    <ul className="grid grid-cols-5  gap-2">
-                        {JSON.parse(product.detail.imagesSource).map((image, index) => (
-                            <li
-                                key={index}
-                                className="hover:opacity-80 hover:border-orange-600 border cursor-pointer mx-1 w-full"
-                            >
-                                <a target="_blank" href={image}>
-                                    <img src={image} className="w-full h-28" alt="source" />
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <ul className="grid grid-cols-5  gap-2">
+                            {JSON.parse(product.detail.imagesSource).map((image, index) => (
+                                <li
+                                    key={index}
+                                    className="hover:opacity-80 hover:border-orange-600 border cursor-pointer mx-1 w-full"
+                                >
+                                    <a target="_blank" href={image}>
+                                        <img src={image} className="w-full h-28" alt="source" />
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="mt-2 text-orange-500">
+                            <strong>Lưu ý:</strong> Hình ảnh nguồn gốc chỉ mang tính chất tham khảo.
+                        </p>
+                    </>
                 )}
             </div>
         </div>

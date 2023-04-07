@@ -19,7 +19,7 @@ function AccountList() {
 
     return (
         <>
-            <div className="bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
+            <div className=" bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
                 <h4 className="text-white ">Tài khoản sinh viên</h4>
                 <button
                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"

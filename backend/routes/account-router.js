@@ -11,6 +11,7 @@ const updateDetailAccount = require("../controllers/AccountController/update-det
 // Import middleware
 const { verifyToken } = require("../middleware/verifyToken.js");
 const { adminRole } = require("../middleware/verifyToken.js");
+const getTopRanking = require("../controllers/AccountController/get-top-ranking.js");
 
 // Account router
 router.post("/", verifyToken, adminRole, createAccount);
@@ -18,6 +19,7 @@ router.delete("/", verifyToken, adminRole, deleteAccount);
 router.patch("/", verifyToken, adminRole, updateAccount);
 router.patch("/detail", verifyToken, updateDetailAccount);
 router.get("/detail", verifyToken, getAccount);
+router.get("/top-ranking", getTopRanking);
 router.get("/", verifyToken, adminRole, getAccountList);
 
 module.exports = router;

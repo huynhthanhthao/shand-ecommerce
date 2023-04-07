@@ -211,7 +211,7 @@ export const loveProductApi = async (payload, dispatch) => {
         if (response.data.status) {
             await getProductLoveApi({ studentId: payload.studentId }, dispatch);
             toast.success(response.data.message);
-        }
+        } else toast.error(response.data.message);
     } catch (error) {
         console.log(error);
     }

@@ -11,7 +11,7 @@ function Categogy() {
         <>
             {account && (
                 <>
-                    <div className="category-header flex items-center ">
+                    <div className="category-header flex items-center animate__animated animate__fadeIn">
                         <img
                             src={account.urlAvatar}
                             alt="account"

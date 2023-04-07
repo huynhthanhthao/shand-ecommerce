@@ -5,9 +5,7 @@ import { setAddressReceive } from "store/reducers/addressReceiveSlice";
 
 function UpdateAddressForm({ setShowFormUpdate }) {
     const dispatch = useDispatch();
-    const { addressReceive } = useSelector(
-        ({ addressReceiveReducer }) => addressReceiveReducer
-    );
+    const { addressReceive } = useSelector(({ addressReceiveReducer }) => addressReceiveReducer);
     const { account } = useSelector(({ accountReducer }) => accountReducer);
 
     const [fullName, setFullName] = useState(addressReceive.fullName);
@@ -29,7 +27,7 @@ function UpdateAddressForm({ setShowFormUpdate }) {
         );
     };
     return (
-        <div className="address-form">
+        <div className="address-form animate__animated animate__fadeIn">
             <table className="w-full border-separate border-spacing-2  ">
                 <tbody>
                     <tr>
@@ -96,10 +94,7 @@ function UpdateAddressForm({ setShowFormUpdate }) {
                     </tr>
                 </tbody>
             </table>
-            <button
-                onClick={() => handleUpdateAddress()}
-                className="px-8 text-base py-2 btn3 my-3 mx-2"
-            >
+            <button onClick={() => handleUpdateAddress()} className="px-8 text-base py-2 btn3 my-3 mx-2">
                 Lưu thông tin
             </button>
             <button

@@ -41,7 +41,6 @@ import Bill from "pages/Profile/Bill";
 
 function App() {
     const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
-
     return (
         <div className="App relative">
             {isLoading && <Loading />}

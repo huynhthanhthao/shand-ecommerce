@@ -2,6 +2,7 @@
 import { loveProductApi } from "api/productApi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { showLogin } from "store/reducers/authSlice";
 import { setProductLove } from "store/reducers/productSlice";
 
 function Card({ product }) {
@@ -12,16 +13,20 @@ function Card({ product }) {
 
     const handleLove = async () => {
         try {
-            if (productList) {
-                const loved = productList.includes(product.id);
-                if (loved) {
-                    productList = productList.filter((item) => product.id !== item);
+            if (account) {
+                if (productList) {
+                    const loved = productList.includes(product.id);
+                    if (loved) {
+                        productList = productList.filter((item) => product.id !== item);
 
-                    await loveProductApi({ productsId: productList, studentId: account.username }, dispatch);
-                } else {
-                    productList.push(product.id);
-                    await loveProductApi({ productsId: productList, studentId: account.username }, dispatch);
+                        await loveProductApi({ productsId: productList, studentId: account.username }, dispatch);
+                    } else {
+                        productList.push(product.id);
+                        await loveProductApi({ productsId: productList, studentId: account.username }, dispatch);
+                    }
                 }
+            } else {
+                dispatch(showLogin());
             }
             // await loveProductApi({})
         } catch (error) {

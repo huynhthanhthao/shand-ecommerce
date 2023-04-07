@@ -135,3 +135,15 @@ export const getAllAccountApi = async (dispatch) => {
         console.log(error);
     }
 };
+
+export const getTopRanking = async (dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/account/top-ranking`);
+        if (response.data.status) {
+            // set state and close modal
+            return response.data.studentList;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};

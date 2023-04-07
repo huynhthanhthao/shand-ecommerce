@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 import { useEffect, useState } from "react";
@@ -14,17 +13,28 @@ function Bill() {
     const { account } = useSelector(({ accountReducer }) => accountReducer);
 
     const [billList, setBillList] = useState([]);
+    const [billFilter, setBillFilter] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const billList = await getBillListApi({ studentId: account.username }, dispatch);
             setBillList(billList);
-            console.log(billList);
+            setBillFilter(billList);
         };
         fetchData();
     }, [dispatch, account.username]);
+
+    useEffect(() => {
+        if (type === "buy") {
+            const filter = billList.filter((bill) => bill.buyerId === account.username);
+            setBillFilter(filter);
+        } else {
+            const filter = billList.filter((bill) => bill.sellerId === account.username);
+            setBillFilter(filter);
+        }
+    }, [type]);
     return (
-        <div className="bill">
+        <div className="bill animate__animated animate__fadeIn">
             <label className="font-bold">Hóa đơn của bạn</label>
             <div className=" bg-white">
                 <ul className="border-b py-3 flex mb-3">
@@ -46,34 +56,28 @@ function Bill() {
                     </NavLink>
                 </ul>
 
-                {billList && (
+                {billFilter ? (
                     <div>
-                        {billList.length === 0 ? (
+                        {billFilter.length === 0 ? (
                             <div className="text-center ">Bạn chưa có hóa đơn tất cả gần đây.</div>
                         ) : (
                             ""
                         )}
                         <ul>
-                            {billList.map((bill) => (
+                            {billFilter.map((bill) => (
                                 <li key={bill.order.id} className="border rounded-sm text-sm mb-2">
                                     <div className="flex justify-between p-3 bg-slate-100 ">
                                         <div>
-                                            <div className="flex ">
-                                                Mã đơn hàng:
-                                                <Link
-                                                    to={"/profile/detail-order/" + bill.order.id}
-                                                    className="cursor-pointer text-blue-500"
-                                                >
-                                                    &nbsp;#{bill.order.id} | Chi tiết
-                                                </Link>
-                                            </div>
+                                            <div className="flex ">Mã đơn hàng: &nbsp;#{bill.order.id} </div>
                                             <p>
                                                 Đặt ngày: <Moment format="DD/MM/YYYY">{bill.order.createdAt}</Moment>
                                             </p>
                                         </div>
                                         <div>
                                             <p>Người nhận:</p>
-                                            <p>{bill.order.buyer.fullName}</p>
+                                            <p>
+                                                {bill.order.buyer.fullName} {bill.order.buyer.username}
+                                            </p>
                                         </div>
                                         <div className="text-center">
                                             <p>Tổng tiền:</p>
@@ -86,35 +90,37 @@ function Bill() {
                                                 </div>
                                             )}
                                         </div>
-                                    </div>
-                                    <div className="flex  p-3">
-                                        <div className="">
-                                            {bill?.order?.productsInformation ?? (
-                                                <ul>
-                                                    {JSON.parse(bill.order.productsInformation).map((product) => (
-                                                        <li key={product.id} className="flex items-start mb-2">
-                                                            <img
-                                                                src={JSON.parse(product.images)[0]}
-                                                                alt="product"
-                                                                className="w-16 border mr-2"
-                                                            />
-                                                            <div>
-                                                                <a href="/" className="font-bold">
-                                                                    {product.name}
-                                                                </a>
-                                                                <div className="flex my-2 mt-1">
-                                                                    <p>Người bán:&nbsp;</p>
-                                                                    <p className="text-blue-500">
-                                                                        {bill.order.seller.fullName}{" "}
-                                                                        {bill.order.seller.username}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            )}
+                                        <div className="bg-green-500 h-10 p-3 flex items-center font-bold text-white">
+                                            Đã thanh toán
                                         </div>
+                                    </div>
+                                    <div className="flex justify-between p-3">
+                                        <div className="">
+                                            <ul>
+                                                {JSON.parse(bill?.order?.productsInformation ?? "[]").map((item) => (
+                                                    <li key={item.product.id} className="flex items-start mb-2">
+                                                        <img
+                                                            src={JSON.parse(item.product.detail.images)[0]}
+                                                            alt="product"
+                                                            className="w-16 border mr-2"
+                                                        />
+                                                        <div>
+                                                            <a href="/" className="font-bold">
+                                                                {item.product.detail.name}
+                                                            </a>
+                                                            <div className="flex my-2 mt-1">
+                                                                <p>Người bán:&nbsp;</p>
+                                                                <p className="text-blue-500">
+                                                                    {bill.order.seller.fullName}{" "}
+                                                                    {bill.order.seller.username}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className=" flex items-center font-bold text-white">Đã thanh toán</div>
                                     </div>
                                     <div className="p-3 flex items-end justify-between">
                                         <div className="flex ">
@@ -127,11 +133,19 @@ function Bill() {
                                             </svg>
                                             <p className="font-bold">{bill.order.buyer.phoneNumber}</p>
                                         </div>
+                                        <div className="flex">
+                                            <p>
+                                                Hóa đơn được tạo vào ngày:&nbsp;
+                                                <Moment format="DD/MM/YYYY">{bill.createdAt}</Moment>
+                                            </p>
+                                        </div>
                                     </div>
                                 </li>
                             ))}
                         </ul>
                     </div>
+                ) : (
+                    ""
                 )}
             </div>
         </div>

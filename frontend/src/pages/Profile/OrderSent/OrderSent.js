@@ -26,7 +26,7 @@ function OrderSent() {
     };
 
     return (
-        <div className="order-sent">
+        <div className="order-sent animate__animated animate__fadeIn">
             <label className="font-bold">Đơn hàng đã đặt</label>
             <div className=" bg-white">
                 <ul className="border-b py-3 flex mb-3">

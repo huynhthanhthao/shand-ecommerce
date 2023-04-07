@@ -23,7 +23,7 @@ function AddAddressForm({ setShowFormAdd }) {
         );
     };
     return (
-        <div className="address-form">
+        <div className="address-form animate__animated animate__fadeIn">
             <table className="w-full border-separate border-spacing-2  ">
                 <tbody>
                     <tr>
@@ -89,10 +89,7 @@ function AddAddressForm({ setShowFormAdd }) {
                     </tr>
                 </tbody>
             </table>
-            <button
-                onClick={() => handleAddAddress()}
-                className="px-8 text-base py-2 btn3 my-3 mx-2"
-            >
+            <button onClick={() => handleAddAddress()} className="px-8 text-base py-2 btn3 my-3 mx-2">
                 Lưu thông tin
             </button>
             <button

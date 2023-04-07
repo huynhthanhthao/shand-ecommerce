@@ -39,52 +39,28 @@ function AddProductForm() {
     }, [dispatch]);
 
     return (
-        <div className="add-product">
+        <div className="add-product animate__animated animate__fadeIn">
             <label className="font-bold">THÔNG TIN SẢN PHẨM</label>
             <div className="px-10 py-5 border-t my-3 bg-white">
                 <table className="w-full border-separate border-spacing-2  text-sm">
                     <tbody>
                         <tr>
-                            <NameProduct
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <NameProduct newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr>
-                            <ProductId
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <ProductId newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr>
-                            <CategorySelect
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <CategorySelect newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr>
-                            <Description
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <Description newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr>
-                            <ImageProduct
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <ImageProduct newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr>
-                            <ImageSource
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <ImageSource newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
 
                         <tr>
@@ -122,9 +98,7 @@ function AddProductForm() {
                                         dispatch(
                                             setNewProduct({
                                                 ...newProduct,
-                                                quantityAvailable: parseInt(
-                                                    e.target.value
-                                                ),
+                                                quantityAvailable: parseInt(e.target.value),
                                             })
                                         );
                                     }}
@@ -132,11 +106,7 @@ function AddProductForm() {
                             </td>
                         </tr>
                         <tr>
-                            <StatusProduct
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <StatusProduct newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr>
                             <OtherInforProduct
@@ -146,11 +116,7 @@ function AddProductForm() {
                             />
                         </tr>
                         <tr>
-                            <ShipInfor
-                                newProduct={newProduct}
-                                dispatch={dispatch}
-                                setNewProduct={setNewProduct}
-                            />
+                            <ShipInfor newProduct={newProduct} dispatch={dispatch} setNewProduct={setNewProduct} />
                         </tr>
                         <tr className="">
                             <td className="w-[15%] text-right "></td>

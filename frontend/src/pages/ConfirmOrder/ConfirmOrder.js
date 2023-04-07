@@ -71,7 +71,7 @@ function ConfirmOrder() {
 
     return (
         <DefaultLayout>
-            <div className="mx-32 grid grid-cols-3 gap-4 text-[#000]">
+            <div className="mx-32 grid grid-cols-3 gap-4 text-[#000] animate__animated animate__fadeIn">
                 {address.fullName === undefined ? (
                     <div className="my-4">
                         Vui lòng thêm{" "}
