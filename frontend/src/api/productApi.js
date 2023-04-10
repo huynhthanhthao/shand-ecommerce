@@ -10,6 +10,7 @@ import {
     setDetailProduct,
     setSearchProductList,
     setProductLove,
+    setProductSuggest,
 } from "store/reducers/productSlice";
 
 import headerConfig from "utils/headerConfig";
@@ -228,6 +229,23 @@ export const getProductLoveApi = async (payload, dispatch) => {
 
         if (response.data.status) {
             dispatch(setProductLove(response.data.productLove));
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getProductSuggestApi = async (payload, dispatch) => {
+    try {
+        const response = await axios.get(`${domain}/product/product-suggest`, {
+            params: {
+                studentId: payload.studentId,
+            },
+            headers: headerConfig(),
+        });
+
+        if (response.data.status) {
+            dispatch(setProductSuggest(response.data.productList));
         }
     } catch (error) {
         console.log(error);

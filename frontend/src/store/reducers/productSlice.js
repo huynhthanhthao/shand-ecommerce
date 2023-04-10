@@ -11,6 +11,7 @@ const productSlice = createSlice({
         searchProductList: [],
         productCategory: [],
         productLove: [],
+        productSuggest: [],
     },
     reducers: {
         setMyProductList(state, action) {
@@ -40,6 +41,9 @@ const productSlice = createSlice({
         setDetailProduct(state, action) {
             state.detailProduct = action.payload;
         },
+        setProductSuggest(state, action) {
+            state.productSuggest = action.payload;
+        },
     },
 });
 
@@ -57,6 +61,7 @@ export const {
     setSearchProductList,
     setProductCategory,
     setProductLove,
+    setProductSuggest,
 } = productSlice.actions;
 
 // export selector
@@ -84,5 +89,9 @@ export const productCategorySelector = (state) => {
 
 export const productLoveSelector = (state) => {
     return state.productReducer.productLove;
+};
+
+export const productSuggestSelector = (state) => {
+    return state.productReducer.productSuggest;
 };
 export default productReducer;
