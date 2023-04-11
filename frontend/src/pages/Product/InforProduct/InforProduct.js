@@ -41,7 +41,7 @@ function InforProduct({ product }) {
 
             <h4 className="w-2/3">{product.detail.name}</h4>
             <div className="my-2">Thương hiệu: {product.trademark}</div>
-            <h4 className="my-2 text-orange-600">{product.detail.price}đ</h4>
+            <h4 className="my-2 text-orange-600">{product.detail.price.toLocaleString().split(",")}đ</h4>
             <div className="amount my-5">
                 <span className="text-[#464747]">Chọn số lượng: </span>
                 <div className="select-amount flex my-5">

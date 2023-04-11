@@ -106,7 +106,7 @@ function Cart() {
                                                 </div>
                                                 <div className=" items-center grid grid-cols-3">
                                                     <p className="font-bold text-center">
-                                                        {cart.product.detail.price}đ
+                                                        {cart.product.detail.price.toLocaleString().split(",")}đ
                                                     </p>
                                                     <div className="text-center">
                                                         <div className="select-amount flex relative">

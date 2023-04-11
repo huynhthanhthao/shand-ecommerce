@@ -66,7 +66,7 @@ function Card({ product }) {
                         <div className="infor p-2 ">
                             <div className="h-6 truncate">{product.name}</div>
                             <div className="text-orange-600 py-1 text-lg">
-                                {product.price}
+                                {product.price.toLocaleString().split(",")}
                                 <span className="text-xs mr-[1px]">₫</span>
                             </div>
                             <div className="text-sm">
