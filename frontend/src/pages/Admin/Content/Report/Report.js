@@ -68,8 +68,8 @@ function Report() {
                                             <td className="px-4 py-3 text-sm text-black">
                                                 <button
                                                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
-                                                    data-te-toggle="modal"
-                                                    data-te-target="#detail_report"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#detail_report"
                                                     onClick={() => {
                                                         dispatch(setReport(report));
                                                     }}
@@ -108,7 +108,7 @@ function Report() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1  text-black transition-colors duration-150 bg-white  border-r-0 border-blue-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>

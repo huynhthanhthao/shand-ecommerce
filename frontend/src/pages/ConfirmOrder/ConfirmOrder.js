@@ -71,7 +71,7 @@ function ConfirmOrder() {
 
     return (
         <DefaultLayout>
-            <div className="mx-32 grid grid-cols-3 gap-4 text-[#000] animate__animated animate__fadeIn">
+            <div className="mx-32 grid grid-cols-3 gap-4 text-[#000] animate__animated animate__fadeIn min-h-screen">
                 {address.fullName === undefined ? (
                     <div className="my-4">
                         Vui lòng thêm{" "}
@@ -208,7 +208,7 @@ function ConfirmOrder() {
                                                             {item.product.detail.name}
                                                         </p>
                                                         <p className="text-orange-600 font-bold">
-                                                            {item.product.detail.price}đ
+                                                            {item.product.detail.price.toLocaleString().split(",")}đ
                                                         </p>
                                                     </div>
                                                 </div>
@@ -227,9 +227,14 @@ function ConfirmOrder() {
                                     <div className="flex justify-between mb-3">
                                         <p className="text-sm text-gray-700">Tiền hàng</p>
                                         <p className="text-sm font-bold">
-                                            {orderConfirm.reduce(function (total, currentValue) {
-                                                return total + currentValue.product.detail.price * currentValue.amount;
-                                            }, 0)}
+                                            {orderConfirm
+                                                .reduce(function (total, currentValue) {
+                                                    return (
+                                                        total + currentValue.product.detail.price * currentValue.amount
+                                                    );
+                                                }, 0)
+                                                .toLocaleString()
+                                                .split(",")}
                                             đ
                                         </p>
                                     </div>
@@ -244,9 +249,14 @@ function ConfirmOrder() {
                                             {isTransport() ? "Chưa tính phí giao hàng" : "Đã tính phí vận chuyển"})
                                         </p>
                                         <p className="text-xl font-bold text-orange-600">
-                                            {orderConfirm.reduce(function (total, currentValue) {
-                                                return total + currentValue.product.detail.price * currentValue.amount;
-                                            }, 0)}
+                                            {orderConfirm
+                                                .reduce(function (total, currentValue) {
+                                                    return (
+                                                        total + currentValue.product.detail.price * currentValue.amount
+                                                    );
+                                                }, 0)
+                                                .toLocaleString()
+                                                .split(",")}
                                             đ
                                         </p>
                                     </div>

@@ -23,18 +23,14 @@ function DetailReport() {
     return (
         <>
             <div
-                data-te-modal-init
-                className="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+                className="modal fade"
                 id="detail_report"
                 tabIndex="-1"
-                aria-labelledby="exampleModalFullscreenLabel"
+                aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
             >
-                <div
-                    data-te-modal-dialog-ref
-                    className="h-screen transform-none opacity-100 duration-300 ease-in-out transition"
-                >
-                    <div className="pointer-events-auto relative flex w-full flex-col rounded-md bg-white bg-clip-padding text-current shadow-lg outline-none  min-[0px]:h-full min-[0px]:rounded-none min-[0px]:border-0">
+                <div className="modal-dialog modal-fullscreen">
+                    <div className="modal-content">
                         <div className="flex  flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 min-[0px]:rounded-none">
                             <h5
                                 className="text-xl font-medium leading-normal text-neutral-800 "
@@ -45,7 +41,7 @@ function DetailReport() {
                             <button
                                 type="button"
                                 className="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-                                data-te-modal-dismiss
+                                data-bs-dismiss="modal"
                                 aria-label="Close"
                             >
                                 <svg
@@ -129,7 +125,8 @@ function DetailReport() {
                                         <div className="my-3">
                                             <div className="mb-2">Tùy chọn</div>
                                             <button
-                                                data-te-modal-dismiss
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"
                                                 onClick={() => {
                                                     handleDeleteReport();
                                                     handleDeleteProduct();
@@ -139,7 +136,8 @@ function DetailReport() {
                                                 Xóa sản phẩm này
                                             </button>
                                             <button
-                                                data-te-modal-dismiss
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close"
                                                 onClick={() => handleDeleteReport()}
                                                 className="inline-block rounded bg-info px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)]"
                                             >
@@ -154,7 +152,8 @@ function DetailReport() {
                             <button
                                 type="button"
                                 className="inline-block rounded bg-primary-100 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-                                data-te-modal-dismiss
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
                             >
                                 Đóng
                             </button>

@@ -9,9 +9,7 @@ function DefaultLayout({ children }) {
     return (
         <>
             <Header />
-            <div className="container min-h-screen bg-[#f2f3f4]">
-                {children}
-            </div>
+            <div className="  bg-[#f2f3f4] pb-3">{children}</div>
             <Footer />
             {isShowLogin && <LoginModal />}
         </>

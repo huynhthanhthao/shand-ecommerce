@@ -40,7 +40,7 @@ function Admin() {
                 <DetailReport />
                 {/* main */}
                 <HeaderAdmin />
-                <div className="container grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-5 gap-4">
                     <div className="category">
                         <Categogy />
                     </div>

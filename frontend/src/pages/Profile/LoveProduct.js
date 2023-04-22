@@ -22,7 +22,7 @@ function LoveProduct() {
     return (
         <div className="love-product animate__animated animate__fadeIn">
             <label className="font-bold">Sản phẩm yêu thích</label>
-            <ul className="  py-5 border-t my-3 ">
+            <ul className="  py-4  border-t my-3 ">
                 <ul className="grid grid-cols-5 gap-3">
                     {productLove.productDetail?.map((product, index) => (
                         <li key={index}>

@@ -56,7 +56,7 @@ function InforAccount() {
     return (
         <div className="infor-account animate__animated animate__fadeIn">
             <label className="font-bold">Thông tin tài khoản</label>
-            <div className="px-10 grid grid-cols-6 py-5 border-t my-3 ">
+            <div className="px-10 grid grid-cols-6 py-4  border-t my-3 ">
                 <div className="col-span-1">
                     <div className="relative w-28 h-28 rounded-full overflow-hidden  border border-[#5e6d81]">
                         <img src={imageAvatar ? imageAvatar : account.urlAvatar} alt="account" className="" />

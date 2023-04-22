@@ -8,7 +8,7 @@ function OtherInforProduct(props) {
                 <div>
                     <div className="my-1">Thương hiệu</div>
                     <input
-                        className=" w-full input focus:shadow-input py-1 px-3"
+                        className=" w-full input focus:shadow-input py-1 px-2"
                         placeholder="Thương hiệu"
                         value={props.newProduct.trademark}
                         onChange={(e) => {
@@ -26,7 +26,7 @@ function OtherInforProduct(props) {
                     <div className="my-1">Kích thước</div>
 
                     <input
-                        className=" w-full input focus:shadow-input py-1 px-3"
+                        className=" w-full input focus:shadow-input py-1 px-2"
                         placeholder="Kích thước"
                         value={props.newProduct.size}
                         onChange={(e) => {

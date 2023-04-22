@@ -42,7 +42,7 @@ function ImageSource(props) {
     return (
         <>
             <td className="w-[15%] text-right">
-                <strong>Hình ảnh nguồn gốc</strong>
+                <strong>Hình ảnh nguồn gốc (xuất xứ)</strong>
                 <span className="text-red-600">*</span>
             </td>
 
@@ -59,11 +59,7 @@ function ImageSource(props) {
                     htmlFor="file-sourse"
                     className="w-28 flex items-center font-bold cursor-pointer hover:opacity-70 border border-dashed p-1"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                        className="w-6 mr-1"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-6 mr-1">
                         <path
                             className="fill-emerald-600 "
                             d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
@@ -75,18 +71,11 @@ function ImageSource(props) {
                     <ul className="flex mt-2">
                         {imageList.map((image, index) => (
                             <li key={index} className="relative">
-                                <img
-                                    alt="product"
-                                    className="w-20 h-20 mr-2"
-                                    src={image}
-                                />
+                                <img alt="product" className="w-20 h-20 mr-2" src={image} />
                                 <svg
                                     onClick={() => {
                                         setImageList((prev) => {
-                                            return prev.filter(
-                                                (image, indexList) =>
-                                                    index !== indexList
-                                            );
+                                            return prev.filter((image, indexList) => index !== indexList);
                                         });
                                     }}
                                     xmlns="http://www.w3.org/2000/svg"
@@ -102,8 +91,7 @@ function ImageSource(props) {
                     {isLoading && <LoadingSmall />}
                     {isShowNotify && (
                         <div className="border-red-500 border p-2 text-red-500 text-center">
-                            Hình ảnh chứng minh nguồn gốc sản phẩm của bạn cung
-                            cấp chưa hợp lệ. Vui lòng thử lại!
+                            Hình ảnh chứng minh nguồn gốc sản phẩm của bạn cung cấp chưa hợp lệ. Vui lòng thử lại!
                         </div>
                     )}
                 </div>

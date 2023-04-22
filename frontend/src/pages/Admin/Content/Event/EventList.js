@@ -19,8 +19,8 @@ function EventList() {
                 <h4 className="text-white ">Danh sách sự kiện</h4>
                 <button
                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
-                    data-te-toggle="modal"
-                    data-te-target="#add_event"
+                    data-bs-toggle="modal"
+                    data-bs-target="#add_event"
                 >
                     Thêm sự kiện
                 </button>
@@ -77,8 +77,8 @@ function EventList() {
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 512 512"
                                                     className="w-5"
-                                                    data-te-toggle="modal"
-                                                    data-te-target="#edit_event"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#edit_event"
                                                 >
                                                     <path
                                                         className="fill-white"
@@ -88,8 +88,8 @@ function EventList() {
                                             </button>
                                             <button
                                                 className="hover:opacity-80 mx-1"
-                                                data-te-toggle="modal"
-                                                data-te-target="#delete_event"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#delete_event"
                                                 onClick={(e) => {
                                                     dispatch(setEvent(event));
                                                 }}
@@ -136,7 +136,7 @@ function EventList() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1  text-black transition-colors duration-150 bg-white  border-r-0 border-blue-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>

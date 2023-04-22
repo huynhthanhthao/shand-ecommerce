@@ -40,7 +40,7 @@ function EditProductForm() {
     return (
         <div className="add-product animate__animated animate__fadeIn">
             <label className="font-bold">THÔNG TIN SẢN PHẨM</label>
-            <div className="px-10 py-5 border-t my-3 bg-white">
+            <div className="px-10 py-4 border-t my-3 bg-white">
                 <table className="w-full border-separate border-spacing-2  text-sm">
                     <tbody>
                         <tr>
@@ -79,7 +79,7 @@ function EditProductForm() {
                                             })
                                         );
                                     }}
-                                    className=" w-full input focus:shadow-input py-1 px-3"
+                                    className=" w-full input focus:shadow-input py-1 px-2"
                                 />
                             </td>
                         </tr>
@@ -91,7 +91,7 @@ function EditProductForm() {
                             <td className="px-5">
                                 <input
                                     type="number"
-                                    className=" w-full input focus:shadow-input py-1 px-3"
+                                    className=" w-full input focus:shadow-input py-1 px-2"
                                     value={newProduct.quantityAvailable}
                                     onChange={(e) => {
                                         dispatch(

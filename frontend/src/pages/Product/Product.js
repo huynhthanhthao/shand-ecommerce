@@ -27,7 +27,7 @@ function Product() {
 
     return (
         <DefaultLayout>
-            <div className="py-10">
+            <div className="pt-10">
                 <ReportModal />
 
                 {product && (

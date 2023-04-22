@@ -2,7 +2,7 @@ import Card from "components/Card";
 function ProductList({ productList, label, setLimit }) {
     return (
         <div className="suggest text-[#3c3c3c] ">
-            <div className="py-4 text-center uppercase bg-white font-bold border-b-4 border-b-[#3c3c3c]">{label}</div>
+            <div className="py-3 text-center uppercase bg-white font-bold border-b-4 border-b-[#3c3c3c]">{label}</div>
             {productList?.length === 0 ? (
                 <div className="py-6">Chưa có sản phẩm nào.</div>
             ) : (
@@ -14,7 +14,7 @@ function ProductList({ productList, label, setLimit }) {
                             ))}
                         </ul>
                     )}
-                    <div className="w-full text-center my-5">
+                    <div className="w-full text-center my-4">
                         <button
                             onClick={() => {
                                 setLimit((prev) => prev + 12);

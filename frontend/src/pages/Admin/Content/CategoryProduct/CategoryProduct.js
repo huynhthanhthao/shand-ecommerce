@@ -18,8 +18,8 @@ function CategoryProduct() {
             <div className="  bg-[#1f2937] rounded-md mb-3 p-3  shadow-lg  flex items-center justify-between border-gray-600 border-b-4 ">
                 <h4 className="text-white ">Danh mục sản phẩm</h4>
                 <button
-                    data-te-toggle="modal"
-                    data-te-target="#add_category"
+                    data-bs-toggle="modal"
+                    data-bs-target="#add_category"
                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
                 >
                     Thêm danh mục
@@ -61,8 +61,8 @@ function CategoryProduct() {
                                         <td className="px-4 py-3 text-sm">
                                             <button
                                                 className="hover:opacity-80 mx-1"
-                                                data-te-toggle="modal"
-                                                data-te-target="#edit_category"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#edit_category"
                                                 onClick={() => {
                                                     dispatch(setCategory(category));
                                                 }}
@@ -80,8 +80,8 @@ function CategoryProduct() {
                                             </button>
                                             <button
                                                 className="hover:opacity-80 mx-1"
-                                                data-te-toggle="modal"
-                                                data-te-target="#delete_category"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#delete_category"
                                                 onClick={() => {
                                                     dispatch(setCategory(category));
                                                 }}
@@ -128,7 +128,7 @@ function CategoryProduct() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1  text-black transition-colors duration-150 bg-white  border-r-0 border-blue-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>

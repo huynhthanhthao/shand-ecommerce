@@ -6,7 +6,7 @@ import { DefaultLayout } from "components/Layout";
 function Profile() {
     return (
         <DefaultLayout>
-            <div className="profile bg-white px-20 grid grid-cols-5 gap-10 py-5 ">
+            <div className="profile bg-white px-20 grid grid-cols-5 gap-10 py-4 min-h-screen">
                 <div className="profile-category col-span-1 text-[#000000a6] border-r">
                     <Category />
                 </div>

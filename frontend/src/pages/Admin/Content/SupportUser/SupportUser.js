@@ -5,8 +5,8 @@ function SupportUser() {
                 <h4 className="text-white ">Thông tin hỗ trợ người dùng</h4>
                 <button
                     className="bg-white py-1 px-3 rounded-md font-bold hover:opacity-80"
-                    data-te-toggle="modal"
-                    data-te-target="#add_support"
+                    data-bs-toggle="modal"
+                    data-bs-target="#add_support"
                 >
                     Thêm hỗ trợ
                 </button>
@@ -30,8 +30,8 @@ function SupportUser() {
                                     <td className="px-4 py-3 text-sm">
                                         <button
                                             className="hover:opacity-80 mx-1"
-                                            data-te-toggle="modal"
-                                            data-te-target="#edit_support"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#edit_support"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -46,8 +46,8 @@ function SupportUser() {
                                         </button>
                                         <button
                                             className="hover:opacity-80 mx-1"
-                                            data-te-toggle="modal"
-                                            data-te-target="#delete_support"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#delete_support"
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ function SupportUser() {
                                         </button>
                                     </li>
                                     <li>
-                                        <button className="px-3 py-1 text-white dark:text-gray-800 transition-colors duration-150 bg-blue-600 dark:bg-gray-100 border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button className="px-3 py-1  text-black transition-colors duration-150 bg-white  border-r-0 border-blue-600 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>

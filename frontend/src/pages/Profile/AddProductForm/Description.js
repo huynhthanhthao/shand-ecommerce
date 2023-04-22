@@ -6,7 +6,7 @@ function Description(props) {
             </td>
             <td className="px-5">
                 <textarea
-                    className=" w-full input focus:shadow-input py-1 px-3"
+                    className=" w-full input focus:shadow-input py-1 px-2"
                     value={props.newProduct.description}
                     onChange={(e) => {
                         props.dispatch(

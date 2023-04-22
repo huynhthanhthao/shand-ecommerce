@@ -31,7 +31,7 @@ function AllProduct() {
             {productList && (
                 <>
                     <label className="font-bold">Sản phẩm của bạn</label>
-                    <div className=" py-5 border-t my-3 ">
+                    <div className=" py-4  border-t my-3 ">
                         <table className=" text-left border border-slate-200 w-full">
                             <thead>
                                 <tr className="bg-slate-300">
@@ -65,8 +65,8 @@ function AllProduct() {
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 512 512"
                                                     className="w-5"
-                                                    // data-te-toggle="modal"
-                                                    // data-te-target="#edit_shop"
+                                                    // data-bs-toggle="modal"
+                                                    // data-bs-target="#edit_shop"
                                                 >
                                                     <path
                                                         className="fill-slate-800"
@@ -76,8 +76,8 @@ function AllProduct() {
                                             </button>
                                             <button
                                                 className="hover:opacity-80 mx-1"
-                                                data-te-toggle="modal"
-                                                data-te-target="#delete_product"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#delete_product"
                                                 onClick={() => {
                                                     dispatch(setProduct(product));
                                                 }}

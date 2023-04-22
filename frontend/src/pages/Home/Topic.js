@@ -1,8 +1,9 @@
 import { getCategoryListApi } from "api/categoryApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 function Topic(props) {
     const dispatch = useDispatch();
+    const [showTopic, setShowTopic] = useState(false);
 
     useEffect(() => {
         const fetchData = () => {
@@ -19,58 +20,25 @@ function Topic(props) {
 
     return (
         <>
-            <div className="topic bground mb-16">
+            <div className="topic bground mb-2">
                 <ul className="flex mx-20 text-white">
                     {rootCategory.map((root, index) => (
                         <li
-                            // onClick={() => {
-                            //     props.setCategory(root);
-                            // }}
+                            onClick={() => {
+                                props.setCategory(root);
+                            }}
                             key={index}
                             className="topic-item relative font-bold  "
                         >
                             <div className="flex justify-center">
                                 <div>
-                                    <div className="relative " data-te-dropdown-ref>
+                                    <div className="relative ">
                                         <a
-                                            className="flex px-16 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757] "
-                                            href="#"
-                                            type="button"
-                                            id="dropdownMenuButton2"
-                                            data-te-dropdown-toggle-ref
-                                            aria-expanded="false"
-                                            data-te-ripple-init
-                                            data-te-ripple-color="light"
+                                            onClick={() => setShowTopic(true)}
+                                            className="flex px-16 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757]dropdown-toggle"
                                         >
                                             {root.nameCategory}
                                         </a>
-                                        <ul
-                                            className="absolute z-[1000]  m-0 hidden min-w-max list-none overflow-hidden border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
-                                            aria-labelledby="dropdownMenuButton2"
-                                            data-te-dropdown-menu-ref
-                                        >
-                                            {allChildCategory.map((child, index) => {
-                                                if (child.parent.id === root.id)
-                                                    return (
-                                                        <li
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                props.setCategory(child);
-                                                            }}
-                                                            key={index}
-                                                        >
-                                                            <a
-                                                                className="block w-full bg-transparent px-8 shadow py-2  font-normal text-white hover:bg-neutral-100 hover:text-neutral-800 transition "
-                                                                href="#"
-                                                                data-te-dropdown-item-ref
-                                                            >
-                                                                {child.nameCategory}
-                                                            </a>
-                                                        </li>
-                                                    );
-                                                else return "";
-                                            })}
-                                        </ul>
                                     </div>
                                 </div>
                             </div>

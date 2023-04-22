@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Profile children
 import InforAccount from "pages/Profile/InforAccount";
-import RecieveAddress from "pages/Profile/RecieveAddress/RecieveAddress";
+import ReceiveAddress from "pages/Profile/ReceiveAddress/ReceiveAddress";
 import LoveProduct from "pages/Profile/LoveProduct";
 import AddProductForm from "pages/Profile/AddProductForm/AddProductForm";
 import AllProduct from "pages/Profile/AllProduct";
@@ -38,6 +38,9 @@ import Product from "pages/Product/Product";
 import ConfirmOrder from "pages/ConfirmOrder/ConfirmOrder";
 import SearchSameProduct from "pages/SearchSameProduct/SearchSameResult";
 import Bill from "pages/Profile/Bill";
+import ExceptShop from "utils/ExceptShop";
+import ExceptAdmin from "utils/ExceptAdmin";
+import NotFound from "pages/NotFound";
 
 function App() {
     const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
@@ -46,27 +49,37 @@ function App() {
             {isLoading && <Loading />}
             <ToastContainer />
             <Routes>
-                <Route path="/search/:key" element={<SearchResult />}></Route>
-                <Route path="/search-same/:key" element={<SearchSameProduct />}></Route>
-                <Route path="/" element={<Home />}></Route>
-                <Route path="/product/:id" element={<Product />}></Route>
+                <Route element={<ExceptAdmin />}>
+                    <Route element={<ExceptShop />}>
+                        <Route path="/search/:key" element={<SearchResult />}></Route>
+                        <Route path="/search-same/:key" element={<SearchSameProduct />}></Route>
+                        <Route path="/" element={<Home />}></Route>
+                        <Route path="/product/:id" element={<Product />}></Route>
+                    </Route>
+                </Route>
+
                 <Route element={<RequireAuth />}>
-                    <Route path="/confirm-order/" element={<ConfirmOrder />}></Route>
-                    <Route path="/cart" element={<Cart />}></Route>
-                    <Route path="/profile/*" element={<Profile />}>
-                        <Route path="account" element={<InforAccount />}></Route>
-                        <Route path="address" element={<RecieveAddress />}></Route>
-                        <Route path="transaction" element={<Transaction />}></Route>
-                        <Route path="account" element={<InforAccount />}></Route>
-                        <Route path="products" element={<AllProduct />}></Route>
-                        <Route path="products/:id" element={<EditProductForm />}></Route>
-                        <Route path="love-products" element={<LoveProduct />}></Route>
-                        <Route path="add-product" element={<AddProductForm />}></Route>
-                        <Route path="edit-product/" element={<EditProductForm />}></Route>
-                        <Route path="order-sent/:status" element={<OrderSent />}></Route>
-                        <Route path="detail-order/:id" element={<DetailOrder />}></Route>
-                        <Route path="order-receive/:status" element={<OrderReceive />}></Route>
-                        <Route path="bill/:type" element={<Bill />}></Route>
+                    <Route element={<ExceptAdmin />}>
+                        <Route element={<ExceptShop />}>
+                            <Route path="/confirm-order/" element={<ConfirmOrder />}></Route>
+                            <Route path="/cart" element={<Cart />}></Route>
+                        </Route>
+
+                        <Route path="/profile/*" element={<Profile />}>
+                            <Route path="account" element={<InforAccount />}></Route>
+                            <Route path="address" element={<ReceiveAddress />}></Route>
+                            <Route path="transaction" element={<Transaction />}></Route>
+                            <Route path="account" element={<InforAccount />}></Route>
+                            <Route path="products" element={<AllProduct />}></Route>
+                            <Route path="products/:id" element={<EditProductForm />}></Route>
+                            <Route path="love-products" element={<LoveProduct />}></Route>
+                            <Route path="add-product" element={<AddProductForm />}></Route>
+                            <Route path="edit-product/" element={<EditProductForm />}></Route>
+                            <Route path="order-sent/:status" element={<OrderSent />}></Route>
+                            <Route path="detail-order/:id" element={<DetailOrder />}></Route>
+                            <Route path="order-receive/:status" element={<OrderReceive />}></Route>
+                            <Route path="bill/:type" element={<Bill />}></Route>
+                        </Route>
                     </Route>
                     <Route element={<RequireAdmin />}>
                         <Route path="/admin/*" element={<Admin />}>
@@ -79,6 +92,7 @@ function App() {
                         </Route>
                     </Route>
                 </Route>
+                <Route path="/:path" element={<NotFound />}></Route>
             </Routes>
         </div>
     );

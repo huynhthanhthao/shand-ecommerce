@@ -36,7 +36,7 @@ function DetailOrderSent() {
             {order && (
                 <>
                     <label className="font-bold flex">Chi tiết đơn hàng</label>
-                    <div className=" py-5 border-t my-3 bg-white text-sm flex flex-col">
+                    <div className=" py-4  border-t my-3 bg-white text-sm flex flex-col">
                         <div className="flex">
                             <div>
                                 <div className="flex ">
@@ -295,9 +295,9 @@ function DetailOrderSent() {
                                 <thead>
                                     <tr className="p-2">
                                         <th className="w-1/2 text-left">Sản phẩm</th>
-                                        <th>Đơn giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Thành tiền</th>
+                                        <th className="text-center">Đơn giá</th>
+                                        <th className="text-center">Số lượng</th>
+                                        <th className="text-center">Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -398,22 +398,24 @@ function DetailOrderSent() {
                                                 )}
                                                 {order.status === "expired" && (
                                                     <>
-                                                        <button
-                                                            onClick={() => {
-                                                                updateStatusOrder(order.id, "cancel");
-                                                            }}
-                                                            className="mr-3 bg-red-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
-                                                        >
-                                                            Hủy đơn hàng
-                                                        </button>
-                                                        <button
-                                                            onClick={() => {
-                                                                updateStatusOrder(order.id, "received");
-                                                            }}
-                                                            className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
-                                                        >
-                                                            Đã nhận hàng
-                                                        </button>
+                                                        <div>
+                                                            <button
+                                                                onClick={() => {
+                                                                    updateStatusOrder(order.id, "cancel");
+                                                                }}
+                                                                className="me-3 bg-red-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
+                                                            >
+                                                                Hủy đơn hàng
+                                                            </button>
+                                                            <button
+                                                                onClick={() => {
+                                                                    updateStatusOrder(order.id, "received");
+                                                                }}
+                                                                className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
+                                                            >
+                                                                Đã nhận hàng
+                                                            </button>
+                                                        </div>
                                                     </>
                                                 )}
                                             </>

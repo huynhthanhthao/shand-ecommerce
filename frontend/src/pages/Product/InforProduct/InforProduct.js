@@ -32,8 +32,8 @@ function InforProduct({ product }) {
                     className="fill-yellow-600  w-5 hover:cursor-pointer hover:opacity-60"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
-                    data-te-toggle="modal"
-                    data-te-target="#report_modal"
+                    data-bs-toggle="modal"
+                    data-bs-target="#report_modal"
                 >
                     <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />
                 </svg>
@@ -42,9 +42,9 @@ function InforProduct({ product }) {
             <h4 className="w-2/3">{product.detail.name}</h4>
             <div className="my-2">Thương hiệu: {product.trademark}</div>
             <h4 className="my-2 text-orange-600">{product.detail.price.toLocaleString().split(",")}đ</h4>
-            <div className="amount my-5">
+            <div className="amount my-3">
                 <span className="text-[#464747]">Chọn số lượng: </span>
-                <div className="select-amount flex my-5">
+                <div className="select-amount flex my-4">
                     <button
                         onClick={() => setAmount((prev) => (prev <= 1 ? prev : prev - 1))}
                         className="bg-[#e7e8ea] p-2 rounded text-3xl hover:opacity-60"
@@ -72,12 +72,12 @@ function InforProduct({ product }) {
             </div>
 
             {product.quantityAvailable <= 0 ? (
-                <div className="p-4 bg-[#e7effe] rounded-lg my-5 flex items-center">
+                <div className="p-3 bg-[#e7effe] rounded-lg my-4 flex items-center mb-5">
                     <img src={require("assets/images/warning.png")} alt="warning" className="w-8 mr-3" />
                     Sản phẩm này đã bán.
                 </div>
             ) : (
-                <div className="p-4 bg-[#e7effe] rounded-lg my-5 flex items-center">
+                <div className="p-3 bg-[#e7effe] rounded-lg my-4 flex items-center mb-5">
                     <img src={require("assets/images/warning.png")} alt="warning" className="w-8 mr-3" />
                     Bạn chỉ có thể mua tối đa
                     <span className="font-bold">&nbsp;{product.quantityAvailable}&nbsp;</span> sản phẩm.

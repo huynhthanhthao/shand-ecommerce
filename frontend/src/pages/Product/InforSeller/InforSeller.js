@@ -15,7 +15,7 @@ function InforSelller({ product }) {
         fetchData();
     }, []);
     return (
-        <div className="bg-white p-5 rounded-md">
+        <div className="bg-white p-4 rounded-md">
             <div className=" font-bold ">Thông tin nguời bán</div>
             <div className="avatar-shop my-3 flex items-center">
                 <img alt="avatar" src={product.detail.owner.urlAvatar} className="w-16 h-16 rounded-full" />

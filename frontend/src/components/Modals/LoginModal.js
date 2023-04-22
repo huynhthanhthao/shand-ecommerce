@@ -19,7 +19,7 @@ function LoginModal() {
 
     return (
         <div className="login-modal w-full h-full bg-[#0f1e2980] absolute top-0 animate__animated animate__fadeIn">
-            <div className="flex flex-col w-[425px] h-[520px] bg-white p-5 fixed bottom-[15%] right-1/2 translate-x-1/2 rounded-lg">
+            <div className="flex flex-col w-[425px] h-[520px] bg-white p-3 fixed bottom-[15%] right-1/2 translate-x-1/2 rounded-lg">
                 <button
                     className="btn self-end hover:bg-[#f2f3f4]"
                     onClick={() => {
@@ -52,7 +52,7 @@ function LoginModal() {
                             window.location.replace("/admin/student-list");
                         } else window.location.replace("/");
                     }}
-                    className="bground text-[19px] transition border-none p-4 my-2 rounded text-sm font-semibold text-white hover:opacity-80"
+                    className="bground text-[19px] transition border-none p-3 my-2 rounded text-sm font-semibold text-white hover:opacity-80"
                 >
                     Đăng nhập
                 </button>

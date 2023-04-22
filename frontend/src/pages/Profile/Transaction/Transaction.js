@@ -21,7 +21,7 @@ function Transaction() {
     return (
         <div className=" flex flex-col animate__animated animate__fadeIn">
             <label className="font-bold">Thông tin giao dịch</label>
-            <div className="border-t my-3 py-5">
+            <div className="border-t my-3 py-4">
                 {transaction.fullName && (
                     <div className="grid grid-cols-2 gap-2 ">
                         <div className="  bg-[#dceafa]  p-3 rounded text-sm flex justify-between items-center">

@@ -24,7 +24,7 @@ function Home() {
     let [limit, setLimit] = useState(12);
     let [limitFree, setLimitFree] = useState(12);
     let [category, setCategory] = useState(null);
-
+    console.log(category);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -53,11 +53,11 @@ function Home() {
     return (
         <DefaultLayout>
             <div className="home animate__animated animate__fadeIn">
-                <div className="nav bg-white">
+                <div className="nav bg-white mb-3">
                     <Topic setCategory={setCategory} />
                     <Event />
                 </div>
-                <div className="container  bg-[#f5f5f5] px-24 py-5 ">
+                <div className="container  bg-[#f5f5f5] px-24 py-1 ">
                     {category && <ProductList productList={productCategory} label={category.nameCategory} />}
                     <ProductList productList={allProduct} label="Sản phẩm mới nhất" setLimit={setLimit} />
                     <ProductList productList={productSuggest} label="Gợi ý cho bạn" />

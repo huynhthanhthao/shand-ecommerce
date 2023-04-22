@@ -25,7 +25,7 @@ function RecieveAddress() {
         <div className="recieve-address flex flex-col animate__animated animate__fadeIn">
             <label className="font-bold">Địa chỉ nhận hàng</label>
 
-            <div className="border-t my-3 py-5">
+            <div className="border-t my-3 py-4">
                 <div className="grid grid-cols-2 gap-2 ">
                     {addressList.map((address) => (
                         <AddressItem key={address.id} address={address} setShowFormUpdate={setShowFormUpdate} />

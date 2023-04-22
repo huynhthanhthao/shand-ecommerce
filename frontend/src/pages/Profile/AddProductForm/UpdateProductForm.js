@@ -10,7 +10,7 @@ function UpdateProductForm() {
     return (
         <div className="add-product">
             <label className="font-bold">THÔNG TIN SẢN PHẨM</label>
-            <div className="px-10 py-5 border-t my-3 bg-white">
+            <div className="px-10 py-4 border-t my-3 bg-white">
                 <table className="w-full border-separate border-spacing-2  text-sm">
                     <tbody>
                         <tr>
@@ -58,7 +58,7 @@ function UpdateProductForm() {
                                 <span className="text-red-600">*</span>
                             </td>
                             <td className="px-5">
-                                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                                <input className=" w-full input focus:shadow-input py-1 px-2" />
                             </td>
                         </tr>
                         <tr>
@@ -67,7 +67,7 @@ function UpdateProductForm() {
                                 <span className="text-red-600">*</span>
                             </td>
                             <td className="px-5">
-                                <input className=" w-full input focus:shadow-input py-1 px-3" />
+                                <input className=" w-full input focus:shadow-input py-1 px-2" />
                             </td>
                         </tr>
                         <tr>
@@ -82,9 +82,7 @@ function UpdateProductForm() {
                         <tr className="">
                             <td className="w-[15%] text-right "></td>
                             <td className="grid grid-cols-4  px-5">
-                                <button className="btn3 px-2 py-2">
-                                    Lưu sản phẩm
-                                </button>
+                                <button className="btn3 px-2 py-2">Lưu sản phẩm</button>
                             </td>
                         </tr>
                     </tbody>

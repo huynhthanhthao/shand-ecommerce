@@ -7,7 +7,7 @@ function NameProduct(props) {
             </td>
             <td className="px-5">
                 <input
-                    className=" w-full input focus:shadow-input py-1 px-3"
+                    className=" w-full input focus:shadow-input py-1 px-2"
                     value={props.newProduct.name}
                     onChange={(e) => {
                         props.dispatch(
