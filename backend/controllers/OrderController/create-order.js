@@ -3,6 +3,7 @@ const createOrder = async (req, res, next) => {
     try {
         const { productsInformation, sellerId, buyerId, total, status, paid } = req.body;
         let order = {};
+
         if (paid) {
             order = await db.Order.create({
                 sellerId,
@@ -13,15 +14,15 @@ const createOrder = async (req, res, next) => {
                 status: "confirmed",
             });
 
-            const productsInformation = JSON.parse(order.dataValues.productsInformation);
-            productsInformation.forEach(async (product) => {
+            const productsInformationCreated = JSON.parse(productsInformation);
+            productsInformationCreated.forEach(async (product) => {
                 await db.DetailProduct.update(
                     {
                         quantityAvailable: product.product.quantityAvailable - product.amount,
                     },
                     {
                         where: {
-                            id: product.productId,
+                            id: product.product.id,
                         },
                     }
                 );

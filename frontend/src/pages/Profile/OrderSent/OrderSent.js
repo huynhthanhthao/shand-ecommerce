@@ -102,7 +102,7 @@ function OrderSent() {
                                         </div>
                                         <div className="text-center">
                                             <p>Tổng tiền:</p>
-                                            <p>{order.total}đ</p>
+                                            <p>{order.total.toLocaleString().split(",")}đ</p>
                                         </div>
                                         <div className="text-right">
                                             {order.paid && (
@@ -116,23 +116,28 @@ function OrderSent() {
                                         <div className="">
                                             <ul>
                                                 {order.productList.map((product) => (
-                                                    <li key={product.id} className="flex items-start mb-2">
-                                                        <img
-                                                            src={JSON.parse(product.images)[0]}
-                                                            alt="product"
-                                                            className="w-16 border mr-2"
-                                                        />
-                                                        <div>
-                                                            <a href="/" className="font-bold">
-                                                                {product.name}
-                                                            </a>
-                                                            <div className="flex my-2 mt-1">
-                                                                <p>Người bán:&nbsp;</p>
-                                                                <p className="text-blue-500">
-                                                                    {order.seller.fullName} {order.seller.username}
-                                                                </p>
+                                                    <li key={product.id}>
+                                                        <Link
+                                                            className="flex items-start mb-2"
+                                                            to={"/product/" + product.id}
+                                                        >
+                                                            <img
+                                                                src={JSON.parse(product.images)[0]}
+                                                                alt="product"
+                                                                className="w-16 border mr-2"
+                                                            />
+                                                            <div>
+                                                                <a href="/" className="font-bold">
+                                                                    {product.name}
+                                                                </a>
+                                                                <div className="flex my-2 mt-1">
+                                                                    <p>Người bán:&nbsp;</p>
+                                                                    <p className="text-blue-500">
+                                                                        {order.seller.fullName} {order.seller.username}
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </Link>
                                                     </li>
                                                 ))}
                                             </ul>

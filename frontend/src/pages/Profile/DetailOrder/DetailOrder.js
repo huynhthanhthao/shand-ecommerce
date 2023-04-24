@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 
@@ -142,7 +142,13 @@ function DetailOrderSent() {
                                         Đã xác nhận
                                     </p>
                                 </div>
-                                <div className="w-16 border-t-2 border-slate-400"></div>
+                                <div
+                                    className={
+                                        order.status === "expired" || order.status === "received"
+                                            ? "w-16 border-t-2  border-green-400 mt-1"
+                                            : "w-16 border-t-2 border-slate-400 "
+                                    }
+                                ></div>
 
                                 <div className="flex flex-col items-center justify-center text-slate-400 fill-slate-400">
                                     <svg
@@ -304,16 +310,18 @@ function DetailOrderSent() {
                                     {order.productList.map((product) => (
                                         <tr key={product.id}>
                                             <td className="flex items-start ">
-                                                <img
-                                                    src={JSON.parse(product.images)[0]}
-                                                    alt="product"
-                                                    className="w-20 h-20 border mr-2"
-                                                />
-                                                <div>
-                                                    <a href="/" className="font-bold">
-                                                        {product.name}
-                                                    </a>
-                                                </div>
+                                                <Link className="flex items-start" to={"/product/" + product.id}>
+                                                    <img
+                                                        src={JSON.parse(product.images)[0]}
+                                                        alt="product"
+                                                        className="w-20 h-20 border mr-2"
+                                                    />
+                                                    <div>
+                                                        <a href="/" className="font-bold">
+                                                            {product.name}
+                                                        </a>
+                                                    </div>
+                                                </Link>
                                             </td>
                                             <td className="text-center">{product.price}</td>
                                             <td className="text-center">{product.amount}</td>
@@ -337,7 +345,7 @@ function DetailOrderSent() {
                                     <div className="">
                                         <div className="flex justify-between my-2">
                                             <p className="w-28">Tổng tiền:</p>
-                                            <p>{order.total}đ</p>
+                                            <p>{order.total.toLocaleString().split(",")}đ</p>
                                         </div>
                                         <div className="flex justify-between my-2">
                                             <p>Giảm giá:</p>

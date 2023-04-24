@@ -98,7 +98,7 @@ function OrderReceive() {
                                     </div>
                                     <div className="text-right">
                                         <p>Tổng tiền:</p>
-                                        <p>{order.total}đ</p>
+                                        <p>{order.total.toLocaleString().split(",")}đ</p>
                                     </div>
                                 </div>
                                 <div className="flex  p-3">
@@ -106,20 +106,22 @@ function OrderReceive() {
                                         <ul>
                                             {order.productList.map((product) => (
                                                 <li key={product.id} className="flex items-start mb-2">
-                                                    <img
-                                                        src={JSON.parse(product.images)[0]}
-                                                        alt="product"
-                                                        className="w-16 border mr-2"
-                                                    />
-                                                    <div>
-                                                        <a href="/" className="font-bold">
-                                                            {product.name}
-                                                        </a>
-                                                        <div className="flex my-2 mt-1">
-                                                            <p>Người bán:&nbsp;</p>
-                                                            <p className="text-blue-500">{order.seller.fullName}</p>
+                                                    <Link to={"/product/" + product.id}>
+                                                        <img
+                                                            src={JSON.parse(product.images)[0]}
+                                                            alt="product"
+                                                            className="w-16 border mr-2"
+                                                        />
+                                                        <div>
+                                                            <a href="/" className="font-bold">
+                                                                {product.name}
+                                                            </a>
+                                                            <div className="flex my-2 mt-1">
+                                                                <p>Người bán:&nbsp;</p>
+                                                                <p className="text-blue-500">{order.seller.fullName}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>

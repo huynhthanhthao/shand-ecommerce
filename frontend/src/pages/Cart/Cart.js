@@ -26,7 +26,7 @@ function Cart() {
                 <div className="font-bold text-xl gap-3 mb-3">Giỏ hàng của bạn (7)</div>
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2 ">
-                        {carts.length > 0 ? (
+                        {carts?.length > 0 ? (
                             <ul>
                                 {carts.map((cart) => (
                                     <li key={cart.id} className="bg-white p-4 rounded-sm mb-3">
@@ -38,9 +38,9 @@ function Cart() {
                                                     className="w-8 h-8 rounded-full mr-2"
                                                 />
                                                 <p className="font-bold ">
-                                                    {cart.product.detail.owner.fullName}
+                                                    {cart?.product.detail.owner.fullName}
                                                     &nbsp;
-                                                    {cart.product.detail.owner.username}
+                                                    {cart?.product.detail.owner.username}
                                                 </p>
                                             </div>
                                             <div className="grid grid-cols-2 gap-3">

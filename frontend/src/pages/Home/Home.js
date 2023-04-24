@@ -24,7 +24,6 @@ function Home() {
     let [limit, setLimit] = useState(12);
     let [limitFree, setLimitFree] = useState(12);
     let [category, setCategory] = useState(null);
-    console.log(category);
     useEffect(() => {
         const fetchData = async () => {
             try {

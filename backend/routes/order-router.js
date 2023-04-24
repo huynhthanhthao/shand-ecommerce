@@ -11,7 +11,7 @@ const getOrderReceived = require("../controllers/OrderController/get-order-recei
 const updateOrder = require("../controllers/OrderController/update-order");
 const deleteOrder = require("../controllers/OrderController/delete-order");
 
-router.post("/", verifyToken, createOrder);
+router.post("/", createOrder);
 router.patch("/", verifyToken, updateOrder);
 router.get("/", verifyToken, getOrder);
 router.get("/ordered", verifyToken, getOrderedList);

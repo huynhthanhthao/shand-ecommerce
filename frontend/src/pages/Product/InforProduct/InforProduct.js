@@ -1,11 +1,17 @@
 import { addCartApi } from "api/cartApi";
+import { getProduct } from "api/productApi";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { showLogin } from "store/reducers/authSlice";
 import { setOrderConfirm } from "store/reducers/orderSlice";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function InforProduct({ product }) {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const [amount, setAmount] = useState(1);
     const { account } = useSelector(({ accountReducer }) => accountReducer);
     const dispatch = useDispatch();
@@ -16,18 +22,24 @@ function InforProduct({ product }) {
         dispatch(setOrderConfirm([{ ...order, amount }]));
     }, [dispatch, order, order.length, amount]);
 
+    const handleBuy = async () => {
+        const data = await getProduct({ id }, dispatch);
+        if (data.product.quantityAvailable > 0) {
+            return navigate(`/confirm-order`);
+        } else toast.info("Sản phẩm này đã bán hết!");
+    };
     return (
         <div className="relative infor-product col-span-2">
             <div className="absolute right-0 -z-0 flex">
-                <Link
-                    to={"/search-same/" + product.detail.name}
+                <a
+                    href={"/search-same/" + product.detail.name}
                     className="text-sm bg-green-500 font-bold rounded hover:opacity-80 flex text-white p-2 mr-2"
                 >
                     <svg className="w-5 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                     </svg>{" "}
                     Tìm kiếm sản phẩm tương tự
-                </Link>
+                </a>
                 <svg
                     className="fill-yellow-600  w-5 hover:cursor-pointer hover:opacity-60"
                     xmlns="http://www.w3.org/2000/svg"
@@ -89,15 +101,18 @@ function InforProduct({ product }) {
                 <div className="w-full flex">
                     <div className="w-1/2 mx-1">
                         <button
-                            onClick={() => {
+                            onClick={async () => {
                                 if (account === null) {
                                     dispatch(showLogin());
                                 } else {
-                                    addCartApi({
-                                        productId: product.id,
-                                        studentId: account.username,
-                                        amount,
-                                    });
+                                    const data = await getProduct({ id }, dispatch);
+                                    if (data.product.quantityAvailable > 0) {
+                                        addCartApi({
+                                            productId: product.id,
+                                            studentId: account.username,
+                                            amount,
+                                        });
+                                    } else toast.info("Sản phẩm này đã bán hết!");
                                 }
                             }}
                             className="bg-[#e7e8ea] text-[#292a2d] px-5 py-3 font-bold rounded-md hover:opacity-80  w-full"
@@ -106,9 +121,11 @@ function InforProduct({ product }) {
                         </button>
                     </div>
                     <div className="w-1/2 mx-1">
-                        <Link to="/confirm-order">
-                            <button className="bg-orange-500 w-full text-white font-bold py-3 rounded">Mua ngay</button>
-                        </Link>
+                        {/* <Link to="/confirm-order"> */}
+                        <button onClick={handleBuy} className="bg-orange-500 w-full text-white font-bold py-3 rounded">
+                            Mua ngay
+                        </button>
+                        {/* </Link> */}
                     </div>
                 </div>
             )}

@@ -14,13 +14,13 @@ function Topic(props) {
 
     const { categoryList } = useSelector(({ categoryReducer }) => categoryReducer);
 
-    const rootCategory = categoryList.filter((category) => category.parent === null);
+    const rootCategory = categoryList.filter((category) => category.parent === null).slice(3, 9);
 
-    const allChildCategory = categoryList.filter((category) => category.parent !== null);
+    // const allChildCategory = categoryList.filter((category) => category.parent !== null);
 
     return (
         <>
-            <div className="topic bground mb-2">
+            <div className="topic bground mb-2 w-screen">
                 <ul className="flex mx-20 text-white">
                     {rootCategory.map((root, index) => (
                         <li
@@ -33,12 +33,12 @@ function Topic(props) {
                             <div className="flex justify-center">
                                 <div>
                                     <div className="relative ">
-                                        <a
+                                        <div
                                             onClick={() => setShowTopic(true)}
                                             className="flex px-16 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757]dropdown-toggle"
                                         >
                                             {root.nameCategory}
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

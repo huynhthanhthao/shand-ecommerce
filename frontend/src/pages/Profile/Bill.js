@@ -81,7 +81,7 @@ function Bill() {
                                         </div>
                                         <div className="text-center">
                                             <p>Tổng tiền:</p>
-                                            <p>{bill.order.total}đ</p>
+                                            <p>{bill.order.total.toLocaleString().split(",")}đ</p>
                                         </div>
                                         <div className="text-right">
                                             {bill.order.paid && (

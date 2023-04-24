@@ -72,7 +72,7 @@ function AddEventForm() {
                         <div className="relative p-4">
                             <form>
                                 <div className="flex flex-col mb-2">
-                                    <label className="pb-2">Tên danh mục</label>
+                                    <label className="pb-2">Tên sự kiện</label>
                                     <input
                                         className="p-2 border outline-neutral-400"
                                         placeholder="Nhập tên sự kiện..."

@@ -132,6 +132,7 @@ function ConfirmOrder() {
                                                 className="mr-3 bg-orange-500 w-5 h-5"
                                                 name="method_pay"
                                                 id="cash"
+                                                checked={!isPayment}
                                                 onChange={() => {
                                                     setIsPayment(false);
                                                 }}
@@ -156,6 +157,7 @@ function ConfirmOrder() {
                                                 className="mr-3 bg-orange-500 w-5 h-5"
                                                 name="method_pay"
                                                 id="bank"
+                                                checked={isPayment}
                                                 onChange={() => {
                                                     setIsPayment(true);
                                                 }}
@@ -316,13 +318,14 @@ function ConfirmOrder() {
                                         )}
                                         <input className="hidden" id="payment" type="submit" value="Submit" />
                                     </form>
-
-                                    <button
-                                        onClick={() => handleConfirm()}
-                                        className="btn3 block w-full py-3 text-base text-center"
-                                    >
-                                        Đặt hàng
-                                    </button>
+                                    {!isPayment && (
+                                        <button
+                                            onClick={() => handleConfirm()}
+                                            className="btn3 block w-full py-3 text-base text-center"
+                                        >
+                                            Đặt hàng
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

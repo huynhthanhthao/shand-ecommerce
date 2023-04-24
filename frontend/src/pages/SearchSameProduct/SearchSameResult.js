@@ -83,7 +83,7 @@ function SearchSameProduct() {
 
     return (
         <DefaultLayout>
-            <div className="px-24 pt-8 grid grid-cols-6 gap-3 text-[#555] fill-[#555]">
+            <div className="px-24 pt-8 grid grid-cols-6 gap-3 text-[#555] fill-[#555] min-h-screen">
                 <div className="">
                     <div className="font-bold flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 mr-1">

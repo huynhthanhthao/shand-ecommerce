@@ -37,8 +37,6 @@ function ImageSource(props) {
         );
     }, [imageList.length]);
 
-    console.log(props.newProduct);
-
     return (
         <>
             <td className="w-[15%] text-right">

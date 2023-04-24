@@ -39,6 +39,7 @@ export const getProduct = async (payload, dispatch) => {
         });
         if (response.data.status) {
             dispatch(setProduct(response.data.product));
+            return response.data;
         }
     } catch (error) {
         console.log(error);
@@ -198,7 +199,7 @@ export const searchSameProductApi = async (payload, dispatch) => {
         const result = fuse.search(payload);
 
         if (response.data.status) {
-            dispatch(setSearchProductList(result.filter((item) => item.score <= 0.2)));
+            dispatch(setSearchProductList(result.filter((item) => item.score <= 0.8)));
         }
     } catch (error) {
         console.log(error);

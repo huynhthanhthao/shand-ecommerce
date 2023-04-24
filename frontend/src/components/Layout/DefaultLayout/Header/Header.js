@@ -59,11 +59,12 @@ function Header() {
                 <input
                     value={name}
                     type="text"
-                    className="w-full py-2 px-4 border-none outline-none bg-[#f5f7f9] rounded "
+                    className="w-full py-2 px-3 border-none outline-none bg-[#f5f7f9] rounded "
                     placeholder="Tìm kiếm sản phẩm..."
                     onKeyDown={async (e) => {
                         if (e.key === "Enter") {
-                            return navigate(`/search/${name}`);
+                            if (name.trim() === "") return navigate(`/`);
+                            window.location.href = `/search/${name}`;
                         }
                     }}
                     onChange={(e) => {
@@ -72,7 +73,9 @@ function Header() {
                 />
                 <img
                     onClick={() => {
-                        return navigate(`/search/${name}`);
+                        if (name.trim() === "") return navigate(`/`);
+
+                        window.location.href = `/search/${name}`;
                     }}
                     alt="Search icon"
                     src={require("assets/images/search.png")}
