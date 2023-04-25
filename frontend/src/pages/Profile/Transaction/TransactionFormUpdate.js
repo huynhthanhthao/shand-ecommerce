@@ -48,29 +48,8 @@ function UpdateAddressForm({ setShowFormUpdate }) {
                             <span className="text-red-600">*</span>
                         </td>
                         <td className="">
-                            <input
-                                value={bankName}
-                                onChange={(e) => {
-                                    setBankName(e.target.value);
-                                }}
-                                className="border rounded p-2 focus:outline-teal-400 w-4/5"
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className="w-1/6">
-                            Số tài khoản:
-                            <span className="text-red-600">*</span>
-                        </td>
-                        <td className="">
-                            {/* <input
-                                value={bankCode}
-                                onChange={(e) => {
-                                    setBankCode(e.target.value);
-                                }}
-                                className="border rounded p-2 focus:outline-teal-400 w-4/5"
-                            /> */}
                             <select
+                                value={bankName}
                                 onChange={(e) => {
                                     setBankName(e.target.value);
                                 }}
@@ -114,6 +93,21 @@ function UpdateAddressForm({ setShowFormUpdate }) {
                                     Ngân hàng TMCP Đầu Tư và Phát triển Việt Nam (BIDV)
                                 </option>
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="w-1/6">
+                            Số tài khoản:
+                            <span className="text-red-600">*</span>
+                        </td>
+                        <td className="">
+                            <input
+                                value={bankCode}
+                                onChange={(e) => {
+                                    setBankCode(e.target.value);
+                                }}
+                                className="border rounded p-2 focus:outline-teal-400 w-4/5"
+                            />
                         </td>
                     </tr>
                 </tbody>

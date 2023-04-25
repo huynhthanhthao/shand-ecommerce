@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { getMyProductList } from "api/productApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setProduct, setUpdateProduct } from "store/reducers/productSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Confirm from "components/Modals/Confirm";
 
 function AllProduct() {
@@ -46,9 +46,16 @@ function AllProduct() {
                             <tbody>
                                 {productList.map((product) => (
                                     <tr key={product.id}>
-                                        <td className="border border-slate-200 p-2 ">{product.productId}</td>
-                                        <td className="border border-slate-200 p-2 ">{product.name}</td>
-                                        <td className="border border-slate-200 p-2 ">{product.price}</td>
+                                        <td className="border border-slate-200 p-2 ">
+                                            <Link to={"/product/" + product.id}>{product.productId}</Link>
+                                        </td>
+                                        <td className="border border-slate-200 p-2 ">
+                                            <Link to={"/product/" + product.id}>{product.name}</Link>
+                                        </td>
+                                        <td className="border border-slate-200 p-2 ">
+                                            {" "}
+                                            <Link to={"/product/" + product.id}>{product.price}</Link>
+                                        </td>
 
                                         <td className="border border-slate-200 p-2 ">
                                             {product.transport === "buyer" ? "Người mua trả" : "Người bán trả"}

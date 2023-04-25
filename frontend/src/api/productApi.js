@@ -199,7 +199,7 @@ export const searchSameProductApi = async (payload, dispatch) => {
         const result = fuse.search(payload);
 
         if (response.data.status) {
-            dispatch(setSearchProductList(result.filter((item) => item.score <= 0.8)));
+            dispatch(setSearchProductList(result.filter((item) => item.score <= 0.5)));
         }
     } catch (error) {
         console.log(error);
