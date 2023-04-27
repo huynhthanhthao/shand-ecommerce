@@ -2,9 +2,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Moment from "react-moment";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { getOrderById, updateOrderApi } from "api/orderApi";
 // import { updateProductQuantity } from "api/productApi";
+import { useReactToPrint } from "react-to-print";
 
 function DetailOrderSent() {
     const dispatch = useDispatch();
@@ -19,6 +20,11 @@ function DetailOrderSent() {
         fetchData();
     }, [id, dispatch]);
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: "epm-data",
+    });
     const { order } = useSelector(({ orderReducer }) => orderReducer);
     const { account } = useSelector(({ accountReducer }) => accountReducer);
     const isTransport = () => {
@@ -34,9 +40,9 @@ function DetailOrderSent() {
     return (
         <div className="add-product animate__animated animate__fadeIn">
             {order && (
-                <>
+                <div className="">
                     <label className="font-bold flex">Chi tiết đơn hàng</label>
-                    <div className=" py-4  border-t my-3 bg-white text-sm flex flex-col">
+                    <div className=" pt-3  border-t  bg-white text-sm flex flex-col">
                         <div className="flex">
                             <div>
                                 <div className="flex ">
@@ -235,101 +241,105 @@ function DetailOrderSent() {
                                 </div>
                             </div>
                         </div>
-                        <div className="grid grid-cols-2 gap-3">
-                            <div className="border p-2 mt-5 border-dashed flex justify-between">
-                                <div>
-                                    <p className="font-bold uppercase mb-2">TÌNH TRẠNG VẬN CHUYỂN</p>
-                                    <div className="flex items-center my-1 ">
-                                        <p className="">Phí giao hàng:&nbsp;</p>
-                                        <p className="font-bold">
-                                            {isTransport() ? "Người mua thanh toán" : "Người bán thanh toán"}
-                                        </p>
+                        <div ref={componentRef}>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="border p-2 mt-5 border-dashed flex justify-between">
+                                    <div>
+                                        <p className="font-bold uppercase mb-2">TÌNH TRẠNG VẬN CHUYỂN</p>
+                                        <div className="flex items-center my-1 ">
+                                            <p className="">Phí giao hàng:&nbsp;</p>
+                                            <p className="font-bold">
+                                                {isTransport() ? "Người mua thanh toán" : "Người bán thanh toán"}
+                                            </p>
+                                        </div>
+                                        <div className="flex items-center my-1 ">
+                                            <p className="">Tình trạng:&nbsp;</p>
+                                            <p className="font-bold">
+                                                {order.status === "pending" ? "Đang chờ xác nhận" : ""}
+                                                {order.status === "confirmed" ? "Đã xác nhận" : ""}
+                                                {order.status === "expired" ? "Đang vận chuyển" : ""}
+                                                {order.status === "received" ? "Đã giao hàng" : ""}
+                                                {order.status === "refuse" ? "Đã bị từ chối" : ""}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center my-1 ">
-                                        <p className="">Tình trạng:&nbsp;</p>
-                                        <p className="font-bold">
+                                    {order.status === "refuse" || order.status === "cancel" ? (
+                                        <div className="w-36 h-8 border border-dashed  text-center border-red-500 p-1 text-red-500">
+                                            {order.status === "refuse" ? "Đã bị từ chối" : "Đã hủy"}
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className={
+                                                order.status === "pending"
+                                                    ? "w-36 h-8 border border-dashed  text-center border-orange-500 p-1 text-orange-500"
+                                                    : "w-36 h-8 border border-dashed  text-center border-green-500 p-1 text-green-500"
+                                            }
+                                        >
                                             {order.status === "pending" ? "Đang chờ xác nhận" : ""}
                                             {order.status === "confirmed" ? "Đã xác nhận" : ""}
                                             {order.status === "expired" ? "Đang vận chuyển" : ""}
                                             {order.status === "received" ? "Đã giao hàng" : ""}
-                                            {order.status === "refuse" ? "Đã bị từ chối" : ""}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="border p-2 mt-5 border-dashed ">
+                                    <p className="font-bold uppercase mb-2">THÔNG TIN NHẬN HÀNG</p>
+                                    <div>
+                                        <p className="font-bold">{order.buyer.fullName}</p>
+                                        <p className="my-1 ">{order.buyer.phoneNumber}</p>
+                                    </div>
+                                    <p>Tan Log, Phung Hiep, Hau Giang</p>
+                                </div>
+                            </div>
+                            <div className="border p-2 mt-5">
+                                <div className="flex justify-center">
+                                    <div className="flex px-2">
+                                        <p>Người bán:&nbsp;</p>
+                                        <p className="font-bold">
+                                            {order.seller.fullName} - {order.seller.username}
+                                        </p>
+                                    </div>
+                                    <div className="flex px-2 mb-2">
+                                        <p>Hình thức thanh toán:&nbsp;</p>
+                                        <p className="font-bold">
+                                            {order.paid ? "Thanh toán trực tuyến" : "Trả tiền mặt"}
                                         </p>
                                     </div>
                                 </div>
-                                {order.status === "refuse" || order.status === "cancel" ? (
-                                    <div className="w-36 h-8 border border-dashed  text-center border-red-500 p-1 text-red-500">
-                                        {order.status === "refuse" ? "Đã bị từ chối" : "Đã hủy"}
-                                    </div>
-                                ) : (
-                                    <div
-                                        className={
-                                            order.status === "pending"
-                                                ? "w-36 h-8 border border-dashed  text-center border-orange-500 p-1 text-orange-500"
-                                                : "w-36 h-8 border border-dashed  text-center border-green-500 p-1 text-green-500"
-                                        }
-                                    >
-                                        {order.status === "pending" ? "Đang chờ xác nhận" : ""}
-                                        {order.status === "confirmed" ? "Đã xác nhận" : ""}
-                                        {order.status === "expired" ? "Đang vận chuyển" : ""}
-                                        {order.status === "received" ? "Đã giao hàng" : ""}
-                                    </div>
-                                )}
-                            </div>
-                            <div className="border p-2 mt-5 border-dashed ">
-                                <p className="font-bold uppercase mb-2">THÔNG TIN NHẬN HÀNG</p>
-                                <div>
-                                    <p className="font-bold">{order.buyer.fullName}</p>
-                                    <p className="my-1 ">{order.buyer.phoneNumber}</p>
-                                </div>
-                                <p>Tan Log, Phung Hiep, Hau Giang</p>
-                            </div>
-                        </div>
-                        <div className="border p-2 mt-5">
-                            <div className="flex justify-center">
-                                <div className="flex px-2">
-                                    <p>Người bán:&nbsp;</p>
-                                    <p className="font-bold">
-                                        {order.seller.fullName} - {order.seller.username}
-                                    </p>
-                                </div>
-                                <div className="flex px-2 mb-2">
-                                    <p>Hình thức thanh toán:&nbsp;</p>
-                                    <p className="font-bold">{order.paid ? "Thanh toán trực tuyến" : "Trả tiền mặt"}</p>
-                                </div>
-                            </div>
-                            <table className="table-fixed w-full border-separate border-spacing-2 border border-white">
-                                <thead>
-                                    <tr className="p-2">
-                                        <th className="w-1/2 text-left">Sản phẩm</th>
-                                        <th className="text-center">Đơn giá</th>
-                                        <th className="text-center">Số lượng</th>
-                                        <th className="text-center">Thành tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {order.productList.map((product) => (
-                                        <tr key={product.id}>
-                                            <td className="flex items-start ">
-                                                <Link className="flex items-start" to={"/product/" + product.id}>
-                                                    <img
-                                                        src={JSON.parse(product.images)[0]}
-                                                        alt="product"
-                                                        className="w-20 h-20 border mr-2"
-                                                    />
-                                                    <div>
-                                                        <a href="/" className="font-bold">
-                                                            {product.name}
-                                                        </a>
-                                                    </div>
-                                                </Link>
-                                            </td>
-                                            <td className="text-center">{product.price}</td>
-                                            <td className="text-center">{product.amount}</td>
-                                            <td className="text-center">{product.price * product.amount}</td>
+                                <table className="table-fixed w-full border-separate border-spacing-2 border border-white">
+                                    <thead>
+                                        <tr className="p-2">
+                                            <th className="w-1/2 text-left">Sản phẩm</th>
+                                            <th className="text-center">Đơn giá</th>
+                                            <th className="text-center">Số lượng</th>
+                                            <th className="text-center">Thành tiền</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {order.productList.map((product) => (
+                                            <tr key={product.id}>
+                                                <td className="flex items-start ">
+                                                    <Link className="flex items-start" to={"/product/" + product.id}>
+                                                        <img
+                                                            src={JSON.parse(product.images)[0]}
+                                                            alt="product"
+                                                            className="w-20 h-20 border mr-2"
+                                                        />
+                                                        <div>
+                                                            <a href="/" className="font-bold">
+                                                                {product.name}
+                                                            </a>
+                                                        </div>
+                                                    </Link>
+                                                </td>
+                                                <td className="text-center">{product.price}</td>
+                                                <td className="text-center">{product.amount}</td>
+                                                <td className="text-center">{product.price * product.amount}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             <div className=" px-3 border-t bg-white text-sm flex flex-col justify-center">
                                 <div className="flex items-end justify-between">
                                     <div className="flex pb-1">
@@ -342,6 +352,7 @@ function DetailOrderSent() {
                                         </svg>
                                         <p className="font-bold">{order.seller.phoneNumber}</p>
                                     </div>
+
                                     <div className="">
                                         <div className="flex justify-between my-2">
                                             <p className="w-28">Tổng tiền:</p>
@@ -361,83 +372,99 @@ function DetailOrderSent() {
                                                 </p>
                                             </div>
 
-                                            <p className="font-bold text-orange-600">{order.total}đ</p>
+                                            <p className="font-bold text-orange-600">
+                                                {order.total.toLocaleString().split(",")}đ
+                                            </p>
                                         </div>
-                                        {order.paid && (
-                                            <div className="w-full border  text-center bg-green-500 p-3 text-white font-bold">
-                                                Đã thanh toán
-                                            </div>
-                                        )}
-
-                                        {account.username !== order.seller.username ? (
-                                            <>
-                                                {order.status === "expired" && (
-                                                    <button
-                                                        onClick={() => {
-                                                            updateStatusOrder(order.id, "received");
-                                                        }}
-                                                        className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
-                                                    >
-                                                        Đã nhận hàng
-                                                    </button>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <>
-                                                {order.status === "pending" && (
-                                                    <button
-                                                        onClick={() => {
-                                                            updateStatusOrder(order.id, "confirmed");
-                                                        }}
-                                                        className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
-                                                    >
-                                                        Xác nhận đơn hàng
-                                                    </button>
-                                                )}
-                                                {order.status === "confirmed" && (
-                                                    <button
-                                                        onClick={() => {
-                                                            updateStatusOrder(order.id, "expired");
-                                                        }}
-                                                        className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
-                                                    >
-                                                        Xác nhận vận chuyển
-                                                    </button>
-                                                )}
-                                                {order.status === "expired" && (
-                                                    <>
-                                                        <div>
-                                                            <button
-                                                                onClick={() => {
-                                                                    updateStatusOrder(order.id, "cancel");
-                                                                }}
-                                                                className="me-3 bg-red-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
-                                                            >
-                                                                Hủy đơn hàng
-                                                            </button>
-                                                            <button
-                                                                onClick={() => {
-                                                                    updateStatusOrder(order.id, "received");
-                                                                }}
-                                                                className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
-                                                            >
-                                                                Đã nhận hàng
-                                                            </button>
-                                                        </div>
-                                                    </>
-                                                )}
-                                            </>
-                                        )}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <button onClick={() => navigate(-1)} className="btn3 p-2 mt-3  w-64 mx-auto text-center">
+                        <div className="flex justify-center items-end">
+                            {order.paid && (
+                                <div className="w-full border  text-center bg-green-500 p-3 text-white font-bold">
+                                    Đã thanh toán
+                                </div>
+                            )}
+                            {account.username !== order.seller.username ? (
+                                <>
+                                    {order.status === "expired" && (
+                                        <button
+                                            onClick={() => {
+                                                updateStatusOrder(order.id, "received");
+                                            }}
+                                            className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
+                                        >
+                                            Đã nhận hàng
+                                        </button>
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    {order.status === "pending" && (
+                                        <button
+                                            onClick={() => {
+                                                updateStatusOrder(order.id, "confirmed");
+                                            }}
+                                            className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
+                                        >
+                                            Xác nhận đơn hàng
+                                        </button>
+                                    )}
+                                    <div className="flex items-end ">
+                                        {order.status === "confirmed" && (
+                                            <>
+                                                <button onClick={handlePrint} className="btn3 flex px-3 py-2 ml-3 mr-2">
+                                                    <svg
+                                                        className="w-5 fill-white mr-1"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 512 512"
+                                                    >
+                                                        <path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />{" "}
+                                                    </svg>
+                                                    Xuất thông tin vận chuyển
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        updateStatusOrder(order.id, "expired");
+                                                    }}
+                                                    className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-64 mx-auto text-center"
+                                                >
+                                                    Xác nhận vận chuyển
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+                                    {order.status === "expired" && (
+                                        <>
+                                            <div>
+                                                <button
+                                                    onClick={() => {
+                                                        updateStatusOrder(order.id, "cancel");
+                                                    }}
+                                                    className="me-3 bg-red-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
+                                                >
+                                                    Hủy đơn hàng
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        updateStatusOrder(order.id, "received");
+                                                    }}
+                                                    className="bg-green-500 font-bold rounded hover:opacity-80  text-white  p-2 mt-3  w-40 mx-auto text-center"
+                                                >
+                                                    Đã nhận hàng
+                                                </button>
+                                            </div>
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                        {/* <button onClick={() => navigate(-1)} className="btn3 p-2 mt-3  w-64 mx-auto text-center">
                             QUAY LẠI DANH SÁCH ĐƠN HÀNG
-                        </button>
+                        </button> */}
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

@@ -56,7 +56,7 @@ function Home() {
                     <Topic setCategory={setCategory} />
                     <Event />
                 </div>
-                <div className="container  bg-[#f5f5f5] px-24 py-1 ">
+                <div className="  bg-[#f5f5f5] px-16 py-1 ">
                     {category && <ProductList productList={productCategory} label={category.nameCategory} />}
                     <ProductList productList={allProduct} label="Sản phẩm mới nhất" setLimit={setLimit} />
                     <ProductList productList={productSuggest} label="Gợi ý cho bạn" />

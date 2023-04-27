@@ -31,7 +31,7 @@ function Product() {
                 <ReportModal />
 
                 {product && (
-                    <div className="product mx-24 ">
+                    <div className="product mx-16 ">
                         <div className="grid grid-cols-3 gap-4 bg-white rounded-lg  p-6">
                             <ImageProduct images={JSON.parse(product.detail.images)} />
                             <InforProduct product={product} />

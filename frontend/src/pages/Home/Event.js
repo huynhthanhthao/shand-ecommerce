@@ -26,14 +26,14 @@ function Event() {
                         backgroundImage: `url(${require("assets/images/eventbg.jpg")})`,
                     }}
                 >
-                    <h4 className="flex justify-center mb-2 p-2 mx-auto bg-zinc-700 -mt-5 text-white w-[60%] uppercase ">
+                    <h4 className="flex justify-center mb-2 p-2 mx-auto bg-zinc-700 -mt-5 text-white w-[65%] uppercase ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-5 fill-white mr-2">
                             <path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16H368c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z" />
                         </svg>
                         Sự kiện mua bán đồ cũ
                     </h4>
                     {activeList && (
-                        <div className="grid grid-cols-3 gap-3 mt-5">
+                        <div className="grid grid-cols-3 gap-3 mt-4">
                             <div className="flex flex-col p-2 justify-center items-center bg-yellow-400 w-48 rounded text-white shadow-xl shadow-yellow-500/20">
                                 <p className=" flex font-bold uppercase">
                                     <svg
@@ -97,7 +97,7 @@ function Event() {
                         backgroundImage: `url(https://img.freepik.com/free-photo/light-gray-acrylic-painting-background-wallpaper-image_53876-124527.jpg?w=996&t=st=1678377664~exp=1678378264~hmac=7e1321f20972cae05ad9b86b3d9623ed2a628bcc32b44db25f0d2c135ce733d6)`,
                     }}
                 >
-                    <h4 className="flex justify-center mb-2 p-2 mx-auto bg-zinc-700 -mt-5 text-white w-[65%] uppercase">
+                    <h4 className="flex justify-center mb-2 p-2 mx-auto bg-zinc-700 -mt-5 text-white w-[80%] uppercase">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" className="w-8 fill-white mr-2">
                             <path d="M353.8 54.1L330.2 6.3c-3.9-8.3-16.1-8.6-20.4 0L286.2 54.1l-52.3 7.5c-9.3 1.4-13.3 12.9-6.4 19.8l38 37-9 52.1c-1.4 9.3 8.2 16.5 16.8 12.2l46.9-24.8 46.6 24.4c8.6 4.3 18.3-2.9 16.8-12.2l-9-52.1 38-36.6c6.8-6.8 2.9-18.3-6.4-19.8l-52.3-7.5zM256 256c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H384c17.7 0 32-14.3 32-32V288c0-17.7-14.3-32-32-32H256zM32 320c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zm416 96v64c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V416c0-17.7-14.3-32-32-32H480c-17.7 0-32 14.3-32 32z" />
                         </svg>

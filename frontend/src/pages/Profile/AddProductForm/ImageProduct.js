@@ -1,15 +1,28 @@
 import { createUrlImage } from "api/cloudinaryApi";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { closeLoading, openLoading } from "store/reducers/loadingSlice";
 
 function ImageProduct(props) {
+    const dispatch = useDispatch();
+
     const [imageList, setImageList] = useState([]);
 
     const setImageStore = async (e) => {
         const file = e.target.files[0];
 
-        const url = await createUrlImage(file);
+        const getSizeImage = e.target.files[0].size;
+        if (getSizeImage > 4000 * 3000) {
+            toast.error("Chỉ chấp nhận hình ảnh dưới 5MB");
+        } else {
+            dispatch(openLoading("Đang tải lên..."));
 
-        setImageList((prev) => [...prev, url]);
+            const url = await createUrlImage(file);
+            dispatch(closeLoading());
+
+            setImageList((prev) => [...prev, url]);
+        }
     };
 
     useEffect(() => {
@@ -32,6 +45,8 @@ function ImageProduct(props) {
                     id="file"
                     type="file"
                     className="hidden"
+                    accept=".jpg, .png"
+                    multiple
                     onChange={async (e) => {
                         await setImageStore(e);
                     }}
@@ -40,11 +55,7 @@ function ImageProduct(props) {
                     htmlFor="file"
                     className="w-28 flex items-center font-bold cursor-pointer hover:opacity-70 border border-dashed p-1"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                        className="w-6 mr-1"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="w-6 mr-1">
                         <path
                             className="fill-emerald-600 "
                             d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
@@ -56,18 +67,11 @@ function ImageProduct(props) {
                     <ul className="flex mt-2">
                         {imageList.map((image, index) => (
                             <li key={index} className="relative">
-                                <img
-                                    alt="product"
-                                    className="w-20 h-20 mr-2"
-                                    src={image}
-                                />
+                                <img alt="product" className="w-20 h-20 mr-2" src={image} />
                                 <svg
                                     onClick={() => {
                                         setImageList((prev) => {
-                                            return prev.filter(
-                                                (image, indexList) =>
-                                                    index !== indexList
-                                            );
+                                            return prev.filter((image, indexList) => index !== indexList);
                                         });
                                     }}
                                     xmlns="http://www.w3.org/2000/svg"

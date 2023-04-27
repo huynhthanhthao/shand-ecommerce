@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <footer className="bg-neutral-200 text-center text-white dark:bg-neutral-600">
-            <div className="container pt-4">
+            <div className=" pt-4">
                 <div className="mb-4 flex justify-center">
                     <a href="#!" className="mr-9 text-neutral-800 dark:text-neutral-200">
                         <svg

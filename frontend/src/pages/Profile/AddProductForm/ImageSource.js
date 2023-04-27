@@ -3,6 +3,7 @@ import { checkImageValid } from "api/teachablemachineApi";
 import { useEffect, useState } from "react";
 // import { useDispatch } from "react-redux";
 import LoadingSmall from "components/LoadingSmall";
+import { toast } from "react-toastify";
 
 function ImageSource(props) {
     const [imageList, setImageList] = useState([]);
@@ -12,17 +13,21 @@ function ImageSource(props) {
     const setImageStore = async (e) => {
         try {
             const file = e.target.files[0];
-
-            setIsLoading(true);
-            setIsShowNotify(false);
-            const url = await createUrlImage(file);
-            if (url) {
-                const percent = await checkImageValid(url);
-                if (percent >= 90) {
-                    setImageList((prev) => [...prev, url]);
-                } else setIsShowNotify(true);
+            const getSizeImage = e.target.files[0].size;
+            if (getSizeImage > 4000 * 3000) {
+                toast.error("Chỉ chấp nhận hình ảnh dưới 5MB");
+            } else {
+                setIsLoading(true);
+                setIsShowNotify(false);
+                const url = await createUrlImage(file);
+                if (url) {
+                    const percent = await checkImageValid(url);
+                    if (percent >= 90) {
+                        setImageList((prev) => [...prev, url]);
+                    } else setIsShowNotify(true);
+                }
+                setIsLoading(false);
             }
-            setIsLoading(false);
         } catch (error) {
             console.log(error);
         }

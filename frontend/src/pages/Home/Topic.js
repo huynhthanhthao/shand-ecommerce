@@ -21,7 +21,7 @@ function Topic(props) {
     return (
         <>
             <div className="topic bground mb-2 w-screen">
-                <ul className="flex mx-20 text-white">
+                <ul className="flex justify-between  mx-12 text-white">
                     {rootCategory.map((root, index) => (
                         <li
                             onClick={() => {
@@ -35,7 +35,7 @@ function Topic(props) {
                                     <div className="relative ">
                                         <div
                                             onClick={() => setShowTopic(true)}
-                                            className="flex px-16 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757]dropdown-toggle"
+                                            className="flex justify-between px-12 py-3 items-center whitespace-nowrap text-base    text-white transition duration-150 ease-in-out hover:bg-[#575757]dropdown-toggle"
                                         >
                                             {root.nameCategory}
                                         </div>

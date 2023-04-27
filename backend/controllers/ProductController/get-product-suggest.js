@@ -25,7 +25,6 @@ const getProductSuggest = async (req, res, next) => {
             });
 
             // Tìm kiếm các người dùng khác có sở thích tương tự
-
             const similarUsers = [];
             for (let i = 0; i < otherUsers.length; i++) {
                 let count = 0;
@@ -51,6 +50,7 @@ const getProductSuggest = async (req, res, next) => {
                 }
             }
 
+            // Chọn ra sản phẩm đề xuất
             const getRecommendedProducts = async () => {
                 const recommendedProductsDetails = [];
 

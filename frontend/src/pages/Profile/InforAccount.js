@@ -114,13 +114,13 @@ function InforAccount() {
                                 </td>
                                 <td className="">
                                     <input
+                                        type="email"
                                         className="input w-4/5 focus:shadow-input  p-2"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </td>
                             </tr>
-
                             <tr>
                                 <td className="w-1/6"></td>
                                 <td
