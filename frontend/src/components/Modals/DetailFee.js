@@ -1,4 +1,5 @@
 import { deleteFeeApi } from "api/feeApi";
+import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFee } from "store/reducers/feeSlice";
 function DetailFee(props) {
@@ -79,7 +80,9 @@ function DetailFee(props) {
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <p className="font-bold">Hạn cuối nộp phí:</p>
-                                    <p>B1906570</p>
+                                    <p>
+                                        <Moment format="DD/MM/YYYY">{feeTarget.deadLine}</Moment>
+                                    </p>
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <p className="font-bold">Tình trạng:</p>

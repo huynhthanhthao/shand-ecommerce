@@ -1,5 +1,7 @@
 import { getFee } from "api/feeApi";
 import { useEffect, useState } from "react";
+import Moment from "react-moment";
+
 import { useDispatch, useSelector } from "react-redux";
 function SalesFee() {
     const { account } = useSelector(({ accountReducer }) => accountReducer);
@@ -18,8 +20,8 @@ function SalesFee() {
                 const newTotal = billList.reduce((total, currentValue) => {
                     return total + currentValue.order.total;
                 }, 0);
-
                 setAmountBill(billList.length);
+                setDeadLine(data.deadLine);
                 setFee(data);
                 setTotal(newTotal);
             } catch (error) {
@@ -58,7 +60,9 @@ function SalesFee() {
                         </div>
                         <div className="grid grid-cols-2">
                             <p className="font-bold">Hạn cuối nộp phí:</p>
-                            <p>B1906570</p>
+                            <p>
+                                <Moment format="DD/MM/YYYY">{fee.deadLine}</Moment>
+                            </p>
                         </div>
                         <div className="grid grid-cols-2">
                             <p className="font-bold">Tình trạng:</p>

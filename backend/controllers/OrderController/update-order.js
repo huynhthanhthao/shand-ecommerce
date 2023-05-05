@@ -63,13 +63,13 @@ const updateOrder = async (req, res, next) => {
             });
 
             if (!fee) {
-                const date = new Date();
-                const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+                var date = new Date();
+                var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
                 await db.SalesFee.create({
                     sellerId: order.dataValues.sellerId,
                     billList: [bill],
-                    deadLine: lastDayOfMonth,
+                    deadLine: lastDay,
                 });
             } else {
                 let newBillList = JSON.parse(fee.dataValues.billList);
