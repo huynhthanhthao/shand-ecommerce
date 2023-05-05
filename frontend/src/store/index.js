@@ -10,17 +10,9 @@ import categoryReducer from "./reducers/categorySlice";
 import eventReducer from "./reducers/eventSlice";
 import reportReducer from "./reducers/reportSlice";
 import loadingReducer from "./reducers/loadingSlice";
+import feeReducer from "./reducers/feeSlice";
 
-import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from "redux-persist";
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 const persistConfig = {
@@ -41,6 +33,7 @@ const reducer = combineReducers({
     eventReducer,
     reportReducer,
     loadingReducer,
+    feeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -50,14 +43,7 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
-                ignoredActions: [
-                    FLUSH,
-                    REHYDRATE,
-                    PAUSE,
-                    PERSIST,
-                    PURGE,
-                    REGISTER,
-                ],
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
 });

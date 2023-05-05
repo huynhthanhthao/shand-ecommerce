@@ -198,7 +198,7 @@ function Cart() {
                             <div>Chưa có sản phẩm nào trong giỏ.</div>
                         )}
                     </div>
-                    <div className="col-span-1 bg-white p-4 rounded-sm h-44">
+                    <div className="col-span-1 bg-white p-4 rounded-sm min-h-44">
                         <div className="flex justify-between  border-b pb-3">
                             <div className="flex">
                                 <svg

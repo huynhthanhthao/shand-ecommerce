@@ -12,6 +12,7 @@ import AddSupportForm from "components/Modals/AddSupportForm";
 import EditSupportForm from "components/Modals/EditSupportForm";
 import Confirm from "components/Modals/Confirm";
 import DetailReport from "components/Modals/DetailReport";
+import DetailFee from "components/Modals/DetailFee";
 
 function Admin() {
     return (
@@ -38,6 +39,7 @@ function Admin() {
                     id="delete_support"
                 />
                 <DetailReport />
+                <DetailFee />
                 {/* main */}
                 <HeaderAdmin />
                 <div className="grid grid-cols-5 gap-4">

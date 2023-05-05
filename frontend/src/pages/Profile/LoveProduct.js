@@ -18,7 +18,6 @@ function LoveProduct() {
     }, []);
 
     const { productLove } = useSelector(({ productReducer }) => productReducer);
-    console.log(productLove);
     return (
         <div className="love-product animate__animated animate__fadeIn">
             <label className="font-bold">Sản phẩm yêu thích</label>

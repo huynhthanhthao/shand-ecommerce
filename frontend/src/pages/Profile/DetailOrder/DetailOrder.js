@@ -356,7 +356,7 @@ function DetailOrderSent() {
                                     <div className="">
                                         <div className="flex justify-between my-2">
                                             <p className="w-28">Tổng tiền:</p>
-                                            <p>{order.total.toLocaleString().split(",")}đ</p>
+                                            <p>{order.paid ? "0" : order.total.toLocaleString().split(",")}đ</p>
                                         </div>
                                         <div className="flex justify-between my-2">
                                             <p>Giảm giá:</p>
@@ -373,7 +373,7 @@ function DetailOrderSent() {
                                             </div>
 
                                             <p className="font-bold text-orange-600">
-                                                {order.total.toLocaleString().split(",")}đ
+                                                <p>{order.paid ? "0" : order.total.toLocaleString().split(",")}đ</p>
                                             </p>
                                         </div>
                                     </div>
@@ -381,11 +381,6 @@ function DetailOrderSent() {
                             </div>
                         </div>
                         <div className="flex justify-center items-end">
-                            {order.paid && (
-                                <div className="w-full border  text-center bg-green-500 p-3 text-white font-bold">
-                                    Đã thanh toán
-                                </div>
-                            )}
                             {account.username !== order.seller.username ? (
                                 <>
                                     {order.status === "expired" && (

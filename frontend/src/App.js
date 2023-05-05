@@ -41,6 +41,8 @@ import Bill from "pages/Profile/Bill";
 import ExceptShop from "utils/ExceptShop";
 import ExceptAdmin from "utils/ExceptAdmin";
 import NotFound from "pages/NotFound";
+import SalesFee from "pages/Profile/SalesFee";
+import FeeManage from "pages/Admin/Content/FeeManage/FeeManage";
 
 function App() {
     const { isLoading } = useSelector(({ loadingReducer }) => loadingReducer);
@@ -67,9 +69,9 @@ function App() {
 
                         <Route path="/profile/*" element={<Profile />}>
                             <Route path="account" element={<InforAccount />}></Route>
+                            <Route path="salesfee" element={<SalesFee />}></Route>
                             <Route path="address" element={<ReceiveAddress />}></Route>
                             <Route path="transaction" element={<Transaction />}></Route>
-                            <Route path="account" element={<InforAccount />}></Route>
                             <Route path="products" element={<AllProduct />}></Route>
                             <Route path="products/:id" element={<EditProductForm />}></Route>
                             <Route path="love-products" element={<LoveProduct />}></Route>
@@ -84,6 +86,7 @@ function App() {
                     <Route element={<RequireAdmin />}>
                         <Route path="/admin/*" element={<Admin />}>
                             <Route path="student-list" element={<StudentAccount />}></Route>
+                            <Route path="salesfee" element={<FeeManage />}></Route>
                             <Route path="shop-list" element={<ShopAccount />}></Route>
                             <Route path="category-product" element={<CategoryProduct />}></Route>
                             <Route path="event-list" element={<EventList />}></Route>

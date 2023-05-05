@@ -18,22 +18,3 @@ export const getBillListApi = async (payload, dispatch) => {
         console.log(error);
     }
 };
-
-// export const addBillApi = async (payload, dispatch) => {
-//     try {
-//         const response = await axios.post(
-//             `${domain}/bill/`,
-//             {
-//                 studentId: payload.studentId,
-//                 orderId: payload.studentId,
-//             },
-//             { headers: headerConfig() }
-//         );
-
-//         if (response.data.status) {
-//             return response.data.billList;
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };

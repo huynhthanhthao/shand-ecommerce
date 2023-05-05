@@ -35,11 +35,52 @@ const updateOrder = async (req, res, next) => {
             const order = await db.Order.findOne({
                 where: { id },
             });
-            await db.Bill.create({
+
+            // Tạo hóa đơn mới
+            let bill = await db.Bill.create({
                 buyerId: order.dataValues.buyerId,
                 sellerId: order.dataValues.sellerId,
                 orderId: order.dataValues.id,
             });
+
+            // Lấy chi tiết hóa đơn
+            bill = await db.Bill.findOne({
+                where: { orderId: bill.dataValues.orderId },
+                include: [
+                    {
+                        model: db.Order,
+                        as: "order",
+                        attributes: { exclude: ["createdAt", "updatedAt"] },
+                    },
+                ],
+            });
+
+            // Thêm vào phí bán hàng
+            const fee = await db.SalesFee.findOne({
+                where: {
+                    sellerId: order.dataValues.sellerId,
+                },
+            });
+
+            if (!fee) {
+                const date = new Date();
+                const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+
+                await db.SalesFee.create({
+                    sellerId: order.dataValues.sellerId,
+                    billList: [bill],
+                    deadLine: lastDayOfMonth,
+                });
+            } else {
+                let newBillList = JSON.parse(fee.dataValues.billList);
+                newBillList.push(bill.dataValues);
+                await db.SalesFee.update(
+                    { billList: newBillList },
+                    {
+                        where: { id: fee.dataValues.id },
+                    }
+                );
+            }
         }
 
         if (status === "cancel") {
