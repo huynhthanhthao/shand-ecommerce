@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 function ImageProduct({ images }) {
-    const [imageShow, setImageShow] = useState(images[0]);
+    const [imageShow, setImageShow] = useState(null);
     return (
         <div className="img-product flex  flex-col items-center">
-            <img src={imageShow} className="w-80 h-80" alt="Product" />
+            <img src={imageShow ?? images[0]} className="w-80 h-80" alt="Product" />
             <ul className="flex mt-3">
                 {images.map((image, index) => (
                     <li

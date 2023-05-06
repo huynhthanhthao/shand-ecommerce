@@ -74,7 +74,7 @@ function SalesFee() {
                         </div>
                     </div>
                 ) : (
-                    <p>Tài khoản chưa có doanh thu.</p>
+                    <p>Tài khoản chưa phát sinh giao dịch mới.</p>
                 )}
             </div>
         </div>

@@ -64,7 +64,7 @@ function Header() {
                     onKeyDown={async (e) => {
                         if (e.key === "Enter") {
                             if (name.trim() === "") return navigate(`/`);
-                            window.location.href = `/search/${name}`;
+                            return navigate(`/search/${name}`);
                         }
                     }}
                     onChange={(e) => {
@@ -75,7 +75,8 @@ function Header() {
                     onClick={() => {
                         if (name.trim() === "") return navigate(`/`);
 
-                        window.location.href = `/search/${name}`;
+                        return navigate(`/search/${name}`);
+                        // window.location.href = `/search/${name}`;
                     }}
                     alt="Search icon"
                     src={require("assets/images/search.png")}

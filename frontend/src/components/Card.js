@@ -1,18 +1,15 @@
 // import { loveProductApi } from "api/productApi";
 import { loveProductApi } from "api/productApi";
-import { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { showLogin } from "store/reducers/authSlice";
-import { setProductLove } from "store/reducers/productSlice";
 
 function Card({ product }) {
     const dispatch = useDispatch();
     const { account } = useSelector(({ accountReducer }) => accountReducer);
     const { productLove } = useSelector(({ productReducer }) => productReducer);
     let productList = JSON.parse(productLove?.productsId ?? "[]");
-
-    const [image, setImage] = useState("");
 
     const handleLove = async () => {
         try {
@@ -37,20 +34,16 @@ function Card({ product }) {
         }
     };
 
-    useEffect(() => {
-        if (JSON.parse(product.images)?.length > 0) {
-            setImage(JSON.parse(product.images)[0]);
-        } else {
-            setImage(require("assets/images/product.png"));
-        }
-    }, []);
-
     return (
         <div className="card  shadow-md hover:shadow-xl border rounded-lg flex flex-col w-52 bg-white   hover:cursor-pointer  transition ease-in-out delay-150  hover:-translate-y-1">
             {product && (
                 <>
                     <div className="relative">
-                        <img className="h-56 rounded-t-lg w-full" src={image} alt="san pham" />
+                        <img
+                            className="h-56 rounded-t-lg w-full"
+                            src={JSON.parse(product.images)[0] ?? require("assets/images/product.png")}
+                            alt="san pham"
+                        />
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();

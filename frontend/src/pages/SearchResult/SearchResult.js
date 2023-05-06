@@ -17,7 +17,7 @@ function SearchResult() {
 
     useEffect(() => {
         setProductFilter(productList);
-    }, [productList]);
+    }, [productList, key]);
 
     const handleSortPrice = (option) => {
         if (option === "big_to_small") {
@@ -243,7 +243,7 @@ function SearchResult() {
                         Kết quả tìm kiếm
                     </div>
                     <div className="grid grid-cols-5 gap-3 mt-3">
-                        {productFilter.length === 0 ? (
+                        {productList?.length === 0 ? (
                             <div className="col-span-2">Không tìm thấy sản phẩm nào.</div>
                         ) : (
                             productFilter.map((product, index) => <Card key={index} product={product.item} />)

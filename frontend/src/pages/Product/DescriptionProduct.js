@@ -48,7 +48,6 @@ function DiscriptionProduct({ product }) {
                                 Nguồn gốc
                             </th>
                             <td className="px-6 py-3">
-                                {console.log(product.detail)}
                                 {JSON.parse(product.detail.imagesSource)?.length === undefined ? (
                                     "-"
                                 ) : (
